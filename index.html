@@ -1,11 +1,482 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="night">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=dial/">
-<title>XPeng Robotics</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>XPENG Robotics Multimodal Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    const storedTheme = localStorage.getItem("paper-blog-theme");
+    if (storedTheme === "day" || storedTheme === "night") {
+      document.documentElement.dataset.theme = storedTheme;
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1110;
+      --paper: #171917;
+      --paper-2: #20231f;
+      --ink: #f4f1e8;
+      --muted: #b8b1a2;
+      --soft: #777062;
+      --line: rgba(244, 241, 232, 0.16);
+      --accent: #f05f3b;
+      --accent-2: #98d957;
+      --accent-3: #60c4bf;
+      --shadow: rgba(0, 0, 0, 0.35);
+      --max: 1180px;
+      --radius: 8px;
+      --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", "Roboto Mono", "Cascadia Mono", "Liberation Mono", Menlo, Consolas, monospace;
+      --small-size: 13px;
+      --label-size: 12px;
+    }
+
+    html[data-theme="day"] {
+      color-scheme: light;
+      --bg: #f5f2ea;
+      --paper: #fffcf4;
+      --paper-2: #ede8dc;
+      --ink: #191815;
+      --muted: #5e5a50;
+      --soft: #8c8576;
+      --line: rgba(25, 24, 21, 0.16);
+      --accent: #d64624;
+      --accent-2: #497f1f;
+      --accent-3: #087b7b;
+      --shadow: rgba(45, 38, 25, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      overflow-y: scroll;
+      scrollbar-gutter: stable both-edges;
+      scrollbar-color: color-mix(in srgb, var(--muted) 26%, transparent) transparent;
+      scrollbar-width: thin;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border: 3px solid transparent;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--muted) 26%, transparent);
+      background-clip: content-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: color-mix(in srgb, var(--accent) 38%, transparent);
+      background-clip: content-box;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        linear-gradient(180deg, rgba(240, 95, 59, 0.10), transparent 360px),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      letter-spacing: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, #000, transparent 72%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 84%, transparent);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: var(--small-size);
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      min-width: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      font-family: var(--font-sans);
+      font-weight: 600;
+    }
+
+    .brand-sep {
+      color: var(--soft);
+      margin: 0 4px;
+    }
+
+    .mark {
+      position: relative;
+      width: 34px;
+      height: 18px;
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    .logo-mark {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-mark--ink { display: none; }
+    html[data-theme="day"] .logo-mark--ink { display: block; }
+    html[data-theme="day"] .logo-mark--white { display: none; }
+
+    .fe-mark {
+      display: inline-flex;
+      align-items: baseline;
+      color: inherit;
+      line-height: 0.88;
+      letter-spacing: 0;
+      white-space: nowrap;
+      text-shadow: 0 0 18px color-mix(in srgb, var(--accent-3) 10%, transparent);
+    }
+
+    .fe-name {
+      font-family: "Chakra Petch", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-style: normal;
+      font-weight: normal;
+    }
+
+    .fe-zero {
+      font-family: "SFMono-Regular", "Roboto Mono", "Cascadia Mono", "Liberation Mono", Menlo, Consolas, monospace;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 0.32em;
+      line-height: 1;
+      margin-left: 0.02em;
+      transform: translateY(0.24em);
+      vertical-align: baseline;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: var(--small-size);
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--ink);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 180ms ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: var(--paper);
+      height: 36px;
+      width: 76px;
+      border-radius: 999px;
+      padding: 3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-toggle span {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--bg);
+      display: grid;
+      place-items: center;
+      font-size: var(--small-size);
+      transition: transform 260ms ease;
+    }
+
+    html[data-theme="day"] .theme-toggle span { transform: translateX(38px); }
+
+    .intro {
+      padding: 58px 0 38px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      color: var(--accent-2);
+      font-size: var(--small-size);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .intro-copy {
+      margin: 0;
+      max-width: 900px;
+      color: var(--muted);
+      font-size: clamp(18px, 1.6vw, 21px);
+      line-height: 1.65;
+    }
+
+    .intro-copy strong {
+      color: var(--ink);
+    }
+
+    section {
+      position: relative;
+      padding: 44px 0 64px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.34fr) minmax(0, 1fr);
+      gap: 44px;
+      align-items: start;
+      margin-bottom: 32px;
+    }
+
+    .kicker {
+      color: var(--accent-2);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+    }
+
+    .blog-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .blog-row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr) 120px;
+      gap: 30px;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+      transition: color 180ms ease, border-color 180ms ease;
+    }
+
+    .blog-row:hover {
+      color: var(--accent);
+      border-color: color-mix(in srgb, var(--accent) 44%, var(--line));
+    }
+
+    .blog-date {
+      color: var(--soft);
+      font-size: var(--small-size);
+      line-height: 1.5;
+    }
+
+    .blog-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(22px, 2.4vw, 30px);
+      line-height: 1.08;
+      letter-spacing: 0;
+      transition: color 180ms ease;
+    }
+
+    .blog-row:hover .blog-title {
+      color: var(--accent);
+    }
+
+    .blog-title .fe-mark {
+      font-size: 1.04em;
+    }
+
+    .blog-title .fe-name {
+      font-weight: 700;
+    }
+
+    .blog-summary {
+      max-width: 760px;
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.58;
+    }
+
+    .blog-type {
+      color: var(--soft);
+      font-family: var(--font-mono);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    .footer {
+      padding: 42px 0 64px;
+      color: var(--soft);
+      font-size: var(--small-size);
+    }
+
+    @media (max-width: 900px) {
+      .section-heading {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-row {
+        grid-template-columns: 110px minmax(0, 1fr);
+      }
+
+      .blog-type {
+        grid-column: 2;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 24px, var(--max)); }
+      .nav-links a { display: none; }
+      .brand-text { overflow: hidden; text-overflow: ellipsis; }
+      .nav-links { gap: 14px; }
+      .intro { padding: 42px 0 34px; }
+      section { padding: 38px 0 52px; }
+      .blog-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 26px 0;
+      }
+      .blog-type { grid-column: auto; }
+    }
+  </style>
 </head>
 <body>
-<p>Redirecting to <a href="dial/">DIAL project page</a>...</p>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html"><span class="mark" aria-hidden="true"><img class="logo-mark logo-mark--white" src="assets/xpeng-logo-white.png" alt=""><img class="logo-mark logo-mark--ink" src="assets/xpeng-logo-ink.png" alt=""></span><span class="brand-text"><span>XPENG Robotics</span><span class="brand-sep">/</span><span>Multimodal Intelligence</span></span></a>
+      <div class="nav-links">
+        <a class="active" href="index.html">Home</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle day and night theme"><span>☾</span></button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="intro">
+    <div class="wrap">
+      <div class="eyebrow">Research blog</div>
+      <p class="intro-copy"><strong>XPENG Robotics Multimodal Intelligence</strong> builds robots that understand physical world.</p>
+    </div>
+  </header>
+
+  <main>
+    <section id="blog">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="kicker">Latest writing</div>
+        </div>
+
+        <div class="blog-list" aria-label="Blog posts">
+          <a class="blog-row" href="fe0/">
+            <time class="blog-date" datetime="2026-05-30">May 30, 2026</time>
+            <div>
+              <h3 class="blog-title">Inside <span class="fe-mark" aria-label="Fe subscript zero"><span class="fe-name">Fe</span><sub class="fe-zero">0</sub></span>: What Cross-Embodiment Data Teaches a Humanoid VLA</h3>
+              <p class="blog-summary">A close look at how heterogeneous robot experience helps a humanoid vision-language-action model transfer across visual, semantic, relational, planning, and control axes.</p>
+            </div>
+            <span class="blog-type">Article</span>
+          </a>
+
+          <a class="blog-row" href="unit/">
+            <time class="blog-date" datetime="2026-04-21">Apr 21, 2026</time>
+            <div>
+              <h3 class="blog-title">UniT: Toward a Unified Physical Language for Human-to-Humanoid Policy Learning and World Modeling</h3>
+              <p class="blog-summary">A project page for a unified physical language that maps heterogeneous human and robot motion into shared action primitives.</p>
+            </div>
+            <span class="blog-type">Paper</span>
+          </a>
+
+          <a class="blog-row" href="dial/">
+            <time class="blog-date" datetime="2026-03-31">Mar 31, 2026</time>
+            <div>
+              <h3 class="blog-title">DAIL: Decoupling Intent and Action via Latent World Modeling for End-to-End VLA</h3>
+              <p class="blog-summary">A project page for latent world modeling that decouples high-level intent from low-level actions in end-to-end vision-language-action policies.</p>
+            </div>
+            <span class="blog-type">Paper</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">XPENG Robotics. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const toggle = document.querySelector(".theme-toggle");
+    const knob = toggle.querySelector("span");
+    const savedTheme = localStorage.getItem("paper-blog-theme");
+    if (savedTheme) {
+      root.dataset.theme = savedTheme;
+      knob.textContent = savedTheme === "day" ? "☀" : "☾";
+    }
+    toggle.addEventListener("click", () => {
+      const next = root.dataset.theme === "night" ? "day" : "night";
+      root.dataset.theme = next;
+      knob.textContent = next === "day" ? "☀" : "☾";
+      localStorage.setItem("paper-blog-theme", next);
+    });
+  </script>
 </body>
 </html>

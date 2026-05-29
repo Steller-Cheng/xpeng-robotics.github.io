@@ -1,0 +1,305 @@
+{
+  "levels": [
+    {
+      "id": "trial-level-l1",
+      "code": "L1",
+      "label": "What to Look at",
+      "cards": [
+        {
+          "level": "L1",
+          "dimension": "Visual Robustness",
+          "axis": "Distractor Robustness",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C032C004_260526XJ_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Put the pear in the box."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C032C004_260526XJ_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Put the pear in the box."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trial-level-l2",
+      "code": "L2",
+      "label": "What Things are",
+      "cards": [
+        {
+          "level": "L2",
+          "dimension": "Semantic Grounding",
+          "axis": "Unseen Object Transfer",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C029C014_260522DY_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Pick up the barcode scanner from the table."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C029C014_260522DY_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Pick up the barcode scanner from the table."
+            }
+          ]
+        },
+        {
+          "level": "L2",
+          "dimension": "Semantic Grounding",
+          "axis": "Unseen Object Transfer",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C029C009_260522PU_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Pick up the pepper and put it in the box."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C029C009_260522PU_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Pick up the pepper and put it in the box."
+            }
+          ]
+        },
+        {
+          "level": "L2",
+          "dimension": "Semantic Grounding",
+          "axis": "Unseen Object Transfer",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C029C012_260522OQ_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Put the measuring tape in the container."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C029C012_260522OQ_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Put the measuring tape in the container."
+            }
+          ]
+        },
+        {
+          "level": "L2",
+          "dimension": "Semantic Grounding",
+          "axis": "Unseen Receptacle Transfer",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C029C016_260522OO_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Place the package on the electronic scale."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C029C016_260522OO_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Place the banana on the electronic scale."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trial-level-l3",
+      "code": "L3",
+      "label": "How to Relate",
+      "cards": [
+        {
+          "level": "L3",
+          "dimension": "Relational Reasoning",
+          "axis": "Superlative Selection",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C029C026_260522OR_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Put the smallest bowl in the box."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C029C026_260522OR_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Put the smallest bowl in the box."
+            }
+          ]
+        },
+        {
+          "level": "L3",
+          "dimension": "Relational Reasoning",
+          "axis": "Unseen Action-Object Pair",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C029C020_260522OH_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Hand the toy to the person in front of you."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C029C020_260522OH_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Hand the toy to the person in front of you."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trial-level-l4",
+      "code": "L4",
+      "label": "How to Plan",
+      "cards": [
+        {
+          "level": "L4",
+          "dimension": "Compositional Planning",
+          "axis": "Semantic Classification",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C030C509_260523NY_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Separate the stationery and bread into two boxes."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C030C509_260523NY_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Separate the toy and bread into two boxes."
+            }
+          ]
+        },
+        {
+          "level": "L4",
+          "dimension": "Compositional Planning",
+          "axis": "Same-Class Multi-Instance",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C029C115_260522GN_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Place each spoon into the bowl separately."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C029C115_260522GN_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Place each spoon into the bowl separately."
+            }
+          ]
+        },
+        {
+          "level": "L4",
+          "dimension": "Compositional Planning",
+          "axis": "Many-to-One Aggregation",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C032C005_260526VD_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Put all the items on the table into the bag."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C032C005_260526VD_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Put all the items on the table into the bag."
+            }
+          ]
+        },
+        {
+          "level": "L4",
+          "dimension": "Compositional Planning",
+          "axis": "3D Multi-Tier Categorical Allocation",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C030C421_260523PL_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Place bread and fruit on top and bottom tier."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C030C421_260523PL_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Place vegetables and bread on top and bottom tier."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trial-level-l5",
+      "code": "L5",
+      "label": "How to Act",
+      "cards": [
+        {
+          "level": "L5",
+          "dimension": "Action Generalization",
+          "axis": "Contact-Based Push",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C031C026_260523ES_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Close the white cabinet door."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C031C026_260523ES_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Close the white cabinet door."
+            }
+          ]
+        },
+        {
+          "level": "L5",
+          "dimension": "Action Generalization",
+          "axis": "Pose Generalization",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C030C255_260522LB_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Grab the whiteboard eraser and put it in the box."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C030C255_260522LB_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Grab the whiteboard eraser and put it in the box."
+            }
+          ]
+        },
+        {
+          "level": "L5",
+          "dimension": "Action Generalization",
+          "axis": "Pose Restoration",
+          "referenceVideo": {
+            "src": "assets/trials/videos/C030C366_260523UG_REF.mp4",
+            "aspect": "4 / 3",
+            "instruction": "Right the fallen cup on the table."
+          },
+          "media": [
+            {
+              "type": "video",
+              "label": "IRON test",
+              "src": "assets/trials/videos/C030C366_260523UG_CUT.mp4",
+              "aspect": "4 / 3",
+              "instruction": "Right the fallen cup on the table."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
