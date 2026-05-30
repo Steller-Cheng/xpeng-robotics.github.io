@@ -177,8 +177,7 @@
     #average-mse-by-group-chart,
     #relative-mse-change-chart,
     #real-robot-trials,
-    #unit-reference-note,
-    #topos-reference-note {
+    #unit-reference-note {
       scroll-margin-top: 116px;
     }
 
@@ -2830,6 +2829,56 @@
       gap: 4px;
     }
 
+    .citation-block {
+      position: relative;
+      margin-top: 34px;
+    }
+
+    .citation-copy {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 1;
+      height: 30px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--size-xs);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 160ms ease, color 160ms ease, background 160ms ease;
+    }
+
+    .citation-copy:hover,
+    .citation-copy:focus-visible,
+    .citation-copy.is-copied {
+      border-color: color-mix(in srgb, var(--green) 44%, var(--line));
+      background: color-mix(in srgb, var(--green) 10%, var(--surface));
+      color: color-mix(in srgb, var(--green) 72%, var(--text));
+      outline: none;
+    }
+
+    .citation-pre {
+      margin: 0;
+      padding: 18px 86px 18px 18px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      color: color-mix(in srgb, var(--muted) 74%, var(--text));
+      font-family: var(--font-mono);
+      font-size: var(--size-small);
+      line-height: 1.65;
+      white-space: pre;
+      box-shadow: var(--panel-shadow);
+    }
+
     .footer {
       padding: 40px 0 280px;
       color: var(--soft);
@@ -3367,7 +3416,7 @@
 <body id="top">
   <nav class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="#top"><span class="mark" aria-hidden="true"><img class="logo-mark logo-mark--white" src="assets/xpeng-logo-white.png" alt=""><img class="logo-mark logo-mark--ink" src="assets/xpeng-logo-ink.png" alt=""></span><span class="brand-text"><span>XPENG Robotics</span><span class="brand-sep">/</span><span>Multimodal Intelligence</span></span></a>
+      <a class="brand" href="#top"><span class="mark" aria-hidden="true"><img class="logo-mark logo-mark--white" src="assets/xpeng-logo-white.png" alt=""><img class="logo-mark logo-mark--ink" src="assets/xpeng-logo-ink.png" alt=""></span><span class="brand-text"><span>XPENG Robotics</span><span class="brand-sep">/</span><span>Multimodal</span></span></a>
       <div class="nav-links" aria-label="Site links">
         <a href="../index.html">Home</a>
         <button class="theme-toggle" type="button" aria-label="Toggle day and night theme"><span>☾</span></button>
@@ -3400,7 +3449,7 @@
         <p class="subtitle">What Cross-Embodiment<button type="button" class="footnote-mark" aria-describedby="cross-embodiment-note" aria-label="Footnote: definition of cross-embodiment"><sup>&#9671;</sup></button> Data Teaches an Embodied Foundation Model</p>
         <p class="subtitle-note" id="cross-embodiment-note"><span class="footnote-mark footnote-mark--inline" aria-hidden="true"><sup>&#9671;</sup></span> heterogeneous robots and humans</p>
         <div class="hero-meta" aria-label="Article metadata">
-          <span>XPENG Robotics / Multimodal Intelligence / Foundation of Embodiment Team
+          <span>XPENG Robotics / Multimodal Team
             <span class="hero-meta-sep" aria-hidden="true">·</span>
             <a class="hero-meta-link" href="#contributors">Contributors</a>
           </span>
@@ -3478,7 +3527,7 @@
                 <div class="trial-reference-tags" aria-label="Homogeneous teleoperation set summary">
                   <span>~3h pick-and-place; 1 container each</span>
                   <span>95% atomic 1-object&rarr;1-container</span>
-                  <span>5% 2-objects&rarr;1-fixed-container</span>
+                  <span>5% 2-objects&rarr;1-identical-container</span>
                 </div>
               </article>
             </aside>
@@ -3493,9 +3542,10 @@
               </div>
             </div>
           </div>
-          <p>In embodied AI, it&apos;s a widely accepted truth that <strong>cross-embodiment data</strong>&mdash;a diverse mixture encompassing both heterogeneous robot data and egocentric human videos&mdash;enhances robot models. Yet, this consensus remains an opaque black box: we know it works, but we rarely understand <em>exactly</em> what this broad spectrum of data is teaching the robot.</p>
-          <p>To demystify this, we introduce <strong><span class="fe-mark" aria-label="Fe subscript zero"><span class="fe-name">Fe</span><sub class="fe-zero">0</sub></span></strong>, an embodied foundation model. Rather than blindly scaling data to chase benchmarks, we designed a rigorous controlled experiment. We deliberately constrained our in-domain teleoperation data to the absolute minimum: just <strong>3 hours</strong> of trajectories featuring only a single, atomic pick-and-place primitive. By establishing this extreme baseline, we guarantee that any zero-shot generalization <span class="fe-mark" aria-label="Fe subscript zero"><span class="fe-name">Fe</span><sub class="fe-zero">0</sub></span> exhibits beyond in-domain grasping is unequivocally powered by cross-embodiment learning.</p>
-          <p>But how do we measure this transfer scientifically? Instead of ad-hoc testing, we constructed a systematic, multi-axis benchmark strictly aligned with the types of knowledge embedded in cross-embodiment data. We decomposed these capabilities into a hierarchical framework—spanning from basic visual robustness and semantic grounding, up to complex relational reasoning, compositional planning, and novel action prediction. Through extensive real-world trials on the IRON robot, we unpack the true anatomy of cross-embodiment data, revealing exactly where visual and semantic generalization successfully transfers, and where the fundamental limits of physical execution still hold firm.</p>
+          <p>In embodied AI, it is a widely held belief that <strong>cross-embodiment data</strong>&mdash;a diverse mixture encompassing both heterogeneous robot data and egocentric human videos&mdash;enhances robot models. Yet, this consensus remains an opaque black box: we know it works, but we rarely understand <em>exactly</em> what this broad spectrum of data is teaching the robot.</p>
+          <p>To demystify this, we introduce <strong><span class="fe-mark" aria-label="Fe subscript zero"><span class="fe-name">Fe</span><sub class="fe-zero">0</sub></span></strong>, an embodied foundation model. Rather than scaling data to chase benchmarks, we designed a rigorous controlled experiment. We deliberately constrained our in-domain teleoperation data to the minimum: just <strong>3 hours</strong> of trajectories featuring only a single, atomic pick-and-place primitive, where 95% of the data involves moving a single object to a single receptacle from a highly restricted vocabulary. By establishing this extreme baseline, we guarantee that any zero-shot generalization <span class="fe-mark" aria-label="Fe subscript zero"><span class="fe-name">Fe</span><sub class="fe-zero">0</sub></span> exhibits beyond in-domain grasping is unequivocally powered by cross-embodiment learning.</p>
+          <p>But how do we measure this transfer scientifically? Instead of ad-hoc testing, we constructed a systematic L1&ndash;L5 capability framework—spanning from basic visual robustness and semantic grounding, up to complex relational reasoning, compositional planning, and novel action execution. We evaluate the model through both rigorous open-loop trajectory scoring and extensive closed-loop real-world trials on the IRON-R01-1.11 robot to unpack the true anatomy of cross-embodiment data.</p>
+          <p>We reveal a clear capability boundary: while heterogeneous data effectively teaches the model visual semantics and basic task logic, it falters at mid-level relational and sequential reasoning, and hits a hard ceiling when transferring precise physical execution. By systematically evaluating exactly where cross-embodiment data succeeds and where it fails, we illuminate what this heterogeneous experience actually teaches an embodied foundation model, and what it takes to push beyond current limits.</p>
         </div>
       </div>
     </section>
@@ -3508,10 +3558,9 @@
           <p class="section-subtitle">The Extreme Asymmetry Between Pool and Anchor</p>
         </div>
         <div class="section-body">
-          <p>The cross-embodiment pool is deliberately diverse, spanning human activity, dexterous hands, grippers, and heterogeneous robots to cover mixed viewpoints, objects, and manipulation styles.</p>
-          <p>The target-embodiment teleoperation anchor, however, is intentionally minimal. It is restricted to the IRON-R01-1.11 humanoid robot and its action vocabulary is dominated by a single primitive: pick-and-place.</p>
-          <p>The scale disparity between the two is massive. The cross-embodiment pool is over three hundred times larger in terms of episodes, nearly a thousand times larger in frame count, and over fifteen hundred times larger in total duration compared to the target anchor.</p>
-          <p>This extreme asymmetry makes the transfer analysis interpretable. When a trial moves beyond the anchor’s restricted object set, receptacle set, task logic, or action primitive, it directly tests whether knowledge from the broader pool can be transferred on the humanoid body.</p>
+          <p>The cross-embodiment pool is deliberately diverse, spanning human activity and heterogeneous robots with dexterous hands and grippers to cover broad scenes, tasks, and action primitives. The target-embodiment teleoperation anchor, however, is intentionally minimal. It is restricted to the IRON-R01-1.11 humanoid robot and its action vocabulary is dominated by a single primitive: pick-and-place.</p>
+          <p>The scale disparity between the two is massive. The cross-embodiment pool is over three hundred times larger in terms of episodes, nearly a thousand times larger in frame count, and over fifteen hundred times larger in total duration compared to the target anchor.
+          This extreme asymmetry makes the transfer analysis interpretable. When a trial moves beyond the anchor’s restricted object set, receptacle set, task logic, or action primitive, it directly tests whether knowledge from the broader pool can be transferred on the humanoid body.</p>
           <div class="data-compare" aria-label="Pool and anchor data comparison">
             <article class="data-profile data-profile--pool" tabindex="0">
               <div class="data-group-heading">
@@ -3584,7 +3633,7 @@
           <div id="in-domain-objects-containers" style="margin-top: 34px;">
             <p>Zooming into the target-embodiment anchor makes its constraints concrete, and reveals just how narrow the in-domain objects and containers really are.</p>
             <p><strong>Extreme simplicity in scale and action primitives.</strong> The dataset contains merely ~3 hours of demonstrations with an average duration of just 6.1 seconds per episode. Crucially, the physical action space is strictly confined to a single, highly uniform primitive: basic pick-and-place. Every demonstration strictly follows a rigid approach &rarr; grasp &rarr; lift &rarr; transport &rarr; release kinematic sequence.</p>
-            <p><strong>Minimal task complexity and semantic diversity.</strong> Furthermore, the task complexity and semantic diversity are heavily restricted. An overwhelming 95% of the trajectories represent the most atomic manipulation scenario: transferring a single object to a single receptacle. The remaining 5% of the data involves placing two objects onto different tiers of a single shelf, and is strictly limited to only three object categories (apples, bananas, and bread). Across the entire dataset, the visual and semantic scope is tightly bounded to 20 common household items and 6 fixed target locations (such as boxes, plates, or handing over to a person) as shown below, uniformly driven by highly templated language instructions.</p>
+            <p><strong>Minimal task complexity and semantic diversity.</strong> Furthermore, the task complexity and semantic diversity are heavily restricted. An overwhelming 95% of the trajectories represent the most atomic manipulation scenario: transferring a single object to a single receptacle. The remaining 5% of the data involves placing two objects onto different tiers of a single shelf, and is strictly limited to only three object categories (apple, banana, and bread). Across the entire dataset, the visual and semantic scope is tightly bounded to 20 common household items and 6 fixed target locations (such as boxes, plates, or handing over to a person) as shown below, uniformly driven by highly templated language instructions.</p>
             <div class="reference-pairs" aria-label="In-domain object and container vocabularies with references">
               <div class="reference-label-section">
                 <div class="chip-title">Objects</div>
@@ -3651,7 +3700,7 @@
           <p class="section-subtitle">From What to Look at, to How to Act</p>
         </div>
         <div class="section-body">
-          <p>To make cross-embodiment transfer measurable, <span class="fe-mark" aria-label="Fe subscript zero"><span class="fe-name">Fe</span><sub class="fe-zero">0</sub></span> is evaluated through a <strong>Multi-Axis Decomposition Framework</strong> rather than a single aggregate metric. The five axes are not arbitrary capability buckets&mdash;each one is designed to isolate a specific type of reusable knowledge that the heterogeneous data pool can plausibly supply, mapping cleanly from perception to action: visual robustness and semantic grounding at the input side, relational reasoning and compositional planning in the middle, and novel action generation at the output side.</p>
+          <p>To make cross-embodiment transfer measurable, <span class="fe-mark" aria-label="Fe subscript zero"><span class="fe-name">Fe</span><sub class="fe-zero">0</sub></span> is evaluated through a <strong>Multi-Axis Decomposition Framework</strong> rather than a single aggregate metric. The five axes are not arbitrary capability buckets&mdash;each one is designed to evaluate a specific type of reusable knowledge that the heterogeneous data pool can plausibly supply, mapping cleanly from perception to action: visual robustness and semantic grounding at the input side, relational reasoning and compositional planning in the middle, and novel action prediction at the output side.</p>
           <p>For every layer we collected a matched set of teleoperated trajectories on the IRON-R01-1.11 to serve as ground truth. The model is then evaluated <strong>open-loop</strong>: along each recorded trajectory we query the model frame by frame and score it by the <strong>MSE</strong> between its predicted actions and the corresponding teleoperated actions. Unlike a closed-loop trial on the real robot, this protocol scores every frame from the ground-truth state rather than from where the model would have ended up&mdash;the success of preceding steps is never enforced. As a result, scores on long-horizon, multi-step layers (most visibly L4 Compositional Planning) may diverge from real-robot outcomes, where errors normally compound across steps.</p>
         </div>
         <div class="card-grid cards-5 axis-grid">
@@ -3769,16 +3818,12 @@
         </div>
         <div class="section-body">
           <div class="side-footnote-anchor">
-            <p>We build <span class="fe-mark" aria-label="Fe subscript zero"><span class="fe-name">Fe</span><sub class="fe-zero">0</sub></span> based on UniT<a class="footnote-mark" href="#unit-reference-note" aria-label="Side note: UniT paper title"><sup>1</sup></a> and TOPOS<a class="footnote-mark" href="#topos-reference-note" aria-label="Side note: TOPOS paper title"><sup>2</sup></a> to reveal what heterogeneous embodied experience actually teaches an embodied foundation. We measure transfer along two complementary views, both evaluated across the L1&ndash;L5 task framework. The first is <strong>open-loop</strong>: a numeric MSE score against teleoperated trajectories. The second is <strong>on the robot</strong>: closed-loop rollouts on IRON-R01-1.11. Together they give us both <em>what the model predicts</em> and <em>what the model executes</em>.</p>
+            <p>We build <span class="fe-mark" aria-label="Fe subscript zero"><span class="fe-name">Fe</span><sub class="fe-zero">0</sub></span> based on UniT<a class="footnote-mark" href="#unit-reference-note" aria-label="Side note: UniT paper title"><sup>1</sup></a> and an in-house multimodal model to reveal what heterogeneous embodied experience actually teaches an embodied foundation. We measure transfer along two complementary views, both evaluated across the L1&ndash;L5 task framework. The first is <strong>open-loop</strong>: a numeric MSE score against teleoperated trajectories. The second is <strong>on the robot</strong>: closed-loop rollouts on IRON-R01-1.11. Together they give us both <em>what the model predicts</em> and <em>what the model executes</em>.</p>
             <aside class="side-footnotes" aria-label="Method reference notes">
               <a class="side-footnote" id="unit-reference-note" href="https://xpeng-robotics.github.io/unit/" target="_blank" rel="noopener">
                 <span class="side-footnote-index">01</span>
                 <span><em class="side-footnote-link">UniT: Toward a Unified Physical Language for Human-to-Humanoid Policy Learning and World Modeling</em></span>
               </a>
-              <div class="side-footnote" id="topos-reference-note">
-                <span class="side-footnote-index">02</span>
-                <span><em>TOPOS: The Sense of Place for Embodied Model</em></span>
-              </div>
             </aside>
           </div>
 
@@ -3788,7 +3833,7 @@
           <div class="results-figure" aria-label="Open-loop validation result charts">
             <article class="result-chart-panel" id="average-mse-by-group-chart">
               <h3>Average MSE by Group</h3>
-              <p class="chart-subtitle">Mean across all model variants; y-axis starts at zero.</p>
+              <p class="chart-subtitle">Mean across all models with different cross-embodiment data ratio.</p>
               <svg class="result-chart-svg" viewBox="0 0 420 300" role="img" aria-label="Bar chart showing average final-step validation MSE for L1 through L5 across all model variants">
                 <rect class="result-plot-bg" x="44" y="40" width="328" height="196" rx="3"></rect>
                 <line class="result-grid" x1="44" y1="40" x2="372" y2="40"></line>
@@ -3982,16 +4027,18 @@
                 </div>
                 <div class="trial-matrix-cell trial-matrix-cell--pass" role="cell">
                   <span class="trial-status trial-status--limited">Limited</span>
-                  <p>Executes challenging non-prehensile actions&mdash;pose generalization, pose restoration, and contact-based pushing&mdash;but cannot yet handle planar constrained motion.</p>
+                  <p>Executes challenging pose generalization and restoration, and pushing, but cannot handle planar constrained motion.</p>
                 </div>
                 <div class="trial-matrix-cell trial-matrix-cell--fail" role="cell">
                   <span class="trial-status trial-status--fail">Complete Failure</span>
-                  <p>Incapable of anything outside the standard pick-and-place template (e.g. uprighting, pushing to close, or navigating around obstacles).</p>
+                  <p>Incapable of anything outside the standard pick-and-place template (e.g. uprighting, pushing to close, or wiping).</p>
                 </div>
               </div>
             </div>
 
-            <p>Based on the real robot trials across the L1–L5 capability axes, the model trained with 100% cross-embodiment data significantly outperforms the 0% baseline. The baseline model fails completely across all levels, remaining restricted to rigid memorization, standard pick-and-place actions, and struggling with novel objects or multi-step tasks. In stark contrast, the 100% cross-embodiment model achieves full success in fundamental perception tasks (L1 visual robustness and L2 semantic grounding). Furthermore, it attains partial success in higher-order tasks: executing novel combinations in relational reasoning (L3), overcoming teleoperation bias for multi-step compositional planning (L4), and performing challenging non-prehensile actions (L5). Ultimately, these closed-loop results confirm that cross-embodiment data is the critical catalyst elevating the model from rigid memorization to generalized real-world execution.</p>
+            <p>The closed-loop trials on the IRON-R01-1.11 robot directly mirror the open-loop trends, translating the numeric MSE drop-offs into visible execution failures. The 0% baseline model fails completely across all levels, remaining rigidly confined to the narrow scope of its teleoperation data and unable to handle any variation in objects, scenes, or multi-step logic.</p>
+            <p>In stark contrast, the 100% cross-embodiment model achieves full autonomy in fundamental perception and semantic grounding (L1&ndash;L2). However, as task complexity increases, its performance becomes fragmented. While it can successfully select superlatives (e.g., the largest/smallest object), it struggles with precise spatial relations (L3). It successfully overcomes teleoperation bias to complete certain multi-step plans, yet these long-horizon executions remain fragile (L4). Finally, while it can execute contact-based pushing (e.g., closing a cabinet door), it completely fails at planar constrained motions (L5). </p>
+              <p>Ultimately, these real-world results confirm that while cross-embodiment data is the critical catalyst for unlocking generalized cognition, simply scaling heterogeneous trajectories under current paradigms is not enough to master higher-order logic and complex physical action. We dissect the underlying structural bottlenecks behind this capability drop-off in the following section.</p>
           </div>
         </div>
       </div>
@@ -4002,31 +4049,30 @@
         <div>
           <div class="kicker">Takeaways</div>
           <h2>The Anatomy of Cross-Embodiment Transfer</h2>
+          <p class="section-subtitle">From Universal Cognition to the Bottlenecks of Physical Execution</p>
         </div>
         <div class="section-body">
-          <p>Cross-embodiment data serves as a powerful catalyst for foundational perception and semantic reasoning. By exposing the model to a massive diversity of scenes, objects, and language-rich interactions, the heterogeneous data acts as a robust pre-training foundation. It allows the model to easily overcome visual distractors and map abstract linguistic instructions to physical targets in the real world.</p>
-          <p>However, the physical execution of complex actions remains strictly bounded by the unique hardware of the target embodiment. While perception and semantics generalize broadly, higher-order physical interactions cannot be easily learned from heterogeneous sources alone. They require a strong grounding in the target robot's specific kinematics, camera perspectives, and dexterous hand manipulation capabilities.</p>
-          <p>The practical implication is a paradigm shift in data collection strategies. Future efforts should not waste resources on basic visual recognition, but rather focus heavily on embodiment-specific, contact-rich physical interactions to bridge the gap between "knowing what to do" and "knowing how to do it."</p>
+          <p>Evaluating transfer across the L1&ndash;L5 framework reveals a clear capability boundary in cross-embodiment learning. While scaling heterogeneous data effectively solves visual semantics and basic task logic, it falters at mid-level relational reasoning and hits a hard ceiling when transferring precise physical execution. This capability drop-off exposes deep structural bottlenecks: the lossy nature of multimodal representations, the challenge of overcoming behavioral biases inherent in teleoperation data, and the fundamental limits of learning physical interaction from raw trajectories. True physical generalization requires new representational and learning paradigms, not just more data.</p>
           <div class="takeaway-list">
             <article class="takeaway-row takeaway-row--i">
               <div class="takeaway-marker" aria-hidden="true">I</div>
               <div class="takeaway-body">
-                <h3>Perception and Semantics are Highly Transferable</h3>
-                <p>Cross-embodiment data is an exceptional catalyst for visual and semantic reasoning. Because visual representations and language logic are isomorphic across different embodiments, the model can easily overcome visual distractors and map abstract instructions to the real world in a zero-shot manner—provided the required action template is familiar. This proves that "knowing what and where" can be robustly shared across distinct physical forms.</p>
+                <h3>Vision and Semantics Transfer Free: Cross-Embodiment Data First Teaches What Remains Stable</h3>
+                <p>The most immediate signal in heterogeneous data is <strong>what remains invariant across humans and diverse robots</strong>: visual features, semantic concepts, and functional affordances. By leveraging the vision-language alignment of the foundation model, we observe clear gains in Visual Robustness (L1) (e.g., ignoring distractors, adapting to new scenes) and Semantic Grounding (L2) (e.g., generalizing to unseen objects, receptacles, and implicit instructions). Through this universal visual-language bridge, cross-embodiment data successfully teaches the model "what to look at" and "what things are" before it teaches "how to act."</p>
               </div>
             </article>
             <article class="takeaway-row takeaway-row--ii">
               <div class="takeaway-marker" aria-hidden="true">II</div>
               <div class="takeaway-body">
-                <h3>Fine-grained Execution is Strictly Hardware-Bounded</h3>
-                <p>However, the transferability breaks down when tasks move beyond basic grasping. Higher-order interactions—such as precision relational placement (L3), long-horizon state tracking (L4), and contact-rich non-prehensile primitives (L5)—cannot be easily learned from heterogeneous sources alone. These complex actions require a strong grounding in the target robot's unique kinematics, camera perspectives, and dexterous capabilities. The underlying physical dynamics represent a barrier that heterogeneous data alone cannot cross.</p>
+                <h3>Mid-Level Logic Falters: Relational and Sequential Tasks Expose Representational Limits</h3>
+                <p>Transferring higher-order logic proves significantly harder than basic perception due to two distinct bottlenecks. First, a <strong>relational representation bottleneck</strong> limits Relational Reasoning (L3): while basic semantic selection transfers well, binding precise spatial relationships or multi-object attributes struggles because current multimodal representations often fail to maintain strict correspondence between objects and their relative properties. Second, a <strong>behavioral bias bottleneck</strong> limits Compositional Planning (L4): executing multi-step continuous tasks forces the model to fight an ingrained "terminate early" instinct, driven by the overwhelmingly single-step nature of the anchor data.</p>
               </div>
             </article>
             <article class="takeaway-row takeaway-row--iii">
               <div class="takeaway-marker" aria-hidden="true">III</div>
               <div class="takeaway-body">
-                <h3>Insight: A Paradigm Shift in Data Strategy</h3>
-                <p>This boundary reveals a necessary paradigm shift for future data collection. Since foundational "seeing" and "hearing" can be generalized through cross-embodiment data, expensive data collection on specific target robots should no longer be wasted on basic visual recognition. Instead, resources must be heavily focused on embodiment-specific, contact-rich physical interactions to conquer the "last mile" of fine-grained execution.</p>
+                <h3>Physics Doesn't Scale Easily: Action Transfer Requires a New Learning Paradigm</h3>
+                <p>Cross-embodiment data clearly demonstrates intent—showing that an actor is picking, pushing, or wiping. What it does not directly specify is <strong>the physical structure that makes the action executable</strong>: contact mode, constraint geometry, force direction, etc. This helps explain why L5 action generalization shows the weakest transfer: these variables are only weakly expressed in raw trajectories and do not transfer cleanly across bodies by scale alone. The remaining gap suggests that action learning may need a new data paradigm that captures transferable physical interaction structure, rather than relying only on more heterogeneous data.</p>
               </div>
             </article>
           </div>
@@ -4044,20 +4090,31 @@
           <p class="contributor-names">
             <span class="contributor-name">Yizhuo Li<sup class="contributor-mark">&ast;</sup></span><span class="contributor-sep">,</span>
             <span class="contributor-name">Xiaoyu Zhang<sup class="contributor-mark">&ast;</sup></span><span class="contributor-sep">,</span>
-            <span class="contributor-name">Yuying Ge<sup class="contributor-mark">&dagger;</sup></span><span class="contributor-sep">,</span>
+            <span class="contributor-name">Yuying Ge<sup class="contributor-mark">&ast;&dagger;</sup></span><span class="contributor-sep">,</span>
             <span class="contributor-name">Teng Wang</span><span class="contributor-sep">,</span>
             <span class="contributor-name">Boyu Chen</span><span class="contributor-sep">,</span>
             <span class="contributor-name">Yi Chen</span><span class="contributor-sep">,</span>
             <span class="contributor-name">Bo Liu</span><span class="contributor-sep">,</span>
             <span class="contributor-name">Feng Qiu</span><span class="contributor-sep">,</span>
+            <span class="contributor-name">Yuguo Gan</span><span class="contributor-sep">,</span>
             <span class="contributor-name">Hui Zhou</span><span class="contributor-sep">,</span>
             <span class="contributor-name">Yixiao Ge</span>
           </p>
           <ul class="contributor-notes">
-            
+
             <li><sup class="contributor-mark">&ast;</sup>Co-first authors.</li>
             <li><sup class="contributor-mark">&dagger;</sup>Project lead.</li>
           </ul>
+          <div class="citation-block" aria-label="Citation">
+            <button class="citation-copy" type="button" data-copy-target="citation-bibtex">Copy</button>
+            <pre class="citation-pre" id="citation-bibtex">@article{li2026fe0,
+  author = {Yizhuo Li and Xiaoyu Zhang and Yuying Ge and Teng Wang and Boyu Chen and Yi Chen and Bo Liu and Feng Qiu and Yuguo Gan and Hui Zhou and Yixiao Ge},
+  title = {Inside Fe0: What Cross-Embodiment Data Teaches an Embodied Foundation Model},
+  journal = {XPENG Robotics Blog},
+  year = {2026},
+  note = {https://xpeng-robotics.github.io/fe0/},
+}</pre>
+          </div>
         </div>
       </div>
     </section>
@@ -4081,6 +4138,37 @@
       root.dataset.theme = next;
       knob.textContent = next === "day" ? "☀" : "☾";
       localStorage.setItem("paper-blog-theme", next);
+    });
+
+    const citationCopy = document.querySelector(".citation-copy");
+    citationCopy?.addEventListener("click", async () => {
+      const target = document.getElementById(citationCopy.dataset.copyTarget);
+      const text = target?.textContent || "";
+      if (!text) return;
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const textarea = document.createElement("textarea");
+          textarea.value = text;
+          textarea.setAttribute("readonly", "");
+          textarea.style.position = "fixed";
+          textarea.style.opacity = "0";
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand("copy");
+          textarea.remove();
+        }
+        citationCopy.textContent = "Copied";
+        citationCopy.classList.add("is-copied");
+        window.setTimeout(() => {
+          citationCopy.textContent = "Copy";
+          citationCopy.classList.remove("is-copied");
+        }, 1600);
+      } catch (error) {
+        citationCopy.textContent = "Failed";
+        window.setTimeout(() => { citationCopy.textContent = "Copy"; }, 1600);
+      }
     });
 
 
