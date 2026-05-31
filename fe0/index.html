@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/iron-front-hand.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/iron-david-stance.webp" type="image/webp" fetchpriority="high">
   <script>
     const paperBlogScrollY = Number(history.state?.paperBlogScrollY);
     if (Number.isFinite(paperBlogScrollY)) {
@@ -3442,8 +3444,14 @@
 
   <header class="hero" id="hero-validation-chart">
     <div class="hero-art" aria-hidden="true">
-      <img class="hero-figure hero-figure--night" src="assets/iron-front-hand.png" alt="">
-      <img class="hero-figure hero-figure--day" src="assets/iron-david-stance.png" alt="">
+      <picture>
+        <source srcset="assets/iron-front-hand.webp" type="image/webp">
+        <img class="hero-figure hero-figure--night" src="assets/iron-front-hand.png" width="2400" height="1345" alt="" decoding="async" fetchpriority="high">
+      </picture>
+      <picture>
+        <source srcset="assets/iron-david-stance.webp" type="image/webp">
+        <img class="hero-figure hero-figure--day" src="assets/iron-david-stance.png" width="2200" height="1237" alt="" decoding="async" fetchpriority="high">
+      </picture>
     </div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
