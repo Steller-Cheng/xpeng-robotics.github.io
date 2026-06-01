@@ -2168,6 +2168,7 @@
     }
 
     .trial-references .reference-figure {
+      position: relative;
       margin: 0;
       padding: 8px;
       border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
@@ -2199,6 +2200,40 @@
       background: #050806;
       border-radius: calc(var(--radius) - 4px);
       clip-path: inset(1px round calc(var(--radius) - 4px));
+    }
+
+    .reference-figure.is-media-loading::after,
+    .video-box.is-media-loading::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 2;
+      width: 22px;
+      height: 22px;
+      margin: -11px 0 0 -11px;
+      border: 2px solid color-mix(in srgb, var(--text) 18%, transparent);
+      border-top-color: color-mix(in srgb, var(--accent) 82%, var(--text));
+      border-radius: 50%;
+      pointer-events: none;
+      animation: media-loading-spin 0.75s linear infinite;
+    }
+
+    .reference-figure.is-media-loading::before,
+    .video-box.is-media-loading::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      z-index: 1;
+      border-radius: calc(var(--radius) - 4px);
+      background: color-mix(in srgb, var(--surface) 42%, transparent);
+      pointer-events: none;
+    }
+
+    @keyframes media-loading-spin {
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .trial-references .reference-figure video {
@@ -2458,6 +2493,7 @@
     }
 
     .video-box {
+      position: relative;
       min-height: 0;
       padding: 10px;
       border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
@@ -2561,6 +2597,13 @@
       background: color-mix(in srgb, var(--surface) 74%, transparent);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .reference-figure.is-media-loading::after,
+      .video-box.is-media-loading::after {
+        animation: none;
+      }
+    }
+
     .trial-loading {
       min-height: clamp(420px, 52vw, 560px);
       padding: 22px;
@@ -2645,6 +2688,7 @@
     }
 
     .reference-figure {
+      position: relative;
       margin: 0;
       overflow: hidden;
       border-radius: calc(var(--radius) - 4px);
@@ -4338,6 +4382,42 @@
       return element;
     }
 
+    function setMediaLoadingState(media, isLoading) {
+      const frame = media.closest(".video-box, .reference-figure");
+      if (frame) frame.classList.toggle("is-media-loading", isLoading);
+    }
+
+    function trackMediaLoading(media) {
+      if (!media || media.dataset.mediaLoadingTracked === "true") return;
+      media.dataset.mediaLoadingTracked = "true";
+
+      const isVideo = media.tagName === "VIDEO";
+      const isLoaded = () => isVideo
+        ? media.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA
+        : media.complete && media.naturalWidth > 0;
+      const markLoaded = () => setMediaLoadingState(media, false);
+      const markLoading = () => setMediaLoadingState(media, !isLoaded());
+
+      markLoading();
+      if (isVideo) {
+        media.addEventListener("loadstart", markLoading);
+        media.addEventListener("waiting", markLoading);
+        media.addEventListener("stalled", markLoading);
+        media.addEventListener("loadeddata", markLoaded);
+        media.addEventListener("canplay", markLoaded);
+        media.addEventListener("playing", markLoaded);
+        media.addEventListener("error", markLoaded);
+      } else {
+        media.addEventListener("load", markLoaded);
+        media.addEventListener("error", markLoaded);
+      }
+    }
+
+    function initializeMediaLoadingIcons(root = document) {
+      root.querySelectorAll(".reference-figure img, .reference-figure video, .video-box img, .video-box video")
+        .forEach(trackMediaLoading);
+    }
+
     function configureDecorativeVideo(video, src, playbackRate = 1) {
       video.src = src;
       video.muted = true;
@@ -4395,9 +4475,11 @@
     function mountTrialVideo(box) {
       if (box.querySelector("video")) return;
       box.querySelector(".video-placeholder")?.remove();
+      box.classList.add("is-media-loading");
       const video = document.createElement("video");
       configureDecorativeVideo(video, box.dataset.mediaSrc, Number(box.dataset.playbackRate || 1));
       box.append(video);
+      trackMediaLoading(video);
     }
 
     function unmountTrialVideo(box) {
@@ -4408,6 +4490,7 @@
         video.load();
         video.remove();
       }
+      box.classList.remove("is-media-loading");
       if (!box.querySelector(".video-placeholder")) {
         box.append(createElement("div", "video-placeholder", ""));
       }
@@ -4622,8 +4705,12 @@
       restorePaperBlogScroll();
     }
 
+    initializeMediaLoadingIcons();
     loadTrialData();
-    window.addEventListener("load", restorePaperBlogScroll);
+    window.addEventListener("load", () => {
+      initializeMediaLoadingIcons();
+      restorePaperBlogScroll();
+    });
 
   </script>
 </body>
