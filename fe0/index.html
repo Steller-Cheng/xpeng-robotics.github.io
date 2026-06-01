@@ -4418,11 +4418,21 @@
         .forEach(trackMediaLoading);
     }
 
-    function configureDecorativeVideo(video, src, playbackRate = 1) {
+    function playTrialVideo(video) {
+      video.dataset.shouldPlay = "true";
+      video.play().catch(() => {});
+    }
+
+    function pauseTrialVideo(video) {
+      video.dataset.shouldPlay = "false";
+      video.pause();
+    }
+
+    function configureDecorativeVideo(video, src, playbackRate = 1, shouldPlay = true) {
       video.src = src;
       video.muted = true;
       video.defaultMuted = true;
-      video.autoplay = true;
+      video.autoplay = shouldPlay;
       video.loop = true;
       video.playsInline = true;
       video.disablePictureInPicture = true;
@@ -4430,6 +4440,7 @@
       video.controls = false;
       video.preload = "auto";
       video.defaultPlaybackRate = playbackRate;
+      video.dataset.shouldPlay = String(shouldPlay);
       video.setAttribute("disablepictureinpicture", "");
       video.setAttribute("controlslist", "nodownload nofullscreen noremoteplayback");
       video.setAttribute("aria-hidden", "true");
@@ -4445,7 +4456,7 @@
       enforceVideoRate();
       video.addEventListener("loadedmetadata", () => {
         enforceVideoRate();
-        video.play().catch(() => {});
+        if (video.dataset.shouldPlay === "true") playTrialVideo(video);
       });
       video.addEventListener("play", enforceVideoRate);
       video.addEventListener("ratechange", enforceVideoRate);
@@ -4472,12 +4483,21 @@
       return box;
     }
 
-    function mountTrialVideo(box) {
-      if (box.querySelector("video")) return;
+    function mountTrialVideo(box, shouldPlay = true) {
+      const existingVideo = box.querySelector("video");
+      if (existingVideo) {
+        if (shouldPlay) {
+          playTrialVideo(existingVideo);
+        } else {
+          pauseTrialVideo(existingVideo);
+        }
+        return;
+      }
+
       box.querySelector(".video-placeholder")?.remove();
       box.classList.add("is-media-loading");
       const video = document.createElement("video");
-      configureDecorativeVideo(video, box.dataset.mediaSrc, Number(box.dataset.playbackRate || 1));
+      configureDecorativeVideo(video, box.dataset.mediaSrc, Number(box.dataset.playbackRate || 1), shouldPlay);
       box.append(video);
       trackMediaLoading(video);
     }
@@ -4496,9 +4516,10 @@
       }
     }
 
-    function createReferenceVideoPlaceholder(card) {
+    function createReferenceVideoPlaceholder(card, shouldLoad) {
       const box = createElement("div", "video-box video-box--reference");
-      box.style.setProperty("--media-aspect", "4 / 3");
+      const aspect = card.referenceVideo?.aspect || "4 / 3";
+      box.style.setProperty("--media-aspect", aspect);
       box.append(createElement("div", "video-label", "Transfer Source"));
       if (card.referenceVideo?.instruction) {
         box.append(createElement("div", "video-instruction", card.referenceVideo.instruction));
@@ -4506,9 +4527,13 @@
 
       if (card.referenceVideo?.src) {
         box.dataset.mediaSrc = card.referenceVideo.src;
-        box.dataset.mediaAspect = card.referenceVideo.aspect || "4 / 3";
+        box.dataset.mediaAspect = aspect;
         box.dataset.playbackRate = "1";
-        mountTrialVideo(box);
+        if (shouldLoad) {
+          mountTrialVideo(box);
+        } else {
+          box.append(createElement("div", "video-placeholder", ""));
+        }
       } else {
         box.append(createElement("div", "video-placeholder", ""));
       }
@@ -4525,7 +4550,7 @@
       const levelClass = getLevelClass(card.level);
       const article = createElement("article", "trial-card" + (levelClass ? " " + levelClass : "") + (isActive ? " is-active" : ""));
       const mediaGrid = createElement("div", "video-pair");
-      mediaGrid.append(createReferenceVideoPlaceholder(card));
+      mediaGrid.append(createReferenceVideoPlaceholder(card, isActive));
       (card.media || []).forEach((media) => mediaGrid.append(createTrialVideoBox(media, isActive)));
       article.append(mediaGrid);
 
@@ -4647,16 +4672,105 @@
       return (index + count) % count;
     }
 
+    function getCardDistance(index, activeIndex, count) {
+      const forward = (index - activeIndex + count) % count;
+      const backward = (activeIndex - index + count) % count;
+      return Math.min(forward, backward);
+    }
+
+    function clearBackgroundLoadTimer(box) {
+      if (!box.dataset.backgroundLoadTimer) return;
+      clearTimeout(Number(box.dataset.backgroundLoadTimer));
+      delete box.dataset.backgroundLoadTimer;
+    }
+
+    function clearBackgroundLoadTimers(root) {
+      root.querySelectorAll(".video-box[data-background-load-timer]").forEach(clearBackgroundLoadTimer);
+    }
+
+    function shouldPlayVideoBox(box) {
+      const card = box.closest(".trial-card");
+      const panel = box.closest(".trial-level-panel");
+      return Boolean(card?.classList.contains("is-active") && panel?.classList.contains("is-active"));
+    }
+
+    function scheduleVideoBoxLoad(box, delay) {
+      clearBackgroundLoadTimer(box);
+      const timer = window.setTimeout(() => {
+        delete box.dataset.backgroundLoadTimer;
+        mountTrialVideo(box, shouldPlayVideoBox(box));
+      }, delay);
+      box.dataset.backgroundLoadTimer = String(timer);
+    }
+
+    function scheduleBackgroundTrialVideoLoads(cards, activeIndex) {
+      const queuedBoxes = [];
+      cards.forEach((card, cardIndex) => {
+        if (cardIndex === activeIndex) return;
+        card.querySelectorAll(".video-box[data-media-src]").forEach((box) => {
+          const video = box.querySelector("video");
+          if (video) {
+            pauseTrialVideo(video);
+            return;
+          }
+          queuedBoxes.push({
+            box,
+            distance: getCardDistance(cardIndex, activeIndex, cards.length)
+          });
+        });
+      });
+
+      queuedBoxes
+        .sort((a, b) => a.distance - b.distance)
+        .forEach(({ box }, queueIndex) => {
+          scheduleVideoBoxLoad(box, 350 + queueIndex * 140);
+        });
+
+      return queuedBoxes.length;
+    }
+
+    function scheduleInactiveLevelVideoLoads(activePanel, activeLevelDelayOffset) {
+      const carousel = activePanel.closest(".trial-carousel");
+      if (!carousel) return;
+
+      const panels = Array.from(carousel.querySelectorAll(".trial-level-panel"));
+      const activePanelIndex = panels.indexOf(activePanel);
+      const queuedBoxes = [];
+
+      panels.forEach((panel, panelIndex) => {
+        if (panel === activePanel) return;
+        panel.querySelectorAll(".video-box[data-media-src]").forEach((box) => {
+          const video = box.querySelector("video");
+          if (video) {
+            pauseTrialVideo(video);
+            return;
+          }
+          const card = box.closest(".trial-card");
+          const cards = Array.from(panel.querySelectorAll(".trial-card"));
+          queuedBoxes.push({
+            box,
+            levelDistance: getCardDistance(panelIndex, activePanelIndex, panels.length),
+            cardIndex: Math.max(0, cards.indexOf(card))
+          });
+        });
+      });
+
+      queuedBoxes
+        .sort((a, b) => a.levelDistance - b.levelDistance || a.cardIndex - b.cardIndex)
+        .forEach(({ box }, queueIndex) => {
+          scheduleVideoBoxLoad(box, 900 + activeLevelDelayOffset * 140 + queueIndex * 180);
+        });
+    }
+
     function syncTrialVideos(cards, activeIndex) {
       cards.forEach((card, cardIndex) => {
-        card.querySelectorAll(".video-box:not(.video-box--reference)").forEach((box) => {
+        card.querySelectorAll(".video-box[data-media-src]").forEach((box) => {
           if (cardIndex === activeIndex) {
-            mountTrialVideo(box);
-          } else {
-            unmountTrialVideo(box);
+            mountTrialVideo(box, true);
           }
         });
       });
+      return scheduleBackgroundTrialVideoLoads(cards, activeIndex);
     }
 
     function setActiveTrialCard(panel, index) {
@@ -4671,7 +4785,9 @@
         card.classList.toggle("is-prev", cards.length > 2 && cardIndex === previousIndex);
         card.classList.toggle("is-next", cards.length > 1 && cardIndex === followingIndex);
       });
-      syncTrialVideos(cards, nextIndex);
+      clearBackgroundLoadTimers(panel.closest(".trial-carousel") || panel);
+      const activeLevelQueueLength = syncTrialVideos(cards, nextIndex);
+      scheduleInactiveLevelVideoLoads(panel, activeLevelQueueLength);
       panel.dataset.activeCard = String(nextIndex);
     }
 
