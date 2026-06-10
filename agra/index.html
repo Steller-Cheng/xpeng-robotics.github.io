@@ -1,0 +1,1481 @@
+<!doctype html>
+<html lang="en" data-theme="night">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AGRA: Making Foresight Actionable in World Action Models</title>
+  <link rel="icon" type="image/png" href="../assets/xpeng-favicon-ink.png">
+  <link rel="icon" type="image/png" href="../assets/xpeng-favicon-ink.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="../assets/xpeng-favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="../assets/xpeng-favicon-ink.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="../fe0/assets/iron-front-hand.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="../fe0/assets/iron-david-stance.webp" type="image/webp" fetchpriority="high">
+  <script>
+    const paperBlogScrollY = Number(history.state?.paperBlogScrollY);
+    if (Number.isFinite(paperBlogScrollY)) {
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      document.documentElement.dataset.restoringScroll = "true";
+    }
+    function savePaperBlogScroll() {
+      history.replaceState({ ...(history.state || {}), paperBlogScrollY: window.scrollY }, "", window.location.href);
+    }
+    window.addEventListener("pagehide", savePaperBlogScroll);
+    const storedTheme = localStorage.getItem("paper-blog-theme");
+    if (storedTheme === "day" || storedTheme === "night") document.documentElement.dataset.theme = storedTheme;
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1110;
+      --surface: #171917;
+      --surface-2: #20231f;
+      --text: #f4f1e8;
+      --muted: #b8b1a2;
+      --soft: #777062;
+      --line: rgba(244, 241, 232, 0.15);
+      --accent: #f05f3b;
+      --green: #98d957;
+      --cyan: #60c4bf;
+      --yellow: #cbc94c;
+      --orange: #d78b3d;
+      --baseline: #8f8b7f;
+      --chart-grid: rgba(244, 241, 232, 0.18);
+      --media-border: rgba(244, 241, 232, 0.10);
+      --media-shadow: rgba(0, 0, 0, 0.28);
+      --max: 1180px;
+      --measure: 700px;
+      --wide: 1040px;
+      --wide-plus: 1080px;
+      --page-gutter: 40px;
+      --radius: 8px;
+      --shadow: rgba(0, 0, 0, 0.36);
+      --panel-shadow: 0 20px 70px var(--shadow);
+      --wide-shadow: 0 22px 80px color-mix(in srgb, var(--shadow) 72%, transparent);
+      --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+      --font-display: "Chakra Petch", var(--font-sans);
+      --content-width: min(var(--max), calc(100% - var(--page-gutter)));
+      --article-width: min(var(--measure), calc(100% - var(--page-gutter)));
+      --wide-content: min(var(--wide), calc(100vw - var(--page-gutter)));
+      --wide-plus-content: min(var(--wide-plus), calc(100vw - var(--page-gutter)));
+      --size-xs: 11px;
+      --size-label: 12px;
+      --size-small: 13px;
+      --size-caption: 14px;
+      --size-copy: 18px;
+    }
+
+    html[data-theme="day"] {
+      color-scheme: light;
+      --bg: #f5f2ea;
+      --surface: #fffcf4;
+      --surface-2: #ede8dc;
+      --text: #191815;
+      --muted: #5e5a50;
+      --soft: #8c8576;
+      --line: rgba(25, 24, 21, 0.16);
+      --accent: #d64624;
+      --green: #497f1f;
+      --cyan: #087b7b;
+      --yellow: #8a7a16;
+      --orange: #9b641f;
+      --baseline: #8f8b7f;
+      --chart-grid: rgba(25, 24, 21, 0.22);
+      --media-border: transparent;
+      --media-shadow: rgba(45, 38, 25, 0.08);
+      --shadow: rgba(45, 38, 25, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-y: scroll; scrollbar-gutter: stable; scrollbar-color: color-mix(in srgb, var(--muted) 26%, transparent) transparent; scrollbar-width: thin; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { border: 3px solid transparent; border-radius: 999px; background: color-mix(in srgb, var(--muted) 26%, transparent); background-clip: content-box; }
+    ::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--accent) 38%, transparent); background-clip: content-box; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, rgba(240, 95, 59, 0.10), transparent 440px), var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      letter-spacing: 0;
+    }
+    html[data-restoring-scroll="true"] body { opacity: 0; }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.07;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(180deg, #000, transparent 68%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img, video { max-width: 100%; }
+    .wrap { width: var(--content-width); margin: 0 auto; }
+    main .wrap { width: var(--wide-content); }
+    .wide-wrap { width: var(--wide-content); margin: 0 auto; }
+    .wide-plus-wrap { width: var(--wide-plus-content); margin: 0 auto; }
+    .overview-wrap { width: var(--wide-content); margin: 0 auto; }
+    .inline-link { color: var(--accent); border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); }
+    .inline-link:hover { border-bottom-color: var(--accent); }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 84%, transparent);
+      backdrop-filter: blur(18px);
+    }
+    .nav-inner { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: var(--size-small); text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 0; }
+    .brand-text { display: flex; align-items: center; gap: 12px; min-width: 0; font-weight: 600; }
+    .brand-sep { color: var(--soft); margin: 0 4px; }
+    .mark { position: relative; width: 34px; height: 18px; display: block; flex: 0 0 auto; }
+    .logo-mark { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+    .logo-mark--ink { display: none; }
+    html[data-theme="day"] .logo-mark--ink { display: block; }
+    html[data-theme="day"] .logo-mark--white { display: none; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: var(--size-small);
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: var(--surface);
+      height: 36px;
+      width: 76px;
+      border-radius: 999px;
+      padding: 3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-toggle span {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--text);
+      color: var(--bg);
+      display: grid;
+      place-items: center;
+      font-size: var(--size-small);
+      transition: transform 260ms ease;
+    }
+
+    html[data-theme="day"] .theme-toggle span {
+      transform: translateX(38px);
+    }
+
+    .content-menu { position: fixed; top: 67px; left: 0; right: 0; z-index: 29; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(18px); color: var(--soft); transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease; }
+    .content-menu.is-hidden { opacity: 0; pointer-events: none; transform: translateY(-8px); visibility: hidden; }
+    .content-menu summary, .content-menu summary::-webkit-details-marker { display: none; }
+    .content-menu-list { width: var(--content-width); margin: 0 auto; display: flex; align-items: center; gap: clamp(14px, 2vw, 26px); min-height: 34px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; }
+    .content-menu-list::-webkit-scrollbar { display: none; }
+    .content-menu button {
+      position: relative;
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-family: var(--font-mono);
+      font-size: var(--size-label);
+      font-weight: 760;
+      letter-spacing: 0.13em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: color 180ms ease;
+    }
+
+    .content-menu button::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 1px;
+      background: transparent;
+      transition: background 180ms ease;
+    }
+
+    .content-menu button:hover,
+    .content-menu button.is-active {
+      color: var(--accent);
+    }
+
+    .content-menu button.is-active::before {
+      background: var(--accent);
+    }
+
+    .hero { position: relative; isolation: isolate; min-height: min(720px, calc(100vh - 66px)); display: flex; align-items: center; padding: clamp(52px, 8vw, 96px) 0 clamp(28px, 4vw, 48px); border-bottom: 1px solid var(--line); overflow: hidden; background: radial-gradient(circle at 82% 44%, color-mix(in srgb, var(--cyan) 14%, transparent), transparent 34%), linear-gradient(100deg, color-mix(in srgb, var(--bg) 98%, transparent) 0%, color-mix(in srgb, var(--bg) 80%, transparent) 56%, color-mix(in srgb, var(--bg) 40%, transparent) 100%); }
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none; background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 76%, transparent) 42%, transparent 70%, var(--bg) 100%), linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--bg) 58%, transparent) 74%, var(--bg) 100%); }
+    .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 46%; z-index: 0; pointer-events: none; background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--bg) 50%, transparent) 58%, var(--bg) 100%); }
+    .hero-art { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+    .hero-art::before { content: ""; position: absolute; right: -6vw; bottom: 0; width: min(70vw, 860px); height: 68%; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--surface) 50%, transparent) 44%, transparent), repeating-linear-gradient(90deg, transparent 0 44px, color-mix(in srgb, var(--line) 68%, transparent) 44px 45px); opacity: 0.30; mask-image: linear-gradient(90deg, transparent, #000 28%, #000 72%, transparent); }
+    .hero-art::after { content: ""; position: absolute; inset: 0; opacity: 0; background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--bg) 70%, transparent) 31%, transparent 50%, color-mix(in srgb, var(--bg) 56%, transparent) 69%, transparent 100%); mix-blend-mode: multiply; transition: opacity 520ms ease; }
+    html[data-theme="day"] .hero-art::after { opacity: 0.58; }
+    .hero-figure { position: absolute; left: 66%; top: clamp(-56px, -4vh, -22px); width: clamp(1180px, 150vw, 1900px); max-width: none; height: auto; opacity: 0.22; filter: saturate(0.58) contrast(1.2) brightness(0.92); transform: translateX(-50%); transform-origin: 58% 46%; mix-blend-mode: lighten; transition: opacity 520ms ease, filter 520ms ease, mix-blend-mode 520ms ease, transform 520ms ease; mask-image: linear-gradient(180deg, #000 0%, #000 56%, rgba(0, 0, 0, 0.72) 68%, transparent 86%); }
+    .hero-figure--day { top: clamp(-56px, -4vh, -22px); width: clamp(1700px, 220vw, 2640px); opacity: 0; filter: saturate(0.4) contrast(1.05) brightness(1.08); transform: translateX(-47%); mix-blend-mode: multiply; mask-image: linear-gradient(180deg, #000 0%, #000 45%, rgba(0, 0, 0, 0.56) 60%, transparent 78%); }
+    html[data-theme="day"] .hero-figure--night { opacity: 0; }
+    html[data-theme="day"] .hero-figure--day { opacity: 0.17; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 920px); gap: clamp(26px, 5vw, 56px); align-items: center; }
+    .kicker, .eyebrow { margin: 0 0 12px; color: var(--accent); font-family: var(--font-mono); font-size: var(--size-label); font-weight: 760; letter-spacing: 0.13em; line-height: 1.2; text-transform: uppercase; }
+    .eyebrow { color: var(--green); margin-bottom: 18px; }
+    h1, h2, h3 { margin: 0; letter-spacing: 0; }
+    h1 {
+      font-size: clamp(60px, 7.4vw, 112px);
+      line-height: 0.92;
+      margin-bottom: 18px;
+    }
+    h2 { font-size: clamp(22px, 2.2vw, 26px); line-height: 1.15; max-width: 900px; }
+    h3 { font-size: 21px; line-height: 1.2; }
+    .subtitle { margin: 0 0 24px; color: var(--muted); font-size: clamp(20px, 1.8vw, 25px); line-height: 1.32; max-width: 900px; }
+    .subtitle-emphasis { color: inherit; font-weight: 800; text-shadow: 0 0 18px color-mix(in srgb, var(--accent) 34%, transparent); }
+    .subtitle-note { margin: 0 0 24px; padding: 8px 12px 8px 0; color: var(--soft); font-size: var(--size-small); line-height: 1.45; max-width: 640px; letter-spacing: 0.01em; }
+    .hero-meta { display: grid; gap: 10px; max-width: 720px; color: var(--muted); font-size: var(--size-small); font-weight: 600; letter-spacing: 0.02em; line-height: 1.35; }
+    .hero-meta-sep { margin: 0 4px; color: var(--soft); }
+    .hero-meta-link { color: var(--green); text-decoration: none; }
+    .hero-meta-link:hover, .hero-meta-link:focus-visible { color: color-mix(in srgb, var(--green) 70%, var(--text)); text-decoration: underline; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .pill-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 72%, transparent); color: var(--muted); font-size: var(--size-small); font-weight: 700; transition: color 160ms ease, border-color 160ms ease, background 160ms ease; }
+    .pill-link:hover { color: var(--text); border-color: color-mix(in srgb, var(--accent) 52%, var(--line)); background: color-mix(in srgb, var(--surface-2) 82%, transparent); }
+    .pill-link svg { width: 15px; height: 15px; flex: 0 0 auto; }
+    .media-tag { color: var(--accent); font-family: var(--font-mono); font-size: var(--size-xs); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    section {
+      padding: 92px 0;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 116px;
+    }
+
+    section .wrap > .kicker { margin-bottom: 14px; }
+    section .wrap > h2 { margin-bottom: 22px; max-width: none; }
+    .overview-wrap > h2 { max-width: none; }
+
+    p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: var(--size-copy);
+      line-height: 1.66;
+      overflow-wrap: anywhere;
+      text-align: justify;
+      text-align-last: left;
+      hyphens: auto;
+    }
+
+    .hero p,
+    .kicker,
+    .eyebrow,
+    .section-note,
+    .chart-card p,
+    figcaption {
+      text-align: left;
+      text-align-last: auto;
+    }
+
+    .lead { color: var(--text); font-size: var(--size-copy); line-height: 1.66; }
+    .section-note {
+      position: relative;
+      margin: 14px 0 0;
+      padding-left: 14px;
+      max-width: none;
+      color: var(--muted);
+      font-size: clamp(15px, 1.4vw, 18px);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .section-note::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.2em;
+      bottom: 0.2em;
+      width: 2px;
+      border-radius: 2px;
+      background: var(--accent);
+    }
+
+    .card-grid { display: grid; gap: 14px; margin-top: 24px; }
+    .cards-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .cards-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card, .chart-card, .figure-card, .video-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--panel-shadow);
+    }
+
+    .card {
+      min-height: 190px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .card .label {
+      display: inline-flex;
+      margin-bottom: 24px;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: var(--size-xs);
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .card h3 { margin-bottom: 24px; }
+    .card p {
+      margin: 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      font-size: 15px;
+      line-height: 1.55;
+      text-align: justify;
+      text-align-last: left;
+      hyphens: auto;
+    }
+
+    .figure-card { overflow: hidden; margin-top: 28px; }
+    .figure-card img { display: block; width: 100%; background: var(--surface); }
+    .figure-card figcaption, .video-card figcaption { padding: 12px 14px; color: var(--muted); border-top: 1px solid var(--line); font-size: var(--size-caption); line-height: 1.55; }
+    .figure-card figcaption strong, .video-card figcaption strong { color: var(--text); }
+    .figure-card img.theme-image--day { display: none; }
+    html[data-theme="day"] .figure-card img.theme-image--night { display: none; }
+    html[data-theme="day"] .figure-card img.theme-image--day { display: block; }
+    .dark-figure img { filter: invert(1) hue-rotate(180deg); }
+    html[data-theme="day"] .dark-figure img { filter: none; }
+    .figure-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; }
+
+    .video-grid { width: var(--wide-plus-content); margin: 30px auto 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .video-card { overflow: hidden; }
+    .video-card video { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #050606; }
+    .video-card figcaption { min-height: 88px; }
+    .video-card .video-label { display: block; margin-bottom: 4px; color: var(--text); font-size: 13px; font-weight: 760; letter-spacing: 0.04em; text-transform: uppercase; }
+    .failure-trials { margin-top: 28px; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--panel-shadow); }
+    .failure-trials-title { display: flex; flex-direction: column; gap: 6px; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent); }
+    .failure-trials-kicker { color: var(--accent); font-family: var(--font-mono); font-size: var(--size-xs); font-weight: 800; letter-spacing: 0.14em; line-height: 1; text-transform: uppercase; }
+    .failure-trials-heading { color: var(--text); font-size: 15px; font-weight: 700; line-height: 1.3; }
+    .failure-carousel { position: relative; overflow: hidden; padding-inline: 54px; }
+    .failure-grid { display: grid; place-items: stretch center; width: 100%; }
+    .failure-card { grid-area: 1 / 1; width: 100%; opacity: 0; pointer-events: none; transform: translateX(100%) scale(0.96); transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease, border-color 220ms ease; }
+    .failure-card.is-active { opacity: 1; pointer-events: auto; transform: translateX(0) scale(1); }
+    .failure-card.is-prev { opacity: 0; transform: translateX(-100%) scale(0.94); }
+    .failure-card.is-next { opacity: 0; transform: translateX(100%) scale(0.94); }
+    .failure-card-inner { --level-color: var(--accent); border: 1px solid var(--line); border-radius: var(--radius); background: color-mix(in srgb, var(--surface-2) 72%, var(--surface)); overflow: hidden; }
+    .failure-card h3 { margin: 0; padding: 16px 18px; color: var(--text); font-size: 18px; line-height: 1.25; }
+    .failure-video-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 16px; border-top: 1px solid color-mix(in srgb, var(--line) 68%, transparent); background: linear-gradient(135deg, rgba(96, 196, 191, 0.055), transparent 58%), color-mix(in srgb, var(--surface-2) 72%, var(--surface)); }
+    .failure-video-box { position: relative; min-width: 0; padding: 10px; border: 1px solid color-mix(in srgb, var(--line) 54%, transparent); border-radius: var(--radius); background: linear-gradient(135deg, rgba(96, 196, 191, 0.05), transparent 58%), linear-gradient(315deg, rgba(240, 95, 59, 0.045), transparent 60%), color-mix(in srgb, var(--surface-2) 58%, var(--surface)); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent), 0 12px 28px color-mix(in srgb, var(--shadow) 30%, transparent); display: flex; flex-direction: column; justify-content: flex-start; }
+    .failure-video-box video { display: block; width: 100%; aspect-ratio: var(--media-aspect, 4 / 3); object-fit: contain; border: 0; border-radius: calc(var(--radius) - 4px); background: transparent; box-shadow: none; clip-path: inset(1px round calc(var(--radius) - 4px)); pointer-events: none; user-select: none; }
+    .failure-video-box video::-webkit-media-controls, .failure-video-box video::-webkit-media-controls-enclosure, .failure-video-box video::-webkit-media-controls-panel, .failure-video-box video::-webkit-media-controls-overlay-play-button, .failure-video-box video::-webkit-media-controls-start-playback-button { display: none !important; opacity: 0 !important; pointer-events: none !important; }
+    .failure-video-label { margin-bottom: 6px; color: var(--muted); font-size: var(--size-label); line-height: 1.2; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .failure-video-label--agra { color: var(--green); }
+    .failure-video-instruction { margin: 0 0 8px; padding: 6px 10px; border-left: 2px solid color-mix(in srgb, var(--level-color) 55%, var(--line)); border-radius: 0 4px 4px 0; background: color-mix(in srgb, var(--level-color) 7%, transparent); color: color-mix(in srgb, var(--text) 90%, var(--bg)); font-size: var(--size-label); line-height: 1.45; font-style: italic; }
+    .simulation-rollouts { margin-top: 24px; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--panel-shadow); }
+    .simulation-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .simulation-tab { border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; background: color-mix(in srgb, var(--surface-2) 72%, transparent); color: var(--muted); font: 760 var(--size-label) var(--font-sans); letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease; }
+    .simulation-tab:hover, .simulation-tab.is-active { border-color: color-mix(in srgb, var(--accent) 48%, var(--line)); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--text); transform: translateY(-1px); }
+    .simulation-carousel { position: relative; display: none; padding-inline: 54px; overflow: hidden; }
+    .simulation-carousel.is-active { display: block; }
+    .simulation-window { overflow: hidden; border-radius: calc(var(--radius) - 2px); }
+    .simulation-track { display: flex; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+    .simulation-slide { flex: 0 0 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 2px; }
+    .simulation-video-card { min-width: 0; padding: 10px; border: 1px solid color-mix(in srgb, var(--line) 54%, transparent); border-radius: var(--radius); background: linear-gradient(135deg, rgba(96, 196, 191, 0.05), transparent 58%), linear-gradient(315deg, rgba(240, 95, 59, 0.045), transparent 60%), color-mix(in srgb, var(--surface-2) 58%, var(--surface)); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent), 0 12px 28px color-mix(in srgb, var(--shadow) 26%, transparent); }
+    .simulation-video-card video { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; border-radius: calc(var(--radius) - 4px); background: transparent; clip-path: inset(1px round calc(var(--radius) - 4px)); pointer-events: none; user-select: none; }
+    .simulation-instruction { min-height: 34px; margin: 0 0 8px; padding: 6px 10px; border-left: 2px solid color-mix(in srgb, var(--accent) 50%, var(--line)); border-radius: 0 4px 4px 0; background: color-mix(in srgb, var(--accent) 7%, transparent); color: color-mix(in srgb, var(--text) 90%, var(--bg)); font-size: var(--size-label); line-height: 1.45; font-style: italic; }
+    .simulation-nav { position: absolute; top: 50%; z-index: 2; width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--surface) 84%, transparent); color: var(--text); font-size: 24px; line-height: 1; cursor: pointer; transform: translateY(-50%); transition: background 160ms ease, border-color 160ms ease, transform 160ms ease; }
+    .simulation-nav:hover { background: color-mix(in srgb, var(--surface-2) 92%, transparent); border-color: color-mix(in srgb, var(--accent) 42%, var(--line)); transform: translateY(-50%) scale(1.04); }
+    .simulation-nav.prev { left: 8px; }
+    .simulation-nav.next { right: 8px; }
+    .overview-text { margin-top: 42px; text-align: justify; hyphens: auto; }
+    .overview-text p { margin-bottom: 18px; }
+    .overview-text p:last-child { margin-bottom: 0; }
+    .failure-nav { position: absolute; top: 50%; z-index: 2; width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--surface) 84%, transparent); color: var(--text); font-size: 24px; line-height: 1; cursor: pointer; transform: translateY(-50%); transition: background 160ms ease, border-color 160ms ease, transform 160ms ease; }
+    .failure-nav:hover { background: color-mix(in srgb, var(--surface-2) 92%, transparent); border-color: color-mix(in srgb, var(--accent) 42%, var(--line)); transform: translateY(-50%) scale(1.04); }
+    .failure-nav.prev { left: 8px; }
+    .failure-nav.next { right: 8px; }
+
+    .chart-card { padding: 18px; overflow: hidden; }
+    .wide-plus-wrap > p,
+    .wide-plus-wrap > ul {
+      max-width: var(--wide-content);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .wide-plus-wrap > ul {
+      margin-top: 0;
+      margin-bottom: 22px;
+      padding-left: 1.25em;
+      color: var(--muted);
+      font-size: var(--size-copy);
+      line-height: 1.66;
+      text-align: justify;
+      text-align-last: left;
+      hyphens: auto;
+    }
+    .wide-plus-wrap > ul li + li { margin-top: 10px; }
+    .wide-plus-wrap > p + .chart-card,
+    .wide-plus-wrap > ul + p,
+    .wide-plus-wrap > p + .simulation-rollouts {
+      margin-top: 28px;
+    }
+    .chart-card + .chart-card { margin-top: 18px; }
+    .chart-head { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; margin-bottom: 16px; }
+    .chart-title { color: var(--text); font-size: 16px; font-weight: 780; }
+    .chart-note { color: var(--soft); font-family: var(--font-mono); font-size: var(--size-xs); text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+    .bar-groups { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; align-items: end; }
+    .bar-group { display: grid; grid-template-rows: 150px auto; gap: 10px; min-width: 0; }
+    .bars { display: flex; align-items: end; gap: 4px; height: 150px; padding: 10px 8px 0; border-bottom: 1px solid var(--line); background: linear-gradient(to top, var(--chart-grid) 1px, transparent 1px) 0 25% / 100% 25%; }
+    .bar { flex: 1; min-width: 5px; height: calc(var(--v) * 1%); border-radius: 4px 4px 0 0; background: var(--c); opacity: 0.84; }
+    .bar.ours { opacity: 1; box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 38%, transparent), 0 0 18px color-mix(in srgb, var(--accent) 30%, transparent); }
+    .bar-group-label { color: var(--muted); font-size: var(--size-label); line-height: 1.35; min-height: 34px; }
+    .bar-groups.method-comparison { display: block; overflow-x: auto; padding: 2px 0 6px; scrollbar-width: thin; }
+    .method-chart-svg { display: block; width: 100%; min-width: 920px; height: auto; overflow: visible; }
+    .method-axis, .method-divider { stroke: color-mix(in srgb, var(--text) 72%, transparent); stroke-width: 1.4; }
+    .method-gridline { stroke: color-mix(in srgb, var(--line) 74%, transparent); stroke-width: 1; }
+    .method-divider { stroke-dasharray: 5 5; stroke: color-mix(in srgb, var(--muted) 58%, transparent); }
+    .method-section-rule { stroke: color-mix(in srgb, var(--text) 84%, transparent); stroke-width: 2.2; }
+    .method-axis-label, .method-tick-label, .method-group-label, .method-section-label { fill: var(--muted); font: 12px var(--font-sans); }
+    .method-axis-label { font-size: 15px; fill: var(--text); }
+    .method-group-label { font-size: 14px; fill: var(--text); }
+    .method-section-label { font-size: 15px; fill: var(--text); }
+    .method-value-label { fill: var(--text); font: 700 11px var(--font-sans); }
+    .method-bar { opacity: 0.9; }
+    .real-world-summary { margin-top: 18px; }
+    .real-world-chart { display: block; overflow-x: visible; padding-bottom: 6px; scrollbar-width: thin; }
+    .real-world-chart-svg { display: block; width: 100%; min-width: 0; height: auto; overflow: visible; }
+    .real-world-overview .real-world-chart-svg { min-width: 0; }
+    .real-world-gridline { stroke: color-mix(in srgb, var(--line) 74%, transparent); stroke-width: 1; }
+    .real-world-axis { stroke: color-mix(in srgb, var(--text) 72%, transparent); stroke-width: 1.4; }
+    .real-world-axis-label, .real-world-tick-label, .real-world-group-label { fill: var(--muted); font: 12px var(--font-sans); }
+    .real-world-axis-title { fill: var(--text); font: 700 15px var(--font-sans); }
+    .real-world-value-label { fill: var(--text); font: 700 11px var(--font-sans); }
+    .real-world-results-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr); gap: 18px; margin-top: 18px; align-items: stretch; }
+    .real-world-metrics { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 0; }
+    .real-world-ood-grid { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .real-world-rollouts { margin-top: 18px; }
+    .real-world-rollouts .simulation-slide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 16px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: var(--size-label); }
+    .legend i { width: 9px; height: 9px; border-radius: 999px; background: var(--c); display: inline-block; }
+    .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    .metric-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; background: color-mix(in srgb, var(--surface-2) 54%, transparent); }
+    .metric-card h3 { margin-bottom: 12px; font-size: 15px; }
+    .metric-row { display: grid; grid-template-columns: 76px 1fr 46px; gap: 10px; align-items: center; color: var(--muted); font-size: var(--size-label); }
+    .metric-row + .metric-row { margin-top: 9px; }
+    .track { height: 10px; border-radius: 999px; background: color-mix(in srgb, var(--line) 60%, transparent); overflow: hidden; }
+    .fill { height: 100%; width: calc(var(--v) * 1%); background: var(--c); border-radius: inherit; }
+    .line-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+    .line-chart .chart-head { min-height: 42px; align-items: flex-start; }
+    .line-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .axis, .gridline { stroke: color-mix(in srgb, var(--line) 92%, transparent); stroke-width: 1; }
+    .plot-line { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .plot-line.secondary { stroke: var(--cyan); }
+    .plot-line.dashed { stroke: var(--muted); stroke-dasharray: 7 7; }
+    .plot-dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+    .plot-dot.secondary { fill: var(--cyan); }
+    .axis-label { fill: var(--muted); font: 12px var(--font-sans); }
+    .axis-title { fill: var(--text); font: 700 16px var(--font-sans); }
+    .chart-value { fill: var(--text); font: 700 12px var(--font-sans); }
+
+    .takeaway-list {
+      display: grid;
+      gap: 18px;
+      width: var(--wide-content);
+      margin-top: 32px;
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .takeaway-row {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: 18px;
+      min-width: 0;
+      padding: 26px 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--surface) 96%, transparent), color-mix(in srgb, var(--bg) 92%, transparent)),
+        var(--surface);
+      box-shadow: var(--panel-shadow);
+    }
+
+    .takeaway-row::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent);
+    }
+
+    .takeaway-row--i::before { background: var(--green); }
+    .takeaway-row--ii::before { background: var(--orange); }
+    .takeaway-row--iii::before { background: var(--accent); }
+    .takeaway-row--iv::before { background: var(--cyan); }
+
+    .takeaway-marker {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 4px;
+      font-family: var(--font-mono);
+      font-size: var(--size-copy);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      color: var(--soft);
+    }
+
+    .takeaway-row--i .takeaway-marker { color: var(--green); }
+    .takeaway-row--ii .takeaway-marker { color: var(--orange); }
+    .takeaway-row--iii .takeaway-marker { color: var(--accent); }
+    .takeaway-row--iv .takeaway-marker { color: var(--cyan); }
+
+    .takeaway-body { min-width: 0; }
+    .takeaway-body h3 { margin: 0 0 10px; font-size: 19px; line-height: 1.3; }
+    .takeaway-body p { margin: 0; font-size: 15px; line-height: 1.62; color: var(--muted); }
+
+    .bibtex { position: relative; margin-top: 34px; }
+    .bibtex pre {
+      margin: 0;
+      padding: 18px 86px 18px 18px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      color: color-mix(in srgb, var(--muted) 74%, var(--text));
+      font-family: var(--font-mono);
+      font-size: var(--size-small);
+      line-height: 1.65;
+      white-space: pre;
+      box-shadow: var(--panel-shadow);
+    }
+    .copy {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 1;
+      height: 30px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--size-xs);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 160ms ease, color 160ms ease, background 160ms ease;
+    }
+    .copy:hover,
+    .copy:focus-visible,
+    .copy.is-copied {
+      border-color: color-mix(in srgb, var(--green) 44%, var(--line));
+      background: color-mix(in srgb, var(--green) 10%, var(--surface));
+      color: color-mix(in srgb, var(--green) 72%, var(--text));
+      outline: none;
+    }
+    .contributors {
+      margin: -4px 0 26px;
+      color: var(--muted);
+      font-size: var(--size-copy);
+      line-height: 1.7;
+    }
+    .contributors p { margin-bottom: 8px; text-align: left; }
+    .contributors .contributor-names {
+      color: var(--text);
+      font-size: clamp(15px, 1.6vw, 20px);
+      font-weight: 400;
+      line-height: 1.35;
+    }
+    .contributors .contributor-contact {
+      font-size: var(--size-small);
+      line-height: 1.5;
+    }
+    .contributors .corresponding-mark { color: var(--green); font-weight: 800; }
+    .citation-block { position: relative; margin-top: 34px; }
+    .citation-pre {
+      margin: 0;
+      padding: 18px 86px 18px 18px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      color: color-mix(in srgb, var(--muted) 74%, var(--text));
+      font-family: var(--font-mono);
+      font-size: var(--size-small);
+      line-height: 1.65;
+      white-space: pre;
+      box-shadow: var(--panel-shadow);
+    }
+    .citation-copy {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 1;
+      height: 30px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--size-xs);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 160ms ease, color 160ms ease, background 160ms ease;
+    }
+    .citation-copy:hover,
+    .citation-copy:focus-visible,
+    .citation-copy.is-copied {
+      border-color: color-mix(in srgb, var(--green) 44%, var(--line));
+      background: color-mix(in srgb, var(--green) 10%, var(--surface));
+      color: color-mix(in srgb, var(--green) 72%, var(--text));
+      outline: none;
+    }
+    .footer { padding: 40px 0 280px; color: var(--soft); font-size: var(--size-small); }
+
+    @media (max-width: 980px) {
+      .hero { min-height: auto; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .cards-3, .cards-4, .video-grid, .bar-groups, .line-grid, .figure-row { grid-template-columns: 1fr 1fr; }
+      .simulation-slide { grid-template-columns: 1fr 1fr; }
+      .real-world-results-layout, .real-world-ood-grid { grid-template-columns: 1fr; }
+      .real-world-ood-grid { grid-column: auto; }
+      .video-grid { width: var(--wide-content); }
+    }
+    @media (max-width: 680px) {
+      :root { --page-gutter: 24px; }
+      .nav-inner { min-height: 62px; }
+      .brand-text { gap: 8px; font-size: 12px; }
+      .nav-links a { display: none; }
+      .content-menu { top: 63px; }
+      h1 { font-size: clamp(48px, 15vw, 68px); }
+      .hero { padding-top: 40px; }
+      .hero-art::before { right: -32vw; width: 92vw; height: 64%; opacity: 0.26; }
+      .cards-3, .cards-4, .video-grid, .bar-groups, .metrics, .line-grid, .figure-row, .failure-video-pair, .simulation-slide, .real-world-rollouts .simulation-slide { grid-template-columns: 1fr; }
+      .failure-carousel { padding-inline: 0; overflow: visible; }
+      .simulation-carousel { padding-inline: 0; overflow: visible; }
+      .failure-nav.prev { left: 4px; }
+      .failure-nav.next { right: 4px; }
+      .simulation-nav.prev { left: 4px; }
+      .simulation-nav.next { right: 4px; }
+      .video-card figcaption { min-height: 0; }
+      .chart-head { display: block; }
+      .chart-note { display: block; margin-top: 5px; }
+      .pill-link { flex: 1 1 auto; }
+      .takeaway-list {
+        width: 100%;
+        margin-left: 0;
+        transform: none;
+      }
+      .takeaway-row {
+        grid-template-columns: 1fr;
+        padding: 22px;
+      }
+      .takeaway-marker {
+        justify-content: flex-start;
+        padding-top: 0;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top"><span class="mark" aria-hidden="true"><img class="logo-mark logo-mark--white" src="../assets/xpeng-logo-white.png" alt=""><img class="logo-mark logo-mark--ink" src="../assets/xpeng-logo-ink.png" alt=""></span><span class="brand-text"><span>XPENG Robotics</span><span class="brand-sep">/</span><span>Multimodal</span></span></a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle day and night theme"><span>☾</span></button>
+      </div>
+    </div>
+  </nav>
+
+  <details class="content-menu is-hidden" open>
+    <summary>Contents</summary>
+    <div class="content-menu-list" aria-label="Page contents">
+      <button type="button" data-target="overview">Overview</button>
+      <button type="button" data-target="motivations">Motivations</button>
+      <button type="button" data-target="simulation">Simulation</button>
+      <button type="button" data-target="real-world">Real World</button>
+      <button type="button" data-target="citation">Citation</button>
+    </div>
+  </details>
+
+  <header class="hero" id="top">
+    <div class="hero-art" aria-hidden="true">
+      <picture>
+        <source srcset="../fe0/assets/iron-front-hand.webp" type="image/webp">
+        <img class="hero-figure hero-figure--night" src="../fe0/assets/iron-front-hand.png" width="2400" height="1345" alt="" decoding="async" fetchpriority="high">
+      </picture>
+      <picture>
+        <source srcset="../fe0/assets/iron-david-stance.webp" type="image/webp">
+        <img class="hero-figure hero-figure--day" src="../fe0/assets/iron-david-stance.png" width="2200" height="1237" alt="" decoding="async" fetchpriority="high">
+      </picture>
+    </div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">World Action Models</p>
+        <h1>AGRA</h1>
+        <p class="subtitle">Making Foresight Actionable: <span class="subtitle-emphasis">Action-Grounded Representation Alignment</span><br>in World Action Models</p>
+        <div class="hero-meta" aria-label="Project metadata">
+          <span>XPENG Robotics / Multimodal Team <span class="hero-meta-sep" aria-hidden="true">·</span> <a class="hero-meta-link" href="#citation">Contributors</a></span>
+        </div>
+        <div class="hero-actions">
+          <a class="pill-link" href="#real-world-deployment"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Demos</a>
+          <a class="pill-link" href="#real-world"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-7"/></svg> Real World Results</a>
+          <a class="pill-link" href="AGRA.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg> Paper source</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="overview">
+      <div class="overview-wrap">
+        <p class="kicker">Overview</p>
+        <h2>Repurposing Representation Alignment in World Action Models</h2>
+        <!-- <p class="lead">AGRA addresses the action-grounding gap in World Action Models: the video model may predict a believable future, but the action head can still attend to a static hand, table clutter, or background instead of the hand-object contact region that determines control.</p> -->
+        <!-- <p class="section-note">The core story is simple: diagnose the representation mismatch, align the world-action interface with DINOv2, and improve real robot execution through stronger spatial grounding.</p> -->
+        <p class="section-note">Make world model representations more suitable for downstream policies</p>
+      </div>
+      <div class="overview-wrap">
+        <figure class="figure-card">
+          <img class="theme-image--night" src="figures/teaser_night.png" alt="Diagnosis of the action-grounding gap with attention and causal intervention maps">
+          <img class="theme-image--day" src="figures/teaser.png" alt="Diagnosis of the action-grounding gap with attention and causal intervention maps">
+          <figcaption><strong>Overview.</strong> We propose AGRA, an Action-Grounded Representation
+            Alignment objective that aligns video features with spatially coherent representations from a frozen foundation visual encoder. This alignment makes world model features more action-grounded and focuses action attention on task-relevant regions, thus leading to higher task success rate.</figcaption>
+        </figure>
+        <div class="failure-trials" id="real-robot-trials">
+          <header class="failure-trials-title">
+            <span class="failure-trials-kicker">Real-Robot Trials</span>
+            <span class="failure-trials-heading">Comparing baseline World Action Model (WAM) and AGRA</span>
+          </header>
+          <div class="failure-carousel" aria-label="Baseline WAM and AGRA failure-case comparison videos" data-active-case="0">
+            <button class="failure-nav prev" type="button" aria-label="Previous comparison case">‹</button>
+            <div class="failure-grid">
+              <article class="failure-card is-active">
+                <div class="failure-card-inner">
+                  <!-- <h3>Put the ball in the box</h3> -->
+                  <div class="failure-video-pair">
+                    <div class="failure-video-box" style="--media-aspect: 4 / 3;">
+                      <div class="failure-video-label">Baseline WAM</div>
+                      <div class="failure-video-instruction">Put the ball in the box.</div>
+                      <video autoplay muted loop playsinline preload="none">
+                        <source data-src="videos_mp4/failure_ball_wam.mp4">
+                      </video>
+                    </div>
+                    <div class="failure-video-box" style="--media-aspect: 4 / 3;">
+                      <div class="failure-video-label">AGRA</div>
+                      <div class="failure-video-instruction">Put the ball in the box.</div>
+                      <video autoplay muted loop playsinline preload="none">
+                        <source data-src="videos_mp4/failure_ball_agra.mp4">
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="failure-card is-next">
+                <div class="failure-card-inner">
+                  <!-- <h3>Put the banana in the box</h3> -->
+                  <div class="failure-video-pair">
+                    <div class="failure-video-box" style="--media-aspect: 4 / 3;">
+                      <div class="failure-video-label">Baseline WAM</div>
+                      <div class="failure-video-instruction">Put the banana in the box.</div>
+                      <video autoplay muted loop playsinline preload="none">
+                        <source data-src="videos_mp4/failure_banana_wam.mp4">
+                      </video>
+                    </div>
+                    <div class="failure-video-box" style="--media-aspect: 4 / 3;">
+                      <div class="failure-video-label">AGRA</div>
+                      <div class="failure-video-instruction">Put the banana in the box.</div>
+                      <video autoplay muted loop playsinline preload="none">
+                        <source data-src="videos_mp4/failure_banana_agra.mp4">
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <button class="failure-nav next" type="button" aria-label="Next comparison case">›</button>
+          </div>
+        </div>
+        <div class="overview-text">
+          <p>World Action Models (WAMs) offer a promising route for robot manipulation by using video generation models to model future scene evolution before producing control actions. However, our empirical observations reveal a phenomenon: generating plausible visual futures does not always guarantee the extraction of accurate actions.</p>
+          <p>To diagnose this failure, we conduct action-head attention analysis and causal interventions. We find that the action decoder fails to focus on task-relevant interaction regions and remains sensitive to perturbations in task-irrelevant areas. <i>This reveals a representation mismatch: hidden states optimized for visual reconstruction are not inherently organized in a form useful for low-level action control.</i></p>
+          <p>In this paper, we propose AGRA, an <b>Action-Grounded Representation Alignment</b> objective that regularizes the world-action interface by aligning intermediate video diffusion features with spatially coherent semantic representations from a foundation visual encoder. We evaluate AGRA on real-world manipulation tasks. Experiments show that AGRA makes world model representations more action-grounded: by focusing the action decoder on the correct interaction regions, it improves object localization accuracy and affordance understanding, and makes the policy more robust to perturbations in task-irrelevant regions. As a result, AGRA consistently improves both in-distribution performance and out-of-distribution generalization over baseline world action model.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="motivations">
+      <div class="wrap">
+        <p class="kicker">Motivations</p>
+        <h2>Diagnosing the Action-Grounding Gap in World Action Models</h2>
+        <p class="section-note">Generating plausible visual futures does not always guarantee the extraction of accurate control actions</p>
+        <!-- <p>AGRA keeps the video prediction and action flow-matching objectives intact. It adds an auxiliary alignment loss that projects selected Cosmos hidden states into a DINOv2 feature space and minimizes negative cosine similarity against spatially resized DINOv2 patch features.</p> -->
+        <div class="card-grid cards-3">
+          <article class="card"><span class="label">1 / Attention Analysis</span><h3>Action head attention maps</h3><p>Cross-attention maps show the action head ignoring the critical hand-object interaction region, despite generating a plausible future video.</p></article>
+          <article class="card"><span class="label">2 / Causal Intervention</span><h3>Intervention on visual feature</h3><p>Causal intervention heatmaps reveal that the baseline model’s decisions are heavily influenced by task-irrelevant background elements rather than the interaction area.</p></article>
+          <article class="card"><span class="label">3 / Feature Visualization</span><h3>Cosmos-DINOv2 Comparison</h3><p>DINOv2 organizes semantically and functionally similar regions into spatially coherent structures; Cosmos features remain more entangled with local appearance.</p></article>
+        </div>
+      </div>
+      <div class="wide-wrap">
+        <div class="overview-text">
+          <p>Our empirical observations show that plausible visual foresight does not necessarily translate into reliable action prediction. A WAM can generate a plausible and task-consistent future while the action decoder still produces an incorrect motion.</p>
+          <p><b>Diagnosing action-grounding gap.</b> To understand this failure mode, we diagnose the world-action interface from both attentional and causal perspectives. We find that the action decoder in the baseline WAM often fails to concentrate on task-relevant interaction regions, such as the hand-object contact areas. In addition, causal interventions on world model hidden states show that action outputs can be sensitive to perturbations in task-irrelevant background regions.</p>
+          <p><b>Feature Visualization.</b> This evidence reveals an action-grounding gap between video prediction and action decoding. Video diffusion models are optimized for pixel reconstruction and therefore encode dense appearance-level information, like texture, color, and background clutter. However, action prediction is determined by a sparse set of spatially localized and functional factors, such as target objects, contact regions, and affordance geometry. We characterize this mismatch through feature visualization. Compared with foundation visual encoders, video diffusion features are more entangled with low-level appearance. As a result, action decoder is prone to attend to spurious or irrelevant regions, leading to erroneous action predictions.</p>
+        </div>
+        <figure class="figure-card">
+          <img class="theme-image--night" src="figures/diagnosis_night.png" alt="Diagnosis of the action-grounding gap">
+          <img class="theme-image--day" src="figures/diagnosis.png" alt="Diagnosis of the action-grounding gap">
+          <figcaption><strong>Action grounding.</strong> Action decoder fails to focus on critical interaction regions and remains sensitive to perturbations in task-irrelevant areas.</figcaption>
+        </figure>
+        <figure class="figure-card">
+          <img class="theme-image--night" src="figures/pca_night.png" alt="PCA visualization of representations">
+          <img class="theme-image--day" src="figures/pca.png" alt="PCA visualization of representations">
+          <figcaption><strong>Feature structure.</strong> Compared with foundation visual encoders, video diffusion features are more entangled with low-level appearance. </figcaption>
+        </figure>
+        <h2 style="margin-top: 90px;">Making Foresight Actionable</h2>
+        <p class="section-note">Aligning visual representations with semantically structured targets</p>
+        <div class="overview-text">
+          <p><b>Method.</b> To close this gap, we introduce Action-Grounded Representation Alignment (AGRA). AGRA repurposes representation alignment as a mechanism for action grounding in WAMs. The key idea is to align selected hidden states of the video diffusion model with spatially structured semantic features extracted from a frozen foundation visual encoder. These semantic targets provide a stable reference for the representation field seen by the action decoder: regions with similar semantic or functional roles are encouraged to form coherent structures, while appearance variations become less dominant.</p>
+        </div>
+        <figure class="figure-card">
+          <img class="theme-image--night" src="figures/architecture_night.png" alt="Model architecture of AGRA">
+          <img class="theme-image--day" src="figures/architecture.png" alt="Model architecture of AGRA">
+          <figcaption><strong>Architecture.</strong> Architecture of baseline World Action Model and the proposed Action-Grounded Representation Alignment. </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="simulation">
+      <div class="wrap">
+        <p class="kicker">Simulation</p>
+        <h2>Comparison Against State-Of-The-Art Policies</h2>
+        <p>We evaluate AGRA on the RoboCasa GR1 Tabletop benchmark, which spans 24 tasks across two categories: Pick & Place (18 tasks) and Articulated Tasks (6 tasks involving cabinets, drawers, and microwaves). With full training data (1,000 trajectories per task), AGRA achieves an overall success rate of 66.4%, outperforming the strong VLA baseline, GR00T, by a significant absolute margin of 18.8%. When compared with contemporary predictive and generative control methods, including FLARE, DiT4DiT, and LDA-1B—AGRA, consistently demonstrates a performance improvement exceeding 10%.</p>
+      </div>
+      <div class="wide-plus-wrap">
+        <div class="chart-card">
+          <div class="chart-head"><div class="chart-title">Comparison with policy and world model baselines</div></div>
+          <div class="bar-groups" id="method-bars" style="grid-template-columns: repeat(3, minmax(0, 1fr));"></div>
+          <div class="legend" id="method-legend"></div>
+        </div>
+      </div>
+      <div class="wrap">
+        <p style="margin-top: 60px;">We show some example rollouts from the simulation benchmark below. AGRA handles both object rearrangement and articulated fixture manipulation.</p>
+      </div>
+      <div class="wide-wrap">
+        <div class="simulation-rollouts" id="simulation-rollouts">
+          <div class="simulation-tabs" role="tablist" aria-label="Simulation rollout task type">
+            <button class="simulation-tab is-active" type="button" role="tab" aria-selected="true" data-simulation-task="pnp">Pick &amp; Place Task</button>
+            <button class="simulation-tab" type="button" role="tab" aria-selected="false" data-simulation-task="articulated">Articulated Task</button>
+          </div>
+          <div class="simulation-carousel is-active" data-simulation-panel="pnp" data-active-slide="0" aria-label="Pick and place simulation rollouts">
+            <button class="simulation-nav prev" type="button" aria-label="Previous pick and place rollouts">‹</button>
+            <div class="simulation-window">
+              <div class="simulation-track">
+                <div class="simulation-slide">
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick the pear from the cutting board and place it in the pan</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/pnp/0.mov"></video></article>
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick the lemon from the placemat and place it in the bowl</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/pnp/1.mov"></video></article>
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick the eggplant from the cutting board and place it in the cardboard box</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/pnp/2.mov"></video></article>
+                </div>
+                <div class="simulation-slide">
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick the bell pepper from the plate and place it in the pan</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/pnp/3.mov"></video></article>
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick the croissant from the cutting board and place it in the basket</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/pnp/4.mov"></video></article>
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick the cupcake from the tray and place it in the tiered shelf</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/pnp/5.mov"></video></article>
+                </div>
+              </div>
+            </div>
+            <button class="simulation-nav next" type="button" aria-label="Next pick and place rollouts">›</button>
+          </div>
+          <div class="simulation-carousel" data-simulation-panel="articulated" data-active-slide="0" aria-label="Articulated simulation rollouts">
+            <button class="simulation-nav prev" type="button" aria-label="Previous articulated rollouts">‹</button>
+            <div class="simulation-window">
+              <div class="simulation-track">
+                <div class="simulation-slide">
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick up the bottled water, place it into the cabinet and close the cabinet</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/articulated/0.mov"></video></article>
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick up the can, place it into the drawer and close the drawer</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/articulated/1.mov"></video></article>
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick up the cup, place it into the drawer and close the drawer</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/articulated/2.mov"></video></article>
+                </div>
+                <div class="simulation-slide">
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick up the milk, place it into the microwave and close the microwave</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/articulated/3.mov"></video></article>
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick up the potato, place it into the microwave and close the microwave</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/articulated/4.mov"></video></article>
+                  <article class="simulation-video-card"><div class="simulation-instruction">pick up the wine, place it into the cabinet and close the cabinet</div><video autoplay muted loop playsinline preload="none"><source data-src="simulations/articulated/5.mov"></video></article>
+                </div>
+              </div>
+            </div>
+            <button class="simulation-nav next" type="button" aria-label="Next articulated rollouts">›</button>
+          </div>
+        </div>
+        <!-- <div class="line-grid">
+          <div class="chart-card line-chart">
+            <div class="chart-head"><div class="chart-title">Single-layer vs multi-layer bridge</div></div>
+            <svg viewBox="0 0 640 300" role="img" aria-label="Single-layer versus multi-layer bridge line chart"><line class="gridline" x1="64" y1="38" x2="610" y2="38"/><line class="gridline" x1="64" y1="87.5" x2="610" y2="87.5"/><line class="gridline" x1="64" y1="137" x2="610" y2="137"/><line class="gridline" x1="64" y1="186.5" x2="610" y2="186.5"/><line class="gridline" x1="64" y1="236" x2="610" y2="236"/><line class="axis" x1="64" y1="236" x2="610" y2="236"/><line class="axis" x1="64" y1="38" x2="64" y2="236"/><line class="plot-line dashed" x1="64" y1="61.7" x2="610" y2="61.7"/><text class="axis-label" x="500" y="54" text-anchor="middle">multi-layer</text><polyline class="plot-line secondary" points="64,236 185,178 327,80 468,98 610,101"/><circle class="plot-dot secondary" cx="64" cy="236" r="5"/><circle class="plot-dot secondary" cx="185" cy="178" r="5"/><circle class="plot-dot secondary" cx="327" cy="80" r="5"/><circle class="plot-dot secondary" cx="468" cy="98" r="5"/><circle class="plot-dot secondary" cx="610" cy="101" r="5"/><text class="axis-label" x="50" y="240" text-anchor="end">0.0</text><text class="axis-label" x="50" y="190.5" text-anchor="end">0.2</text><text class="axis-label" x="50" y="141" text-anchor="end">0.4</text><text class="axis-label" x="50" y="91.5" text-anchor="end">0.6</text><text class="axis-label" x="50" y="42" text-anchor="end">0.8</text><text class="axis-label" x="64" y="262" text-anchor="middle">0</text><text class="axis-label" x="185" y="262" text-anchor="middle">6</text><text class="axis-label" x="327" y="262" text-anchor="middle">13</text><text class="axis-label" x="468" y="262" text-anchor="middle">20</text><text class="axis-label" x="610" y="262" text-anchor="middle">27</text><text class="axis-title" x="337" y="292" text-anchor="middle">Layer</text><text class="axis-title" x="16" y="137" text-anchor="middle" transform="rotate(-90 16 137)">Task success rate</text></svg>
+          </div>
+          <div class="chart-card line-chart">
+            <div class="chart-head"><div class="chart-title">Layer selection for AGRA</div></div>
+            <svg viewBox="0 0 640 300" role="img" aria-label="Layer selection line chart"><line class="gridline" x1="64" y1="38" x2="610" y2="38"/><line class="gridline" x1="64" y1="87.5" x2="610" y2="87.5"/><line class="gridline" x1="64" y1="137" x2="610" y2="137"/><line class="gridline" x1="64" y1="186.5" x2="610" y2="186.5"/><line class="gridline" x1="64" y1="236" x2="610" y2="236"/><line class="axis" x1="64" y1="236" x2="610" y2="236"/><line class="axis" x1="64" y1="38" x2="64" y2="236"/><polyline class="plot-line" points="64,178 142,133 220,69 298,104 376,141 454,199 532,160 610,168"/><circle class="plot-dot" cx="64" cy="178" r="5"/><circle class="plot-dot" cx="142" cy="133" r="5"/><circle class="plot-dot" cx="220" cy="69" r="5"/><circle class="plot-dot" cx="298" cy="104" r="5"/><circle class="plot-dot" cx="376" cy="141" r="5"/><circle class="plot-dot" cx="454" cy="199" r="5"/><circle class="plot-dot" cx="532" cy="160" r="5"/><circle class="plot-dot" cx="610" cy="168" r="5"/><text class="axis-label" x="50" y="240" text-anchor="end">0.55</text><text class="axis-label" x="50" y="190.5" text-anchor="end">0.57</text><text class="axis-label" x="50" y="141" text-anchor="end">0.59</text><text class="axis-label" x="50" y="91.5" text-anchor="end">0.61</text><text class="axis-label" x="50" y="42" text-anchor="end">0.63</text><text class="axis-label" x="64" y="262" text-anchor="middle">0</text><text class="axis-label" x="142" y="262" text-anchor="middle">4</text><text class="axis-label" x="220" y="262" text-anchor="middle">8</text><text class="axis-label" x="298" y="262" text-anchor="middle">12</text><text class="axis-label" x="376" y="262" text-anchor="middle">15</text><text class="axis-label" x="454" y="262" text-anchor="middle">19</text><text class="axis-label" x="532" y="262" text-anchor="middle">23</text><text class="axis-label" x="610" y="262" text-anchor="middle">27</text><text class="axis-title" x="337" y="292" text-anchor="middle">Layer</text><text class="axis-title" x="16" y="137" text-anchor="middle" transform="rotate(-90 16 137)">Task success rate</text></svg>
+          </div>
+        </div> -->
+      </div>
+    </section>
+
+    <section id="real-world">
+      <div class="wrap">
+        <p class="kicker">Real World</p>
+        <h2>AGRA Improves Action-Grounded Control</h2>
+      </div>
+      <div class="wide-plus-wrap">
+        <p>We validate AGRA on the <b>IRON-R01-1.11 humanoid robot</b> across two real world tasks: Pick-and-Place and Open-Steamer-Transfer-Bun. To comprehensively validate the robustness of the models in physical deployments, we establish an in-distribution (ID) evaluation regime and three out-of-distribution (OOD) generalization regimes:</p>
+        <ul>
+          <li><b>In-Distribution (ID).</b> Evaluated on the Pick-and-Place task, this regime measures the policy's ability to manipulate objects that have been seen in training corpus.</li>
+          <li><b>Semantic Generalization (OOD).</b> Evaluated on the Pick-and-Place task, the robot is required to accurately grasp a specified object from several distractors or place it into a designated container following the user's instruction.</li>
+          <li><b>Instance-Level Generalization (OOD).</b> Evaluated on the Pick-and-Place task, this regime tests whether the policy can generalize to object instances that are unseen during training.</li>
+          <li><b>Attribute Generalization (OOD).</b> Conducted on the Open-Steamer-Transfer-Bun task, this regime evaluates robustness to visual attribute shifts in both objects and surrounding scene.</li>
+        </ul>
+        <p>We evaluate whether regularizing the world-action interface improves real-world execution. AGRA model achieves an ID success rate of 80%, substantially outperforming the baseline WAM which obtains 34%. AGRA also yields stronger robustness under Semantic, Instance-Level, and Attribute Generalization, boosting performance by 27%, 32%, and 32%.</p>
+        <div class="chart-card real-world-overview">
+          <div class="chart-head"><div class="chart-title">Real-world success rate across ID and OOD settings</div></div>
+          <div class="real-world-chart" id="real-world-overview-bars"></div>
+          <div class="legend" id="real-world-overview-legend"></div>
+          <div class="metrics">
+            <div class="metric-card"><h3>Attention in mask ratio (ratio)</h3><div class="metric-row"><span>WAM</span><div class="track"><div class="fill" style="--v:89;--c:var(--baseline)"></div></div><strong>0.238</strong></div><div class="metric-row"><span>AGRA</span><div class="track"><div class="fill" style="--v:100;--c:var(--accent)"></div></div><strong>0.267</strong></div></div>
+            <div class="metric-card"><h3>Centroid error (gird num)</h3><div class="metric-row"><span>WAM</span><div class="track"><div class="fill" style="--v:100;--c:var(--baseline)"></div></div><strong>3.57</strong></div><div class="metric-row"><span>AGRA</span><div class="track"><div class="fill" style="--v:91;--c:var(--accent)"></div></div><strong>3.26</strong></div></div>
+          </div>
+        </div>
+        <p style="margin-top: 60px;"><b>Action-head attention analysis.</b> We use a Pick-and-Place scene containing an apple and a banana, and evaluate different instructions from the same current observation. Both the baseline WAM and AGRA can generate plausible future in which the robot arm moves toward the correct object. The WAM often allocates large attention mass to regions that are not causally relevant to action, while AGRA concentrates more on this task-critical region. We quantify this effect and report two metrics: Attention in Mask Ratio and Centroid Error. Our empirical results indicate that AGRA improves both metrics, confirming that AGRA makes the action decoder attend more precisely to the spatial regions that determine control.</p>
+        <p><b>Causal intervention for hidden-state actionability.</b> Action-sensitivity heatmaps also show the same trend qualitatively: AGRA concentrates high-impact regions around the task-critical hand-object contact area, while WAM exhibits more diffuse or background-sensitive actionability. This demonstrates AGRA's robustness against task-irrelevant information, explaining its stronger generalization under OOD scenarios (e.g., changed attributes and backgrounds).</p>
+        <figure class="figure-card">
+          <img class="theme-image--night" src="figures/exp_attn_night.png" alt="Model architecture of AGRA">
+          <img class="theme-image--day" src="figures/exp_attn.png" alt="Model architecture of AGRA">
+          <figcaption><strong>Qualitative analysis of action grounding.</strong> Compared with baseline WAM, AGRA directs action-head attention and causal sensitivity toward the task-critical hand-object interaction region.</figcaption>
+        </figure>
+      </div>
+      <div class="wrap">
+        <h2 style="margin-top: 60px;">Other Findings</h2>
+        <div class="takeaway-list">
+          <article class="takeaway-row takeaway-row--i">
+            <div class="takeaway-marker" aria-hidden="true">I</div>
+            <div class="takeaway-body">
+              <h3>Where Should Representation Alignment Be Applied?</h3>
+              <p>Aligning the 8th layer (<i>AGRA-DinoL8</i>) gives better real-world performance than aligning the 15th layer (<i>AGRA-DinoL15</i>). This finding suggests that AGRA should be applied at 1/3 of the network depth. By assigning the extraction of semantic representations to shallow layers, the deeper layers are liberated to model motion and fine-grained spatiotemporal dynamics. Enforcing static semantic alignment in deeper layers would disrupt geometric and dynamic details of world model. This conclusion is also well-supported by REPA’s experimental results. Furthermore, we compared single-layer with multi-layer aligning. Aligning multiple layers simultaneously, as in <i>AGRA-DinoL4/8/12</i>, does not improve performance.</p>
+            </div>
+          </article>
+          <article class="takeaway-row takeaway-row--ii">
+            <div class="takeaway-marker" aria-hidden="true">II</div>
+            <div class="takeaway-body">
+              <h3>Which Visual Representation Is Better for Action Grounding?</h3>
+              <p>We compare DINOv2 and SigLIP as the alignment target. They provide different representational biases: DINOv2 features are more object-centric and spatially coherent, while SigLIP features are optimized for image-text matching and emphasize global language alignment. Therefore, DINOv2 features produce clearer boundaries among objects and background, while SigLIP features are more spatially diffuse and less effective at separating the exact regions involved in manipulation. This can explain why <i>AGRA-DinoL8</i> achieves better grasping accuracy and execution stability than <i>AGRA-SiglipL8</i>.</p>
+            </div>
+          </article>
+          <article class="takeaway-row takeaway-row--iii">
+            <div class="takeaway-marker" aria-hidden="true">III</div>
+            <div class="takeaway-body">
+              <h3>Semantic Information Alone Is Not Sufficient.</h3>
+              <p>The <i>AGRA-BridgeL8</i> variant tests whether an aligned semantic representation alone can drive precise control. In this variant, alignment is applied to 8th layer of Cosmos, and this single-layer feature is repeatedly used as the guidance input for all cross-attention layers of action DiT. This removes the multi-level predictive bridge and isolates the contribution of the aligned semantic layer. <i>AGRA-BridgeL8</i> performs poorly and drops to 0% success on the challenging Open-Steamer-Transfer-Bun task. The aligned 8th layer provides strong object identity and scene-layout information, but it lacks the spatial, geometric and dynamic details required for precise manipulation.</p>
+            </div>
+          </article>
+          <article class="takeaway-row takeaway-row--iv">
+            <div class="takeaway-marker" aria-hidden="true">IV</div>
+            <div class="takeaway-body">
+              <h3>Cross-Embodiment Generalization via Human Data.</h3>
+              <p>Human data provides broad visual and interactive diversity, but this diversity is only useful if the policy can extract manipulation-relevant structure that transfers across embodiment. Without action-grounded alignment, the hidden states of a generative model may entangle task structure with embodiment-specific appearance. Empirically, adding EgoDex data to the baseline <i>WAM</i> yields little improvement, while <i>AGRA</i> benefits substantially from human data, especially in OOD scenarios. By anchoring Cosmos hidden states to visual features with stronger semantic coherence, <i>AGRA</i> reduces the dependence on embodiment-specific cues and exposes more invariant object-centric and interaction-relevant structure.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+      
+      <div class="wrap" id="real-world-deployment">
+        <h2 style="margin-top: 60px;">Real-World Deployment of AGRA</h2>
+      </div>
+      <div class="wide-plus-wrap">
+        <div class="simulation-rollouts real-world-rollouts" id="real-world-rollouts">
+          <div class="simulation-tabs" role="tablist" aria-label="Real-world rollout category">
+            <button class="simulation-tab" type="button" role="tab" aria-selected="false" data-real-world-task="id">In-Distribution</button>
+            <button class="simulation-tab" type="button" role="tab" aria-selected="false" data-real-world-task="semantic">Semantic Generalization</button>
+            <button class="simulation-tab" type="button" role="tab" aria-selected="false" data-real-world-task="instance">Instance-Level Generalization</button>
+            <button class="simulation-tab is-active" type="button" role="tab" aria-selected="true" data-real-world-task="attribute">Attribute Generalization</button>
+          </div>
+          <div class="simulation-carousel" data-real-world-panel="id" data-active-slide="0" aria-label="In-distribution real-world rollouts">
+            <button class="simulation-nav prev" type="button" aria-label="Previous in-distribution rollouts">‹</button>
+            <div class="simulation-window"><div class="simulation-track">
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Put the plush toy in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/id_1.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Put the peach in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/id_4.mp4"></video></article></div>
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Put the ball in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/id_2.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Put the banana in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/id_5.mp4"></video></article></div>
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Put the bread in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/id_3.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Put the apple in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/id_6.mp4"></video></article></div>
+            </div></div>
+            <button class="simulation-nav next" type="button" aria-label="Next in-distribution rollouts">›</button>
+          </div>
+          <div class="simulation-carousel" data-real-world-panel="semantic" data-active-slide="0" aria-label="Semantic generalization real-world rollouts">
+            <button class="simulation-nav prev" type="button" aria-label="Previous semantic generalization rollouts">‹</button>
+            <div class="simulation-window"><div class="simulation-track">
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Put the apple in the pink bowl
+              </div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/semantic_1.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Put the apple in the blue bowl</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/semantic_4.mp4"></video></article></div>
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Put the bread in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/semantic_2.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Put the bread in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/semantic_5.mp4"></video></article></div>
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Put the green apple in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/semantic_3.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Put the red apple in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/semantic_6.mp4"></video></article></div>
+            </div></div>
+            <button class="simulation-nav next" type="button" aria-label="Next semantic generalization rollouts">›</button>
+          </div>
+          <div class="simulation-carousel" data-real-world-panel="instance" data-active-slide="0" aria-label="Instance-level generalization real-world rollouts">
+            <button class="simulation-nav prev" type="button" aria-label="Previous instance-level generalization rollouts">‹</button>
+            <div class="simulation-window"><div class="simulation-track">
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Put the carrot in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/obj_1.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Put the potato in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/obj_4.mp4"></video></article></div>
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Put the strawberry in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/obj_2.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Put the onion in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/obj_5.mp4"></video></article></div>
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Put the corn in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/obj_3.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Put the lemon in the box</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/obj_6.mp4"></video></article></div>
+            </div></div>
+            <button class="simulation-nav next" type="button" aria-label="Next instance-level generalization rollouts">›</button>
+          </div>
+          <div class="simulation-carousel is-active" data-real-world-panel="attribute" data-active-slide="0" aria-label="Attribute generalization real-world rollouts">
+            <button class="simulation-nav prev" type="button" aria-label="Previous attribute generalization rollouts">‹</button>
+            <div class="simulation-window"><div class="simulation-track">
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Open the steamer and transfer the bun to a plate (unseen object & container & background)</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/att_1.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Open the steamer and transfer the bun to a plate (unseen object & container & background)</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/att_4.mp4"></video></article></div>
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Open the steamer and transfer the bun to a plate (unseen object & container)</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/att_2.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Open the steamer and transfer the bun to a plate(unseen object & container)</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/att_5.mp4"></video></article></div>
+              <div class="simulation-slide"><article class="simulation-video-card"><div class="simulation-instruction">Open the steamer and transfer the bun to a plate (unseen object)</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/att_3.mp4"></video></article><article class="simulation-video-card"><div class="simulation-instruction">Open the steamer and transfer the bun to a plate (unseen container)</div><video autoplay muted loop playsinline preload="none"><source data-src="videos_mp4/att_6.mp4"></video></article></div>
+            </div></div>
+            <button class="simulation-nav next" type="button" aria-label="Next attribute generalization rollouts">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="citation">
+      <div class="wrap">
+        <p class="kicker">Citation</p>
+        <h2>Contributors</h2>
+        <div class="contributors" aria-label="Contributors">
+          <p class="contributor-names">Lu Qiu, Yizhuo Li<span class="corresponding-mark">*</span>, Yi Chen, Yuying Ge, Yixiao Ge, Xihui Liu<span class="corresponding-mark">*</span></p>
+          <p class="contributor-contact"><span class="corresponding-mark">*</span> Corresponding authors. Contact: <a href="mailto:liyz1997@gmail.com">liyz1997@gmail.com</a> &amp; <a href="mailto:xihuiliu@eee.hku.hk">xihuiliu@eee.hku.hk</a></p>
+        </div>
+        <div class="citation-block" aria-label="Citation">
+          <button class="citation-copy" type="button" data-copy-target="citation-bibtex">Copy</button>
+          <pre class="citation-pre" id="citation-bibtex">@article{qiu2026agra,
+  author = {Lu Qiu and Yizhuo Li and Yi Chen and Yuying Ge and Yixiao Ge and Xihui Liu},
+  title = {Making Foresight Actionable: Repurposing Representation Alignment in World Action Models},
+  journal = {},
+  year = {2026},
+}</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="wrap">XPENG Robotics. All rights reserved.</div></footer>
+
+  <script>
+    const root = document.documentElement;
+    const toggle = document.querySelector(".theme-toggle");
+    const knob = toggle.querySelector("span");
+    const savedTheme = localStorage.getItem("paper-blog-theme");
+    if (savedTheme) {
+      root.dataset.theme = savedTheme;
+      knob.textContent = savedTheme === "day" ? "☀" : "☾";
+    }
+    toggle.addEventListener("click", () => {
+      const next = root.dataset.theme === "night" ? "day" : "night";
+      root.dataset.theme = next;
+      localStorage.setItem("paper-blog-theme", next);
+      knob.textContent = next === "day" ? "☀" : "☾";
+    });
+
+    const contentMenu = document.querySelector(".content-menu");
+    const contentLinks = Array.from(document.querySelectorAll(".content-menu button"));
+    const hero = document.querySelector(".hero");
+    const sections = contentLinks.map((button) => document.getElementById(button.dataset.target)).filter(Boolean);
+    function syncContentMenu() {
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      contentMenu.classList.toggle("is-hidden", heroBottom > 96);
+      let activeId = sections[0]?.id;
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= 130) activeId = section.id;
+      }
+      contentLinks.forEach((button) => button.classList.toggle("is-active", button.dataset.target === activeId));
+    }
+    contentLinks.forEach((button) => {
+      button.addEventListener("click", () => document.getElementById(button.dataset.target)?.scrollIntoView({ block: "start" }));
+    });
+    window.addEventListener("scroll", syncContentMenu, { passive: true });
+    window.addEventListener("resize", syncContentMenu);
+    syncContentMenu();
+
+    const realWorldSeries = [["Freeze", "#cfe7ed"], ["AGRA-BridgeL8", "#c5d3ec"], ["WAM no EgoDex", "#9eadd6", true], ["WAM", "#9eadd6"], ["AGRA-DinoL8 no EgoDex", "#f28d89", true], ["AGRA-DinoL8 (ours)", "#f28d89"], ["AGRA-DinoL4/8/12", "#f3d8ad"], ["AGRA-DinoL15", "#94bdc8"], ["AGRA-SigLIPL8", "#8fbfba"]];
+    const realWorldGroups = [["In-Distribution", [50, 28, 42, 34, 74, 80, 72, 22, 60]], ["Semantic Generalization", [35, 2, 50, 55, 55, 82, 68, 30, 57]], ["Instance-Level Generalization", [20, 20, 30, 30, 28, 62, 44, 14, 46]], ["Attribute Generalization", [5, 0, 30, 48, 32, 80, 82, 42, 72]]];
+    const methodSeries = [["UWM", "#cfe7ed"], ["Diffusion Policy", "#c5d3ec"], ["GR00T N1.6", "#ddd4e8"], ["FLARE", "#9eadd6"], ["DiT4DiT", "#f3d8ad"], ["LDA-1B", "#94bdc8"], ["AGRA", "#f28d89"]];
+    const methodGroups = [["Pick & Place", [30.1, 40.4, 55.4, 58.2, 50.9, 55.1, 68.8]], ["Articulated", [38.4, 50.1, 24.2, 51.3, 50.3, 56.3, 59.0]], ["24 GR Avg", [29.5, 40.9, 47.6, 55.0, 50.8, 55.4, 66.4]]];
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+    }
+    function renderGroupedBars(containerId, legendId, series, groups, maxValue = 100) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = groups.map(([label, values]) => `<div class="bar-group"><div class="bars">${values.map((v, i) => `<span class="bar ${series[i][0].includes("AGRA-DinoL8") || series[i][0] === "AGRA" ? "ours" : ""}" title="${series[i][0]}: ${v}%" style="--v:${Math.max(0, v / maxValue * 100)};--c:${series[i][1]}"></span>`).join("")}</div><div class="bar-group-label">${label}</div></div>`).join("");
+      document.getElementById(legendId).innerHTML = series.map(([name, color]) => `<span><i style="--c:${color}"></i>${name}</span>`).join("");
+    }
+    function renderMethodComparisonBars(containerId, legendId, series, groups) {
+      const width = 1020;
+      const height = 390;
+      const left = 72;
+      const right = 28;
+      const top = 48;
+      const bottom = 78;
+      const plotBottom = height - bottom;
+      const plotHeight = plotBottom - top;
+      const yMin = 20;
+      const yMax = 80;
+      const barWidth = 26;
+      const barGap = 4;
+      const groupCenters = [250, 500, 830];
+      const dividerX = 660;
+      const valueToY = (value) => top + ((yMax - Math.max(yMin, Math.min(yMax, value))) / (yMax - yMin)) * plotHeight;
+      const ticks = [20, 30, 40, 50, 60, 70, 80];
+
+      const grid = ticks.map((tick) => {
+        const y = valueToY(tick);
+        return `<line class="method-gridline" x1="${left}" y1="${y}" x2="${width - right}" y2="${y}"></line><text class="method-tick-label" x="${left - 10}" y="${y + 4}" text-anchor="end">${tick}</text>`;
+      }).join("");
+      const bars = groups.map(([label, values], groupIndex) => {
+        const groupWidth = values.length * barWidth + (values.length - 1) * barGap;
+        const startX = groupCenters[groupIndex] - groupWidth / 2;
+        const groupBars = values.map((value, seriesIndex) => {
+          const x = startX + seriesIndex * (barWidth + barGap);
+          const y = valueToY(value);
+          const h = plotBottom - y;
+          return `<rect class="method-bar" x="${x}" y="${y}" width="${barWidth}" height="${h}" fill="${series[seriesIndex][1]}"><title>${escapeHtml(series[seriesIndex][0])}: ${value}%</title></rect><text class="method-value-label" x="${x + barWidth / 2}" y="${y - 6}" text-anchor="middle">${value.toFixed(1)}</text>`;
+        }).join("");
+        return `${groupBars}<text class="method-group-label" x="${groupCenters[groupIndex]}" y="${plotBottom + 22}" text-anchor="middle">${escapeHtml(label)}</text>`;
+      }).join("");
+      const svg = `<svg class="method-chart-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Comparison with policy and world-model baselines">
+        <line class="method-section-rule" x1="118" y1="14" x2="612" y2="14"></line>
+        <text class="method-section-label" x="365" y="36" text-anchor="middle">Individual Task Categories</text>
+        <line class="method-section-rule" x1="720" y1="14" x2="966" y2="14"></line>
+        <text class="method-section-label" x="843" y="36" text-anchor="middle">Overall Summary</text>
+        ${grid}
+        <line class="method-axis" x1="${left}" y1="${top}" x2="${left}" y2="${plotBottom}"></line>
+        <line class="method-axis" x1="${left}" y1="${plotBottom}" x2="${width - right}" y2="${plotBottom}"></line>
+        <line class="method-divider" x1="${dividerX}" y1="4" x2="${dividerX}" y2="${plotBottom}"></line>
+        <text class="method-axis-label" x="18" y="${top + plotHeight / 2}" text-anchor="middle" transform="rotate(-90 18 ${top + plotHeight / 2})">Success rate (%)</text>
+        ${bars}
+      </svg>`;
+
+      document.querySelectorAll(`[id="${containerId}"]`).forEach((container) => {
+        container.classList.add("method-comparison");
+        container.innerHTML = svg;
+      });
+      document.querySelectorAll(`[id="${legendId}"]`).forEach((legend) => {
+        legend.innerHTML = series.map(([name, color]) => `<span><i style="--c:${color}"></i>${escapeHtml(name)}</span>`).join("");
+      });
+    }
+    function renderRealWorldBars(containerId, legendId, series, groups, options = {}) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const width = options.width || 1120;
+      const height = options.height || 430;
+      const left = 72;
+      const right = 30;
+      const top = 34;
+      const bottom = options.bottom || (options.showGroupLabels === false ? 56 : 78);
+      const plotBottom = height - bottom;
+      const plotHeight = plotBottom - top;
+      const ticks = [0, 25, 50, 75, 100];
+      const barWidth = options.barWidth || 20;
+      const barGap = options.barGap || 4;
+      const groupCenters = options.groupCenters || groups.map((_, index) => left + (width - left - right) * (index + 0.5) / groups.length);
+      const valueToY = (value) => top + ((100 - Math.max(0, Math.min(100, value))) / 100) * plotHeight;
+      const patternDefs = series.map(([name, color, hatched], index) => hatched ? `<pattern id="${containerId}-hatch-${index}" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)"><rect width="8" height="8" fill="transparent"></rect><line x1="0" y1="0" x2="0" y2="8" stroke="rgba(255,255,255,0.72)" stroke-width="3"></line></pattern>` : "").join("");
+      const grid = ticks.map((tick) => {
+        const y = valueToY(tick);
+        return `<line class="real-world-gridline" x1="${left}" y1="${y}" x2="${width - right}" y2="${y}"></line><text class="real-world-tick-label" x="${left - 10}" y="${y + 4}" text-anchor="end">${tick}</text>`;
+      }).join("");
+      const bars = groups.map(([label, values], groupIndex) => {
+        const groupWidth = values.length * barWidth + (values.length - 1) * barGap;
+        const startX = groupCenters[groupIndex] - groupWidth / 2;
+        const groupBars = values.map((value, seriesIndex) => {
+          const [name, color, hatched] = series[seriesIndex];
+          const x = startX + seriesIndex * (barWidth + barGap);
+          const y = valueToY(value);
+          const h = plotBottom - y;
+          const hatchRect = hatched ? `<rect x="${x}" y="${y}" width="${barWidth}" height="${h}" fill="url(#${containerId}-hatch-${seriesIndex})"></rect>` : "";
+          return `<rect x="${x}" y="${y}" width="${barWidth}" height="${h}" fill="${color}" opacity="0.92"><title>${escapeHtml(name)}: ${value}%</title></rect>${hatchRect}<text class="real-world-value-label" x="${x + barWidth / 2}" y="${Math.max(top + 10, y - 6)}" text-anchor="middle">${value}</text>`;
+        }).join("");
+        const groupLabel = options.showGroupLabels === false ? "" : `<text class="real-world-group-label" x="${groupCenters[groupIndex]}" y="${plotBottom + 24}" text-anchor="middle">${escapeHtml(label)}</text>`;
+        return `${groupBars}${groupLabel}`;
+      }).join("");
+      container.innerHTML = `<svg class="real-world-chart-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Real-world success rate chart"><defs>${patternDefs}</defs>${grid}<line class="real-world-axis" x1="${left}" y1="${plotBottom}" x2="${width - right}" y2="${plotBottom}"></line><line class="real-world-axis" x1="${left}" y1="${top}" x2="${left}" y2="${plotBottom}"></line><text class="real-world-axis-title" x="20" y="${top + plotHeight / 2}" text-anchor="middle" transform="rotate(-90 20 ${top + plotHeight / 2})">Success rate</text>${bars}</svg>`;
+      if (legendId) {
+        const legend = document.getElementById(legendId);
+        if (legend) legend.innerHTML = series.map(([name, color]) => `<span><i style="--c:${color}"></i>${escapeHtml(name)}</span>`).join("");
+      }
+    }
+    renderRealWorldBars("real-world-overview-bars", "real-world-overview-legend", realWorldSeries, realWorldGroups, { width: 980, height: 360, bottom: 52, barWidth: 16, barGap: 2 });
+    renderRealWorldBars("real-world-id-bars", null, realWorldSeries, [realWorldGroups[0]], { width: 640, height: 360, barWidth: 34, barGap: 7, showGroupLabels: false });
+    renderRealWorldBars("real-world-semantic-bars", null, realWorldSeries, [realWorldGroups[1]], { width: 560, height: 330, barWidth: 26, barGap: 5, showGroupLabels: false });
+    renderRealWorldBars("real-world-instance-bars", null, realWorldSeries, [realWorldGroups[2]], { width: 560, height: 330, barWidth: 26, barGap: 5, showGroupLabels: false });
+    renderRealWorldBars("real-world-attribute-bars", null, realWorldSeries, [realWorldGroups[3]], { width: 560, height: 330, barWidth: 26, barGap: 5, showGroupLabels: false });
+    renderMethodComparisonBars("method-bars", "method-legend", methodSeries, methodGroups);
+
+    function loadLazyVideo(video) {
+      if (video.dataset.loaded === "true") return;
+      video.querySelectorAll("source[data-src]").forEach((source) => {
+        source.src = source.dataset.src;
+      });
+      video.preload = "metadata";
+      video.load();
+      video.dataset.loaded = "true";
+    }
+
+    function resetVideoTime(video) {
+      const reset = () => {
+        try {
+          video.currentTime = 0;
+        } catch (error) {}
+      };
+      if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
+        reset();
+      } else {
+        video.addEventListener("loadedmetadata", reset, { once: true });
+      }
+    }
+
+    function playLazyVideo(video, options = {}) {
+      loadLazyVideo(video);
+      if (options.reset) resetVideoTime(video);
+      video.play().catch(() => {});
+    }
+
+    function pauseLazyVideo(video) {
+      video.pause();
+    }
+
+    function isLazyMediaReady(container) {
+      return container?.dataset.mediaReady === "true";
+    }
+
+    function whenLazyMediaNearViewport(container, onReady) {
+      if (!container) return;
+      if (!("IntersectionObserver" in window)) {
+        container.dataset.mediaReady = "true";
+        onReady();
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          container.dataset.mediaReady = "true";
+          onReady();
+          observer.unobserve(container);
+        });
+      }, { rootMargin: "420px 0px" });
+      observer.observe(container);
+    }
+
+    document.querySelectorAll(".failure-carousel").forEach((carousel) => {
+      const cards = Array.from(carousel.querySelectorAll(".failure-card"));
+      const previous = carousel.querySelector(".failure-nav.prev");
+      const next = carousel.querySelector(".failure-nav.next");
+      let activeIndex = 0;
+      let slideDirection = 1;
+
+      function syncFailureCards(index, direction = slideDirection) {
+        slideDirection = direction;
+        activeIndex = (index + cards.length) % cards.length;
+        cards.forEach((card, cardIndex) => {
+          const isActive = cardIndex === activeIndex;
+          card.classList.toggle("is-active", isActive);
+          card.classList.toggle("is-prev", !isActive && slideDirection < 0);
+          card.classList.toggle("is-next", !isActive && slideDirection >= 0);
+          const shouldPlay = isActive && isLazyMediaReady(carousel);
+          card.querySelectorAll("video").forEach((video) => {
+            if (shouldPlay) {
+              playLazyVideo(video, { reset: true });
+            } else {
+              pauseLazyVideo(video);
+            }
+          });
+        });
+        carousel.dataset.activeCase = String(activeIndex);
+      }
+
+      previous?.addEventListener("click", () => syncFailureCards(activeIndex - 1, -1));
+      next?.addEventListener("click", () => syncFailureCards(activeIndex + 1, 1));
+      syncFailureCards(activeIndex);
+      whenLazyMediaNearViewport(carousel, () => syncFailureCards(activeIndex));
+    });
+
+    const simulationRollouts = document.getElementById("simulation-rollouts");
+    if (simulationRollouts) {
+      const tabs = Array.from(simulationRollouts.querySelectorAll(".simulation-tab"));
+      const panels = Array.from(simulationRollouts.querySelectorAll(".simulation-carousel"));
+
+      function syncSimulationPanel(panel, requestedIndex = Number(panel.dataset.activeSlide || 0)) {
+        const slides = Array.from(panel.querySelectorAll(".simulation-slide"));
+        const activeIndex = (requestedIndex + slides.length) % slides.length;
+        const track = panel.querySelector(".simulation-track");
+        const isPanelActive = panel.classList.contains("is-active");
+        panel.dataset.activeSlide = String(activeIndex);
+        if (track) track.style.transform = `translateX(-${activeIndex * 100}%)`;
+
+        slides.forEach((slide, slideIndex) => {
+          const shouldPlay = isLazyMediaReady(simulationRollouts) && isPanelActive && slideIndex === activeIndex;
+          slide.querySelectorAll("video").forEach((video) => {
+            if (shouldPlay) {
+              playLazyVideo(video);
+            } else {
+              pauseLazyVideo(video);
+            }
+          });
+        });
+      }
+
+      function setSimulationTask(taskName) {
+        tabs.forEach((tab) => {
+          const isActive = tab.dataset.simulationTask === taskName;
+          tab.classList.toggle("is-active", isActive);
+          tab.setAttribute("aria-selected", String(isActive));
+        });
+        panels.forEach((panel) => {
+          const isActive = panel.dataset.simulationPanel === taskName;
+          panel.classList.toggle("is-active", isActive);
+          panel.setAttribute("aria-hidden", String(!isActive));
+          syncSimulationPanel(panel, isActive ? 0 : Number(panel.dataset.activeSlide || 0));
+        });
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => setSimulationTask(tab.dataset.simulationTask));
+      });
+      panels.forEach((panel) => {
+        panel.querySelector(".simulation-nav.prev")?.addEventListener("click", () => {
+          syncSimulationPanel(panel, Number(panel.dataset.activeSlide || 0) - 1);
+        });
+        panel.querySelector(".simulation-nav.next")?.addEventListener("click", () => {
+          syncSimulationPanel(panel, Number(panel.dataset.activeSlide || 0) + 1);
+        });
+      });
+      setSimulationTask("pnp");
+      whenLazyMediaNearViewport(simulationRollouts, () => {
+        panels.forEach((panel) => syncSimulationPanel(panel));
+      });
+    }
+
+    const realWorldRollouts = document.getElementById("real-world-rollouts");
+    if (realWorldRollouts) {
+      const tabs = Array.from(realWorldRollouts.querySelectorAll(".simulation-tab"));
+      const panels = Array.from(realWorldRollouts.querySelectorAll(".simulation-carousel"));
+
+      function syncRealWorldPanel(panel, requestedIndex = Number(panel.dataset.activeSlide || 0)) {
+        const slides = Array.from(panel.querySelectorAll(".simulation-slide"));
+        const activeIndex = (requestedIndex + slides.length) % slides.length;
+        const track = panel.querySelector(".simulation-track");
+        const isPanelActive = panel.classList.contains("is-active");
+        panel.dataset.activeSlide = String(activeIndex);
+        if (track) track.style.transform = `translateX(-${activeIndex * 100}%)`;
+
+        slides.forEach((slide, slideIndex) => {
+          const shouldPlay = isLazyMediaReady(realWorldRollouts) && isPanelActive && slideIndex === activeIndex;
+          slide.querySelectorAll("video").forEach((video) => {
+            if (shouldPlay) {
+              playLazyVideo(video);
+            } else {
+              pauseLazyVideo(video);
+            }
+          });
+        });
+      }
+
+      function setRealWorldTask(taskName) {
+        tabs.forEach((tab) => {
+          const isActive = tab.dataset.realWorldTask === taskName;
+          tab.classList.toggle("is-active", isActive);
+          tab.setAttribute("aria-selected", String(isActive));
+        });
+        panels.forEach((panel) => {
+          const isActive = panel.dataset.realWorldPanel === taskName;
+          panel.classList.toggle("is-active", isActive);
+          panel.setAttribute("aria-hidden", String(!isActive));
+          syncRealWorldPanel(panel, isActive ? 0 : Number(panel.dataset.activeSlide || 0));
+        });
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => setRealWorldTask(tab.dataset.realWorldTask));
+      });
+      panels.forEach((panel) => {
+        panel.querySelector(".simulation-nav.prev")?.addEventListener("click", () => {
+          syncRealWorldPanel(panel, Number(panel.dataset.activeSlide || 0) - 1);
+        });
+        panel.querySelector(".simulation-nav.next")?.addEventListener("click", () => {
+          syncRealWorldPanel(panel, Number(panel.dataset.activeSlide || 0) + 1);
+        });
+      });
+      setRealWorldTask("attribute");
+      whenLazyMediaNearViewport(realWorldRollouts, () => {
+        panels.forEach((panel) => syncRealWorldPanel(panel));
+      });
+    }
+
+    const citationCopy = document.querySelector(".citation-copy");
+    citationCopy?.addEventListener("click", async () => {
+      const target = document.getElementById(citationCopy.dataset.copyTarget);
+      const text = target?.textContent || "";
+      if (!text) return;
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const textarea = document.createElement("textarea");
+          textarea.value = text;
+          textarea.style.position = "fixed";
+          textarea.style.left = "-9999px";
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand("copy");
+          textarea.remove();
+        }
+        citationCopy.textContent = "Copied";
+        citationCopy.classList.add("is-copied");
+        window.setTimeout(() => {
+          citationCopy.textContent = "Copy";
+          citationCopy.classList.remove("is-copied");
+        }, 1600);
+      } catch (error) {
+        citationCopy.textContent = "Failed";
+        window.setTimeout(() => { citationCopy.textContent = "Copy"; }, 1600);
+      }
+    });
+
+    requestAnimationFrame(() => {
+      if (Number.isFinite(paperBlogScrollY)) window.scrollTo(0, paperBlogScrollY);
+      document.documentElement.removeAttribute("data-restoring-scroll");
+    });
+  </script>
+</body>
+</html>

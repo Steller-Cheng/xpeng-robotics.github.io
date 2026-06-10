@@ -3,3 +3,8 @@
 
 # DIAL: raw / intermediate video assets (not used by the live site)
 dial/videos_raw*/
+
+fe0_video_output/
+
+# AGRA: raw video assets
+agra/videos/*.mov
