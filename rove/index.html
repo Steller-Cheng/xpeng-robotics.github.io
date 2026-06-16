@@ -3558,7 +3558,12 @@
     .rove-result-section h3 { margin-bottom: 10px; color: var(--text); }
     .rove-result-section p { margin-bottom: 18px; }
     .rove-result-section .rove-result-grid + p { margin-top: 26px; }
-    .rove-bib { white-space: pre; overflow-x: auto; }
+    .rove-bib {
+      white-space: pre-wrap;
+      overflow-x: visible;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
     @media (max-width: 900px) { .rove-result-grid, .rove-bars, .rove-task-videos { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -3751,15 +3756,15 @@
           <p class="section-subtitle">If you find ROVE useful, please cite our arXiv paper.</p>
         </div>
         <div class="section-body">
-          <pre class="rove-bib">@misc{xiao2026roveunlockinghumaninterventions,
-  title         = {ROVE: Unlocking Human Interventions for Humanoid Manipulation via Reinforcement Learning},
-  author        = {Wei Xiao and Weiliang Tang and Yuying Ge and Hui Zhou and Yao Mu and Li Zhang and Yixiao Ge},
-  year          = {2026},
-  eprint        = {2606.17011},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.RO},
-  url           = {https://arxiv.org/abs/2606.17011}
+          <div class="citation-block">
+            <button class="citation-copy" type="button" data-copy-target="rove-bib">Copy</button>
+            <pre class="citation-pre rove-bib" id="rove-bib">@article{xiao2026rove,
+  title={ROVE: Unlocking Human Interventions for Humanoid Manipulation via Reinforcement Learning},
+  author={Xiao, Wei and Tang, Weiliang and Ge, Yuying and Zhou, Hui and Mu, Yao and Zhang, Li and Ge, Yixiao},
+  journal={arXiv preprint arXiv:2606.17011},
+  year={2026}
 }</pre>
+          </div>
         </div>
       </div>
     </section>
@@ -3798,6 +3803,28 @@
     }, { rootMargin: '-25% 0px -58% 0px', threshold: [0, 0.2, 0.5, 0.8] });
     targets.forEach((target) => observer.observe(target));
     window.addEventListener('scroll', () => menu?.classList.toggle('is-hidden', window.scrollY < 180), { passive: true });
+
+    document.querySelectorAll('.citation-copy[data-copy-target]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const target = document.getElementById(button.dataset.copyTarget);
+        if (!target) return;
+        const originalText = button.textContent;
+        try {
+          await navigator.clipboard.writeText(target.textContent.trim());
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+          window.setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('is-copied');
+          }, 1400);
+        } catch {
+          button.textContent = 'Failed';
+          window.setTimeout(() => {
+            button.textContent = originalText;
+          }, 1400);
+        }
+      });
+    });
   </script>
 </body>
 </html>
