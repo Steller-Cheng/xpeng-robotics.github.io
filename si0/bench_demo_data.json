@@ -1,0 +1,1046 @@
+{
+ "ver": "76",
+ "order": [
+  "demo",
+  "fgp",
+  "sr",
+  "motion",
+  "er"
+ ],
+ "tabs": {
+  "demo": {
+   "label": "Real Robot",
+   "color": "var(--accent)"
+  },
+  "fgp": {
+   "label": "Fine-grained perception",
+   "color": "var(--cap-f)",
+   "cases": [
+    {
+     "id": "CountQA_test__ep-000081",
+     "bench": "CountQA_test",
+     "cap": "counting",
+     "caplabel": "Counting",
+     "n_img": 1,
+     "q": "How many peppers are there?",
+     "a": "24",
+     "imgs": [
+      "demo_assets/bench/CountQA_test/ep-000081_0.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "CountQA_test__ep-000041",
+     "bench": "CountQA_test",
+     "cap": "counting",
+     "caplabel": "Counting",
+     "n_img": 1,
+     "q": "How many cups are there on the right?",
+     "a": "9",
+     "imgs": [
+      "demo_assets/bench/CountQA_test/ep-000041_0.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "CountQA_test__ep-000060",
+     "bench": "CountQA_test",
+     "cap": "counting",
+     "caplabel": "Counting",
+     "n_img": 1,
+     "q": "How many plates are there?",
+     "a": "4",
+     "imgs": [
+      "demo_assets/bench/CountQA_test/ep-000060_0.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "CountQA_test__ep-000052",
+     "bench": "CountQA_test",
+     "cap": "counting",
+     "caplabel": "Counting",
+     "n_img": 1,
+     "q": "How many mints are there?",
+     "a": "14",
+     "imgs": [
+      "demo_assets/bench/CountQA_test/ep-000052_0.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "detection3d__objectron_702087",
+     "bench": "Objectron",
+     "cap": "detection3d",
+     "caplabel": "3D detection",
+     "n_img": 1,
+     "q": "Cereal box",
+     "a": "Predicted 3D box (green).",
+     "imgs": [
+      "demo_assets/bench/objectron3d/obj_702087.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "detection3d__objectron_801048",
+     "bench": "Objectron",
+     "cap": "detection3d",
+     "caplabel": "3D detection",
+     "n_img": 1,
+     "q": "Chair",
+     "a": "Predicted 3D box (green).",
+     "imgs": [
+      "demo_assets/bench/objectron3d/obj_801048.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "detection3d__objectron_811010",
+     "bench": "Objectron",
+     "cap": "detection3d",
+     "caplabel": "3D detection",
+     "n_img": 1,
+     "q": "Chair",
+     "a": "Predicted 3D box (green).",
+     "imgs": [
+      "demo_assets/bench/objectron3d/obj_811010.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "detection3d__objectron_1506064",
+     "bench": "Objectron",
+     "cap": "detection3d",
+     "caplabel": "3D detection",
+     "n_img": 1,
+     "q": "Shoes",
+     "a": "Predicted 3D box (green).",
+     "imgs": [
+      "demo_assets/bench/objectron3d/obj_1506064.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "grounding__single_10893",
+     "bench": "IRON-R1.11",
+     "cap": "grounding",
+     "caplabel": "Grounding",
+     "n_img": 1,
+     "q": "Yellow and white patterned fabric pillow at upper right",
+     "a": "Green box = Si0 prediction, red box = ground truth.",
+     "imgs": [
+      "demo_assets/bench/grounding/single_10893.jpg"
+     ],
+     "o": "l"
+    },
+    {
+     "id": "grounding__single_11319",
+     "bench": "IRON-R1.11",
+     "cap": "grounding",
+     "caplabel": "Grounding",
+     "n_img": 1,
+     "q": "The tray closest to the left of the empty green ceramic bowl",
+     "a": "Green box = Si0 prediction, red box = ground truth.",
+     "imgs": [
+      "demo_assets/bench/grounding/single_11319.jpg"
+     ],
+     "o": "l"
+    },
+    {
+     "id": "grounding__multi_1888",
+     "bench": "IRON-R1.11",
+     "cap": "grounding",
+     "caplabel": "Grounding",
+     "n_img": 1,
+     "q": "(1) The soda can closest below the purple mesh pen holder (2) The lamp closest to the right of the purple mesh pen holder",
+     "a": "Green box = Si0 prediction, red box = ground truth.",
+     "imgs": [
+      "demo_assets/bench/grounding/multi_1888.jpg"
+     ],
+     "o": "l"
+    },
+    {
+     "id": "grounding__droid_10784",
+     "bench": "IRON-R1.11",
+     "cap": "grounding",
+     "caplabel": "Grounding",
+     "n_img": 1,
+     "q": "The bowl closest above the empty red ceramic mug",
+     "a": "Green box = Si0 prediction, red box = ground truth.",
+     "imgs": [
+      "demo_assets/bench/grounding/droid_10784.jpg"
+     ],
+     "o": "l"
+    },
+    {
+     "id": "grounding__droid_37625",
+     "bench": "IRON-R1.11",
+     "cap": "grounding",
+     "caplabel": "Grounding",
+     "n_img": 1,
+     "q": "The mousepad closest below the open silver metallic laptop",
+     "a": "Green box = Si0 prediction, red box = ground truth.",
+     "imgs": [
+      "demo_assets/bench/grounding/droid_37625.jpg"
+     ],
+     "o": "l"
+    },
+    {
+     "id": "grounding__droid_135032",
+     "bench": "IRON-R1.11",
+     "cap": "grounding",
+     "caplabel": "Grounding",
+     "n_img": 1,
+     "q": "The sponge closest to the right of the red metallic soda can",
+     "a": "Green box = Si0 prediction, red box = ground truth.",
+     "imgs": [
+      "demo_assets/bench/grounding/droid_135032.jpg"
+     ],
+     "o": "l"
+    },
+    {
+     "id": "grounding__vln_32744",
+     "bench": "IRON-R1.11",
+     "cap": "grounding",
+     "caplabel": "Grounding",
+     "n_img": 1,
+     "q": "Grey duffel bag",
+     "a": "Green box = Si0 prediction, red box = ground truth.",
+     "imgs": [
+      "demo_assets/bench/grounding/vln_32744.jpg"
+     ],
+     "o": "l"
+    },
+    {
+     "id": "grounding__vln_43095",
+     "bench": "IRON-R1.11",
+     "cap": "grounding",
+     "caplabel": "Grounding",
+     "n_img": 1,
+     "q": "Beige sedan on right",
+     "a": "Green box = Si0 prediction, red box = ground truth.",
+     "imgs": [
+      "demo_assets/bench/grounding/vln_43095.jpg"
+     ],
+     "o": "l"
+    },
+    {
+     "id": "grounding__vln_101648",
+     "bench": "IRON-R1.11",
+     "cap": "grounding",
+     "caplabel": "Grounding",
+     "n_img": 1,
+     "q": "Black SUV parked on the right",
+     "a": "Green box = Si0 prediction, red box = ground truth.",
+     "imgs": [
+      "demo_assets/bench/grounding/vln_101648.jpg"
+     ],
+     "o": "l"
+    }
+   ],
+   "layout": "orient",
+   "pagecaps": [
+    "<span class=\"si0\">Si<sub>0</sub></span> can accurately count fine-grained object instances in diverse visual scenes.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can detect and localize objects in 3D space, predicting precise oriented bounding boxes.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can resolve complex referring expressions to localize target objects in robot manipulation scenes.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can resolve complex referring expressions to localize target objects in robot manipulation scenes.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can ground referring expressions to localize target objects under fisheye lens distortion."
+   ],
+   "minh": 440
+  },
+  "sr": {
+   "label": "Spatial relations",
+   "color": "var(--cap-s)",
+   "cases": [
+    {
+     "id": "DA-2K__ep-000002",
+     "bench": "DA-2K",
+     "cap": "depth",
+     "caplabel": "Depth",
+     "n_img": 1,
+     "q": "Which marked point is closer to the camera, A or B?",
+     "a": "B",
+     "imgs": [
+      "demo_assets/bench/DA-2K/ep-000002_0.jpg"
+     ]
+    },
+    {
+     "id": "DA-2K__ep-000004",
+     "bench": "DA-2K",
+     "cap": "depth",
+     "caplabel": "Depth",
+     "n_img": 1,
+     "q": "Which marked point is closer to the camera, A or B?",
+     "a": "A",
+     "imgs": [
+      "demo_assets/bench/DA-2K/ep-000004_0.jpg"
+     ]
+    },
+    {
+     "id": "DA-2K__ep-000008",
+     "bench": "DA-2K",
+     "cap": "depth",
+     "caplabel": "Depth",
+     "n_img": 1,
+     "q": "Which marked point is closer to the camera, A or B?",
+     "a": "B",
+     "imgs": [
+      "demo_assets/bench/DA-2K/ep-000008_0.jpg"
+     ]
+    },
+    {
+     "id": "CV-Bench-3D__ep-000000",
+     "bench": "CV-Bench-3D",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Which object is closer to the camera taking this photo, the table (highlighted by a red box) or the bookcase (highlighted by a blue box)?",
+     "imgs": [
+      "demo_assets/bench/CV-Bench-3D/ep-000000_0.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. table",
+       "on": true
+      },
+      {
+       "t": "B. bookcase",
+       "on": false
+      }
+     ]
+    },
+    {
+     "id": "CV-Bench-3D__ep-000001",
+     "bench": "CV-Bench-3D",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Which object is closer to the camera taking this photo, the door (highlighted by a red box) or the books (highlighted by a blue box)?",
+     "imgs": [
+      "demo_assets/bench/CV-Bench-3D/ep-000001_0.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. door",
+       "on": true
+      },
+      {
+       "t": "B. books",
+       "on": false
+      }
+     ]
+    },
+    {
+     "id": "CV-Bench-3D__ep-000002",
+     "bench": "CV-Bench-3D",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Which object is closer to the camera taking this photo, the table (highlighted by a red box) or the television (highlighted by a blue box)?",
+     "imgs": [
+      "demo_assets/bench/CV-Bench-3D/ep-000002_0.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. table",
+       "on": true
+      },
+      {
+       "t": "B. television",
+       "on": false
+      }
+     ]
+    },
+    {
+     "id": "CV-Bench-3D__ep-000003",
+     "bench": "CV-Bench-3D",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Which object is closer to the camera taking this photo, the refrigerator (highlighted by a red box) or the door (highlighted by a blue box)?",
+     "imgs": [
+      "demo_assets/bench/CV-Bench-3D/ep-000003_0.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. refrigerator",
+       "on": true
+      },
+      {
+       "t": "B. door",
+       "on": false
+      }
+     ]
+    },
+    {
+     "id": "CV-Bench-3D__ep-000004",
+     "bench": "CV-Bench-3D",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Which object is closer to the camera taking this photo, the door (highlighted by a red box) or the lamp (highlighted by a blue box)?",
+     "imgs": [
+      "demo_assets/bench/CV-Bench-3D/ep-000004_0.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. door",
+       "on": false
+      },
+      {
+       "t": "B. lamp",
+       "on": true
+      }
+     ]
+    },
+    {
+     "id": "CV-Bench-3D__ep-000006",
+     "bench": "CV-Bench-3D",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Which object is closer to the camera taking this photo, the desk (highlighted by a red box) or the chair (highlighted by a blue box)?",
+     "imgs": [
+      "demo_assets/bench/CV-Bench-3D/ep-000006_0.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. desk",
+       "on": false
+      },
+      {
+       "t": "B. chair",
+       "on": true
+      }
+     ]
+    },
+    {
+     "id": "CV-Bench-3D__ep-000007",
+     "bench": "CV-Bench-3D",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Which object is closer to the camera taking this photo, the television (highlighted by a red box) or the sofa (highlighted by a blue box)?",
+     "imgs": [
+      "demo_assets/bench/CV-Bench-3D/ep-000007_0.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. television",
+       "on": false
+      },
+      {
+       "t": "B. sofa",
+       "on": true
+      }
+     ]
+    },
+    {
+     "id": "CV-Bench-3D__ep-000008",
+     "bench": "CV-Bench-3D",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Which object is closer to the camera taking this photo, the table (highlighted by a red box) or the bookcase (highlighted by a blue box)?",
+     "imgs": [
+      "demo_assets/bench/CV-Bench-3D/ep-000008_0.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. table",
+       "on": true
+      },
+      {
+       "t": "B. bookcase",
+       "on": false
+      }
+     ]
+    },
+    {
+     "id": "CV-Bench-3D__ep-000608",
+     "bench": "CV-Bench-3D",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Estimate the real-world distances between objects in this image. Which object is closer to the pillow (highlighted by a red box), the lamp (highlighted by a blue box) or the table (highlighted by a green box)?",
+     "imgs": [
+      "demo_assets/bench/CV-Bench-3D/ep-000608_0.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. lamp",
+       "on": false
+      },
+      {
+       "t": "B. table",
+       "on": true
+      }
+     ]
+    },
+    {
+     "id": "spatialrel__robomind2_29922",
+     "bench": "RoboMIND2.0",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Which of the following is closer to the camera?",
+     "imgs": [
+      "demo_assets/bench/spatialrel/sr_29922.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. open beige plastic rice cooker",
+       "on": false
+      },
+      {
+       "t": "B. pale green ceramic plate",
+       "on": true
+      }
+     ]
+    },
+    {
+     "id": "spatialrel__robomind2_40304",
+     "bench": "RoboMIND2.0",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Which of the following is closer to the camera?",
+     "imgs": [
+      "demo_assets/bench/spatialrel/sr_40304.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. light green ceramic plate",
+       "on": true
+      },
+      {
+       "t": "B. light blue ceramic plate",
+       "on": false
+      }
+     ]
+    },
+    {
+     "id": "spatialrel__robomind2_45262",
+     "bench": "RoboMIND2.0",
+     "cap": "spatialrelation",
+     "caplabel": "Spatial relation",
+     "n_img": 1,
+     "q": "Which of the following is closer to the camera?",
+     "imgs": [
+      "demo_assets/bench/spatialrel/sr_45262.jpg"
+     ],
+     "choices": [
+      {
+       "t": "A. yellow smooth lemon",
+       "on": true
+      },
+      {
+       "t": "B. closed dark blue plastic pot with glass lid",
+       "on": false
+      }
+     ]
+    }
+   ],
+   "minh": 420,
+   "pagecaps": [
+    "<span class=\"si0\">Si<sub>0</sub></span> can reason about the spatial relations between objects — their relative position, distance, and size.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can reason about the spatial relations between objects — their relative position, distance, and size.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can reason about the spatial relations between objects — their relative position, distance, and size.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can reason about the spatial relations between objects — their relative position, distance, and size.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can reason about the spatial relations between objects — their relative position, distance, and size."
+   ]
+  },
+  "motion": {
+   "label": "Motion perception",
+   "color": "var(--cap-m)",
+   "pending": "",
+   "cases": [
+    {
+     "id": "itw_track_1",
+     "bench": "ITW (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking left hand.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_itw_1.mp4",
+     "o": "l"
+    },
+    {
+     "id": "itw_track_2",
+     "bench": "ITW (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking lunch box.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_itw_2.mp4",
+     "o": "l"
+    },
+    {
+     "id": "itw_track_4",
+     "bench": "ITW (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking a blue and white beverage bottle.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_itw_4.mp4",
+     "o": "l"
+    },
+    {
+     "id": "itw_track_5",
+     "bench": "ITW (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking blue bottled laundry detergent against the wall.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_itw_5.mp4",
+     "o": "l"
+    },
+    {
+     "id": "itw_track_6",
+     "bench": "ITW (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking thumbs up of right hand.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_itw_6.mp4",
+     "o": "l"
+    },
+    {
+     "id": "itw_track_7",
+     "bench": "ITW (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking the ring-shaped food.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_itw_7.mp4",
+     "o": "l"
+    },
+    {
+     "id": "egoscale_track_can",
+     "bench": "EgoScale (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking the can.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_egoscale_1.mp4",
+     "o": "l"
+    },
+    {
+     "id": "egoscale_track_2",
+     "bench": "EgoScale (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking the tea pot.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_egoscale_2.mp4",
+     "o": "l"
+    },
+    {
+     "id": "egoscale_track_3",
+     "bench": "EgoScale (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking the faucet.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_egoscale_3.mp4",
+     "o": "l"
+    },
+    {
+     "id": "egoscale_track_5",
+     "bench": "EgoScale (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking the white cup handle.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_egoscale_5.mp4",
+     "o": "l"
+    },
+    {
+     "id": "egoscale_track_6",
+     "bench": "EgoScale (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking the mop head.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_egoscale_6.mp4",
+     "o": "l"
+    },
+    {
+     "id": "egoscale_track_7",
+     "bench": "EgoScale (in-house)",
+     "cap": "tracking",
+     "caplabel": "Tracking",
+     "n_obj": 1,
+     "q": "Tracking the right hand.",
+     "a": "Per-frame point trajectory shown on the video.",
+     "vid": "demo_assets/tracking/track_egoscale_7.mp4",
+     "o": "l"
+    },
+    {
+     "id": "iron__4_04_tennis_ball",
+     "bench": "Iron (in-house)",
+     "cap": "waypoint",
+     "caplabel": "Waypoint prediction",
+     "n_img": 1,
+     "q": "Pick up the tennis ball and place it into the white container.",
+     "a": "Predicted trajectory shown on the image.",
+     "imgs": [
+      "assets/capability_examples/waypoint_4_04_tennis_ball.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "iron__3_04_blue_block",
+     "bench": "Iron (in-house)",
+     "cap": "waypoint",
+     "caplabel": "Waypoint prediction",
+     "n_img": 1,
+     "q": "Pick up the blue block and place it into the yellow container.",
+     "a": "Predicted trajectory shown on the image.",
+     "imgs": [
+      "assets/capability_examples/waypoint_3_04_blue_block.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "iron__3_02_egg",
+     "bench": "Iron (in-house)",
+     "cap": "waypoint",
+     "caplabel": "Waypoint prediction",
+     "n_img": 1,
+     "q": "Pick up the egg and place it into the yellow container.",
+     "a": "Predicted trajectory shown on the image.",
+     "imgs": [
+      "assets/capability_examples/waypoint_3_02_egg.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "iron__8_12_yellow_apple",
+     "bench": "Iron (in-house)",
+     "cap": "waypoint",
+     "caplabel": "Waypoint prediction",
+     "n_img": 1,
+     "q": "Pick up the yellow apple and place it into the bamboo basket.",
+     "a": "Predicted trajectory shown on the image.",
+     "imgs": [
+      "assets/capability_examples/waypoint_8_12_yellow_apple.jpg"
+     ],
+     "o": "p"
+    },
+    {
+     "id": "iron__4_05_yellow_star_toy",
+     "bench": "Iron (in-house)",
+     "cap": "waypoint",
+     "caplabel": "Waypoint prediction",
+     "n_img": 1,
+     "q": "Pick up the yellow star toy and place it into the pink bowl.",
+     "a": "Predicted trajectory shown on the image.",
+     "imgs": [
+      "assets/capability_examples/waypoint_4_05_yellow_star_toy.jpg"
+     ],
+     "o": "p"
+    }
+   ],
+   "layout": "orient",
+   "portraitPer": 3,
+   "pagecaps": [
+    "<span class=\"si0\">Si<sub>0</sub></span> can track objects across frames, following their motion through time.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can track objects across frames, following their motion through time.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can track objects across frames, following their motion through time.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can track objects across frames, following their motion through time.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can predict manipulation waypoints — the gripper's future pick-and-place trajectory.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can predict manipulation waypoints — the gripper's future pick-and-place trajectory."
+   ]
+  },
+  "er": {
+   "label": "Embodied reasoning",
+   "color": "var(--cap-p)",
+   "cases": [
+    {
+     "id": "robobench_subgoal_505",
+     "bench": "RoboBench",
+     "cap": "subgoal",
+     "caplabel": "Subgoal prediction",
+     "n_img": 9,
+     "q": "With <moving a pumpkin from a bowl to the bottom left corner of the table> as the goal, steps so far are shown in the video, what is the next step to do?",
+     "a": "grasp pumpkin",
+     "vid": "demo_assets/bench/robobench/rb_505.mp4"
+    },
+    {
+     "id": "robobench_subgoal_583",
+     "bench": "RoboBench",
+     "cap": "subgoal",
+     "caplabel": "Subgoal prediction",
+     "n_img": 11,
+     "q": "With <transferring a block of cheese from a cloth to a pan> as the goal, steps so far are shown in the video, what is the next step to do?",
+     "a": "grasp cheese",
+     "vid": "demo_assets/bench/robobench/rb_583.mp4"
+    },
+    {
+     "id": "robobench_subgoal_1783",
+     "bench": "RoboBench",
+     "cap": "subgoal",
+     "caplabel": "Subgoal prediction",
+     "n_img": 13,
+     "q": "With <Move the cloth to the side of the pot> as the goal, steps so far are shown in the video, what is the next step to do?",
+     "a": "grasp towel",
+     "vid": "demo_assets/bench/robobench/rb_1783.mp4"
+    },
+    {
+     "id": "robobench_subgoal_2079",
+     "bench": "RoboBench",
+     "cap": "subgoal",
+     "caplabel": "Subgoal prediction",
+     "n_img": 8,
+     "q": "With <placing a corncob on a plate and a cucumber in a pot> as the goal, steps so far are shown in the video, what is the next step to do?",
+     "a": "place corncob, plate",
+     "vid": "demo_assets/bench/robobench/rb_2079.mp4"
+    },
+    {
+     "id": "robobench_success_424",
+     "bench": "RoboBench",
+     "cap": "success",
+     "caplabel": "Success detection",
+     "n_img": 12,
+     "q": "With <transfer a stuffed toy from a pink bowl to a gray bowl> as the goal, steps so far are shown in the video, is step grasp stuffed_toy finished?",
+     "choices": [
+      {
+       "t": "Yes",
+       "on": true
+      },
+      {
+       "t": "No",
+       "on": false
+      }
+     ],
+     "vid": "demo_assets/bench/robobench/rb_424.mp4"
+    },
+    {
+     "id": "robobench_success_437",
+     "bench": "RoboBench",
+     "cap": "success",
+     "caplabel": "Success detection",
+     "n_img": 7,
+     "q": "With <relocate a cloth to the bottom middle of the tabletop> as the goal, steps so far are shown in the video, is step move_to none, cloth finished?",
+     "choices": [
+      {
+       "t": "Yes",
+       "on": false
+      },
+      {
+       "t": "No",
+       "on": true
+      }
+     ],
+     "vid": "demo_assets/bench/robobench/rb_437.mp4"
+    },
+    {
+     "id": "robobench_success_469",
+     "bench": "RoboBench",
+     "cap": "success",
+     "caplabel": "Success detection",
+     "n_img": 7,
+     "q": "With <placing corn into a bowl> as the goal, steps so far are shown in the video, is step grasp corn finished?",
+     "choices": [
+      {
+       "t": "Yes",
+       "on": false
+      },
+      {
+       "t": "No",
+       "on": true
+      }
+     ],
+     "vid": "demo_assets/bench/robobench/rb_469.mp4"
+    },
+    {
+     "id": "robobench_success_476",
+     "bench": "RoboBench",
+     "cap": "success",
+     "caplabel": "Success detection",
+     "n_img": 15,
+     "q": "With <place the spatula on the towel> as the goal, steps so far are shown in the video, is step grasp spatula finished?",
+     "choices": [
+      {
+       "t": "Yes",
+       "on": true
+      },
+      {
+       "t": "No",
+       "on": false
+      }
+     ],
+     "vid": "demo_assets/bench/robobench/rb_476.mp4"
+    },
+    {
+     "id": "robobench_success_506",
+     "bench": "RoboBench",
+     "cap": "success",
+     "caplabel": "Success detection",
+     "n_img": 9,
+     "q": "With <moving a pumpkin from a bowl to the bottom left corner of the table> as the goal, steps so far are shown in the video, is step move_to none, pumpkin finished?",
+     "choices": [
+      {
+       "t": "Yes",
+       "on": true
+      },
+      {
+       "t": "No",
+       "on": false
+      }
+     ],
+     "vid": "demo_assets/bench/robobench/rb_506.mp4"
+    },
+    {
+     "id": "robobench_success_561",
+     "bench": "RoboBench",
+     "cap": "success",
+     "caplabel": "Success detection",
+     "n_img": 3,
+     "q": "With <placing a broccoli into a pot> as the goal, steps so far are shown in the video, is step move_to none, broccoli finished?",
+     "choices": [
+      {
+       "t": "Yes",
+       "on": false
+      },
+      {
+       "t": "No",
+       "on": true
+      }
+     ],
+     "vid": "demo_assets/bench/robobench/rb_561.mp4"
+    },
+    {
+     "id": "robobench_success_608",
+     "bench": "RoboBench",
+     "cap": "success",
+     "caplabel": "Success detection",
+     "n_img": 7,
+     "q": "With <placing a banana into a pot> as the goal, steps so far are shown in the video, is step move_to none, banana finished?",
+     "choices": [
+      {
+       "t": "Yes",
+       "on": false
+      },
+      {
+       "t": "No",
+       "on": true
+      }
+     ],
+     "vid": "demo_assets/bench/robobench/rb_608.mp4"
+    },
+    {
+     "id": "robobench_success_626",
+     "bench": "RoboBench",
+     "cap": "success",
+     "caplabel": "Success detection",
+     "n_img": 9,
+     "q": "With <placing a knife to the left of a croissant> as the goal, steps so far are shown in the video, is step move_to none, knife finished?",
+     "choices": [
+      {
+       "t": "Yes",
+       "on": true
+      },
+      {
+       "t": "No",
+       "on": false
+      }
+     ],
+     "vid": "demo_assets/bench/robobench/rb_626.mp4"
+    },
+    {
+     "id": "where2place__ep-000000",
+     "bench": "where2place",
+     "cap": "affordance",
+     "caplabel": "Affordance",
+     "n_img": 1,
+     "q": "Identify several spots within the vacant space that's between the two mugs.",
+     "a": "Predicted points (green); ground-truth free space shaded.",
+     "imgs": [
+      "demo_assets/bench/where2place/ep-000000_0.jpg"
+     ]
+    },
+    {
+     "id": "where2place__ep-000001",
+     "bench": "where2place",
+     "cap": "affordance",
+     "caplabel": "Affordance",
+     "n_img": 1,
+     "q": "Locate several points within the vacant space positioned to the left of the yellow mustard bottle.",
+     "a": "Predicted points (green); ground-truth free space shaded.",
+     "imgs": [
+      "demo_assets/bench/where2place/ep-000001_0.jpg"
+     ]
+    },
+    {
+     "id": "where2place__ep-000003",
+     "bench": "where2place",
+     "cap": "affordance",
+     "caplabel": "Affordance",
+     "n_img": 1,
+     "q": "Locate several points within the vacant area that is situated to the right of the teal plate.",
+     "a": "Predicted points (green); ground-truth free space shaded.",
+     "imgs": [
+      "demo_assets/bench/where2place/ep-000003_0.jpg"
+     ]
+    },
+    {
+     "id": "where2place__ep-000005",
+     "bench": "where2place",
+     "cap": "affordance",
+     "caplabel": "Affordance",
+     "n_img": 1,
+     "q": "Select one or more locations within the vacant area that is in front of the mug in the middle.",
+     "a": "Predicted points (green); ground-truth free space shaded.",
+     "imgs": [
+      "demo_assets/bench/where2place/ep-000005_0.jpg"
+     ]
+    },
+    {
+     "id": "where2place__ep-000009",
+     "bench": "where2place",
+     "cap": "affordance",
+     "caplabel": "Affordance",
+     "n_img": 1,
+     "q": "Locate a few places in the free space between the orange and the plastic cup.",
+     "a": "Predicted points (green); ground-truth free space shaded.",
+     "imgs": [
+      "demo_assets/bench/where2place/ep-000009_0.jpg"
+     ]
+    },
+    {
+     "id": "where2place__ep-000015",
+     "bench": "where2place",
+     "cap": "affordance",
+     "caplabel": "Affordance",
+     "n_img": 1,
+     "q": "Locate several spots within the vacant area that is in front of the bowl on the left.",
+     "a": "Predicted points (green); ground-truth free space shaded.",
+     "imgs": [
+      "demo_assets/bench/where2place/ep-000015_0.jpg"
+     ]
+    }
+   ],
+   "pagecaps": [
+    "<span class=\"si0\">Si<sub>0</sub></span> can decompose a task into sub-goals and predict the next sub-goal to pursue.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can judge whether a task or step has been completed successfully.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can judge whether a task or step has been completed successfully.",
+    "<span class=\"si0\">Si<sub>0</sub></span> can judge whether a task or step has been completed successfully.",
+    "",
+    ""
+   ]
+  }
+ }
+}
