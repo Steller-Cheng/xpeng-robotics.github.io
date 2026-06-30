@@ -1,5 +1,5 @@
 {
- "ver": "76",
+ "ver": "77",
  "order": [
   "demo",
   "fgp",
@@ -774,7 +774,7 @@
      "cap": "subgoal",
      "caplabel": "Subgoal prediction",
      "n_img": 9,
-     "q": "With <moving a pumpkin from a bowl to the bottom left corner of the table> as the goal, steps so far are shown in the video, what is the next step to do?",
+     "q": "With \"moving a pumpkin from a bowl to the bottom left corner of the table\" as the goal, steps so far are shown in the video, what is the next step to do?",
      "a": "grasp pumpkin",
      "vid": "demo_assets/bench/robobench/rb_505.mp4"
     },
@@ -784,7 +784,7 @@
      "cap": "subgoal",
      "caplabel": "Subgoal prediction",
      "n_img": 11,
-     "q": "With <transferring a block of cheese from a cloth to a pan> as the goal, steps so far are shown in the video, what is the next step to do?",
+     "q": "With \"transferring a block of cheese from a cloth to a pan\" as the goal, steps so far are shown in the video, what is the next step to do?",
      "a": "grasp cheese",
      "vid": "demo_assets/bench/robobench/rb_583.mp4"
     },
@@ -794,7 +794,7 @@
      "cap": "subgoal",
      "caplabel": "Subgoal prediction",
      "n_img": 13,
-     "q": "With <Move the cloth to the side of the pot> as the goal, steps so far are shown in the video, what is the next step to do?",
+     "q": "With \"Move the cloth to the side of the pot\" as the goal, steps so far are shown in the video, what is the next step to do?",
      "a": "grasp towel",
      "vid": "demo_assets/bench/robobench/rb_1783.mp4"
     },
@@ -804,7 +804,7 @@
      "cap": "subgoal",
      "caplabel": "Subgoal prediction",
      "n_img": 8,
-     "q": "With <placing a corncob on a plate and a cucumber in a pot> as the goal, steps so far are shown in the video, what is the next step to do?",
+     "q": "With \"placing a corncob on a plate and a cucumber in a pot\" as the goal, steps so far are shown in the video, what is the next step to do?",
      "a": "place corncob, plate",
      "vid": "demo_assets/bench/robobench/rb_2079.mp4"
     },
@@ -814,7 +814,7 @@
      "cap": "success",
      "caplabel": "Success detection",
      "n_img": 12,
-     "q": "With <transfer a stuffed toy from a pink bowl to a gray bowl> as the goal, steps so far are shown in the video, is step grasp stuffed_toy finished?",
+     "q": "With \"transfer a stuffed toy from a pink bowl to a gray bowl\" as the goal, steps so far are shown in the video, is step grasp stuffed_toy finished?",
      "choices": [
       {
        "t": "Yes",
@@ -833,7 +833,7 @@
      "cap": "success",
      "caplabel": "Success detection",
      "n_img": 7,
-     "q": "With <relocate a cloth to the bottom middle of the tabletop> as the goal, steps so far are shown in the video, is step move_to none, cloth finished?",
+     "q": "With \"relocate a cloth to the bottom middle of the tabletop\" as the goal, steps so far are shown in the video, is step move_to none, cloth finished?",
      "choices": [
       {
        "t": "Yes",
@@ -852,7 +852,7 @@
      "cap": "success",
      "caplabel": "Success detection",
      "n_img": 7,
-     "q": "With <placing corn into a bowl> as the goal, steps so far are shown in the video, is step grasp corn finished?",
+     "q": "With \"placing corn into a bowl\" as the goal, steps so far are shown in the video, is step grasp corn finished?",
      "choices": [
       {
        "t": "Yes",
@@ -871,7 +871,7 @@
      "cap": "success",
      "caplabel": "Success detection",
      "n_img": 15,
-     "q": "With <place the spatula on the towel> as the goal, steps so far are shown in the video, is step grasp spatula finished?",
+     "q": "With \"place the spatula on the towel\" as the goal, steps so far are shown in the video, is step grasp spatula finished?",
      "choices": [
       {
        "t": "Yes",
@@ -890,7 +890,7 @@
      "cap": "success",
      "caplabel": "Success detection",
      "n_img": 9,
-     "q": "With <moving a pumpkin from a bowl to the bottom left corner of the table> as the goal, steps so far are shown in the video, is step move_to none, pumpkin finished?",
+     "q": "With \"moving a pumpkin from a bowl to the bottom left corner of the table\" as the goal, steps so far are shown in the video, is step move_to none, pumpkin finished?",
      "choices": [
       {
        "t": "Yes",
@@ -909,7 +909,7 @@
      "cap": "success",
      "caplabel": "Success detection",
      "n_img": 3,
-     "q": "With <placing a broccoli into a pot> as the goal, steps so far are shown in the video, is step move_to none, broccoli finished?",
+     "q": "With \"placing a broccoli into a pot\" as the goal, steps so far are shown in the video, is step move_to none, broccoli finished?",
      "choices": [
       {
        "t": "Yes",
@@ -928,7 +928,7 @@
      "cap": "success",
      "caplabel": "Success detection",
      "n_img": 7,
-     "q": "With <placing a banana into a pot> as the goal, steps so far are shown in the video, is step move_to none, banana finished?",
+     "q": "With \"placing a banana into a pot\" as the goal, steps so far are shown in the video, is step move_to none, banana finished?",
      "choices": [
       {
        "t": "Yes",
@@ -947,7 +947,7 @@
      "cap": "success",
      "caplabel": "Success detection",
      "n_img": 9,
-     "q": "With <placing a knife to the left of a croissant> as the goal, steps so far are shown in the video, is step move_to none, knife finished?",
+     "q": "With \"placing a knife to the left of a croissant\" as the goal, steps so far are shown in the video, is step move_to none, knife finished?",
      "choices": [
       {
        "t": "Yes",
