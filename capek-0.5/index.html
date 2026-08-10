@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Capek 0.5 | XPENG Robotics</title>
+    <meta
+      name="description"
+      content="Capek 0.5 is an execution-centric vision-language model for embodied intelligence from XPENG Robotics."
+    />
+    <link rel="stylesheet" href="styles.css?v=20260810-responsive-layout" />
+  </head>
+  <body>
+    <header class="site-header" aria-label="Top navigation">
+      <div class="brand-lockup" aria-label="Project and institution logos">
+        <a class="xpeng-brand" href="#top" aria-label="XPENG Robotics">
+          <img src="assets/xpeng-robotics-lockup-transparent.png" alt="XPENG Robotics logo" />
+        </a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero-section" aria-labelledby="hero-subtitle">
+        <div class="hero-copy">
+          <div class="hero-lockup" aria-label="Institution and project">
+            <img class="capek-hero-logo" src="assets/capek-logo-20260806.png" alt="Capek 0.5 logo" />
+          </div>
+          <p class="hero-subtitle" id="hero-subtitle">
+            An execution-centric vision-language model for embodied intelligence.
+          </p>
+          <p class="hero-summary">
+            Robot execution is iterative: each action changes what must be perceived,
+            reasoned about, grounded, and verified next. Capek 0.5 organizes post-training
+            around four execution-facing capabilities and consolidates their specialists
+            into a single inference-time model.
+          </p>
+          <div class="hero-actions" aria-label="Project links">
+            <a class="button primary" href="https://arxiv.org/abs/2608.06756" target="_blank" rel="noopener noreferrer">
+              <img class="button-icon" src="assets/icons/arxiv.svg" alt="" aria-hidden="true" />
+              arXiv
+            </a>
+            <button class="button secondary disabled-hero-button" type="button" aria-disabled="true" data-tooltip="coming soon">
+              <img class="button-icon" src="assets/icons/github.svg" alt="" aria-hidden="true" />
+              GitHub
+            </button>
+            <button class="button secondary disabled-hero-button" type="button" aria-disabled="true" data-tooltip="coming soon">
+              <img class="button-icon" src="assets/icons/huggingface.svg" alt="" aria-hidden="true" />
+              Model
+            </button>
+            <button class="button secondary disabled-hero-button" type="button" aria-disabled="true" data-tooltip="coming soon">
+              <img class="button-icon" src="assets/icons/huggingface.svg" alt="" aria-hidden="true" />
+              StateBench
+            </button>
+          </div>
+        </div>
+        <div class="hero-side" aria-label="Headline contribution summary">
+          <figure class="hero-domain-chart" aria-label="35B-A3B domain mean chart with y-axis starting at 30">
+            <div class="chart-heading">
+              <div>
+                <p class="label">35B-A3B domain means</p>
+                <h2>Capek 0.5 leads across execution-facing capabilities.</h2>
+              </div>
+            </div>
+            <div class="chart-legend" aria-hidden="true">
+              <span><i class="legend-capek"></i>Capek 0.5</span>
+              <span><i class="legend-rynnbrain"></i>RynnBrain 30B-A3B</span>
+              <span><i class="legend-mimo"></i>MiMo-Embodied 7B</span>
+              <span><i class="legend-r1"></i>Embodied R1.5 8B</span>
+              <span><i class="legend-rynnbrain11"></i>RynnBrain1.1 9B</span>
+              <span><i class="legend-hy"></i>HY-Embodied1.0 30B-A3B</span>
+            </div>
+            <div class="domain-chart">
+              <div class="y-axis" aria-hidden="true">
+                <span>85</span>
+                <span>70</span>
+                <span>50</span>
+                <span>30</span>
+              </div>
+              <div class="chart-area">
+                <div class="chart-grid" aria-hidden="true"></div>
+                <div class="domain-group domain-spatial" style="--v1: 67.8%; --v2: 56.0%; --v3: 45.0%; --v4: 46.5%; --v5: 60.3%; --v6: 60.5%">
+                  <div class="bars">
+                    <span class="bar capek"><strong>70.7</strong></span>
+                    <span class="bar model-a"><strong>63.6</strong></span>
+                    <span class="bar model-b"><strong>57.0</strong></span>
+                    <span class="bar model-c"><strong>57.9</strong></span>
+                    <span class="bar model-d"><strong>66.2</strong></span>
+                    <span class="bar model-e"><strong>66.3</strong></span>
+                  </div>
+                  <p>Spatial</p>
+                </div>
+                <div class="domain-group domain-temporal" style="--v1: 54.5%; --v2: 39.5%; --v3: 19.5%; --v4: 39.0%; --v5: 37.0%; --v6: 30.0%">
+                  <div class="bars">
+                    <span class="bar capek"><strong>62.7</strong></span>
+                    <span class="bar model-a"><strong>53.7</strong></span>
+                    <span class="bar model-b"><strong>41.7</strong></span>
+                    <span class="bar model-c"><strong>53.4</strong></span>
+                    <span class="bar model-d"><strong>52.2</strong></span>
+                    <span class="bar model-e"><strong>48.0</strong></span>
+                  </div>
+                  <p>Temporal</p>
+                </div>
+                <div class="domain-group domain-guidance" style="--v1: 63.5%; --v2: 35.0%; --v3: 39.2%; --v4: 54.5%; --v5: 42.0%; --v6: 49.8%">
+                  <div class="bars">
+                    <span class="bar capek"><strong>68.1</strong></span>
+                    <span class="bar model-a"><strong>51.0</strong></span>
+                    <span class="bar model-b"><strong>53.5</strong></span>
+                    <span class="bar model-c"><strong>62.7</strong></span>
+                    <span class="bar model-d"><strong>55.2</strong></span>
+                    <span class="bar model-e"><strong>59.9</strong></span>
+                  </div>
+                  <p>Guidance</p>
+                </div>
+                <div class="domain-group domain-state" style="--v1: 52.5%; --v2: 39.0%; --v3: 29.8%; --v4: 27.2%; --v5: 32.3%; --v6: 27.7%">
+                  <div class="bars">
+                    <span class="bar capek"><strong>61.5</strong></span>
+                    <span class="bar model-a"><strong>53.4</strong></span>
+                    <span class="bar model-b"><strong>47.9</strong></span>
+                    <span class="bar model-c"><strong>46.3</strong></span>
+                    <span class="bar model-d"><strong>49.4</strong></span>
+                    <span class="bar model-e"><strong>46.6</strong></span>
+                  </div>
+                  <p>State</p>
+                </div>
+                <div class="domain-group domain-general" style="--v1: 88.2%; --v2: 54.8%; --v3: 60.7%; --v4: 55.5%; --v5: 69.7%; --v6: 71.3%">
+                  <div class="bars">
+                    <span class="bar capek"><strong>82.9</strong></span>
+                    <span class="bar model-a"><strong>62.9</strong></span>
+                    <span class="bar model-b"><strong>66.4</strong></span>
+                    <span class="bar model-c"><strong>63.3</strong></span>
+                    <span class="bar model-d"><strong>71.8</strong></span>
+                    <span class="bar model-e"><strong>72.8</strong></span>
+                  </div>
+                  <p>General</p>
+                </div>
+              </div>
+            </div>
+            <figcaption>
+              Domain means are replotted from the paper figure with the lower axis cropped at 30
+              to emphasize score separation in the release poster.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="content-section statebench-section" id="statebench" aria-labelledby="statebench-title">
+        <div class="section-heading">
+          <p class="eyebrow">Capek-StateBench</p>
+          <h2 id="statebench-title">A held-out benchmark for verifying execution state and task progress.</h2>
+        </div>
+        <div class="statebench-samples">
+          <article class="statebench-sample-card">
+            <video autoplay loop muted playsinline controls>
+              <source src="assets/samples/statebench_showcase/psv_support_trash_floor.mp4" type="video/mp4" />
+            </video>
+            <div>
+              <p class="label">PSV / Video</p>
+              <h3>Verify support relation.</h3>
+              <p>
+                <span>Question: Can we verify that the trash can is on the floor?</span>
+                <span>GT: <strong>yes</strong>.</span>
+              </p>
+            </div>
+          </article>
+          <article class="statebench-sample-card">
+            <video autoplay loop muted playsinline controls>
+              <source src="assets/samples/statebench_showcase/psv_bottom_cabinet.mp4" type="video/mp4" />
+            </video>
+            <div>
+              <p class="label">PSV / Video</p>
+              <h3>Judge final object state.</h3>
+              <p>
+                <span>Question: Is the bottom cabinet door open or closed?</span>
+                <span>GT: <strong>closed</strong>.</span>
+              </p>
+            </div>
+          </article>
+          <article class="statebench-sample-card">
+            <img src="assets/samples/statebench_showcase/tsv_sort_vegetables.gif" alt="StateBench-T task-condition progress example" />
+            <div>
+              <p class="label">TSV / Task condition</p>
+              <h3>Estimate task progress.</h3>
+              <p>
+                <span>Question: Sort vegetables into three mixing bowls by type.</span>
+                <span>GT: <strong>{"progress": 46.15, "next_action": "pick up the leek from the wicker basket"}</strong>.</span>
+              </p>
+            </div>
+          </article>
+          <article class="statebench-sample-card">
+            <img src="assets/samples/statebench_showcase/tsv_pineapple_skill.gif" alt="StateBench-T primitive-skill progress example" />
+            <div>
+              <p class="label">TSV / Primitive skill</p>
+              <h3>Predict the next action.</h3>
+              <p>
+                <span>Question: Pour diced pineapple into the bowl, then return the cutting board to the sink.</span>
+                <span>GT: <strong>{"progress": 50, "next_action": "pour the diced pineapple from the cutting board into the bowl"}</strong>.</span>
+              </p>
+            </div>
+          </article>
+        </div>
+        <div class="statebench-feature">
+          <figure class="inline-figure statebench-figure">
+            <img src="assets/figures/state_data_construction.png" alt="StateBench data construction from execution checkpoints" />
+            <figcaption>
+              State Verification examples are anchored at primitive, skill, and task checkpoints.
+              The model sees only causal visual evidence at the selected checkpoint.
+            </figcaption>
+          </figure>
+          <div class="statebench-copy">
+            <p class="label">Why this benchmark</p>
+            <h3>Most public suites do not ask whether execution actually reached the required state.</h3>
+            <p>
+              Capek-StateBench targets the verification side of embodied execution: observable
+              physical predicates, task progress, and the immediate next action needed to continue.
+              It is held out from specialist training and aligned with the State Verification objective.
+            </p>
+          </div>
+        </div>
+        <div class="statebench-grid">
+          <article class="statebench-card">
+            <span>StateBench-P</span>
+            <h3>Physical-state verification</h3>
+            <p>
+              500 examples evaluate object states and relations from a single image, short clip,
+              or key-frame set. Predictions are normalized and scored by exact match.
+            </p>
+          </article>
+          <article class="statebench-card">
+            <span>StateBench-T</span>
+            <h3>Task-state verification</h3>
+            <p>
+              500 examples evaluate progress and next-step prediction from a causal visual prefix:
+              213 task-condition records and 287 primitive-skill records.
+            </p>
+          </article>
+          <article class="statebench-card">
+            <span>Scoring</span>
+            <h3>Progress + action</h3>
+            <p>
+              Physical scores use exact match. Task scores combine progress accuracy and next-action
+              semantic matching:
+            </p>
+            <div class="formula-block" aria-label="s p equals max zero one minus absolute predicted progress minus reference progress over twenty five">
+              <span class="math-var"><var>s</var><sub>p</sub></span>
+              <span class="formula-equals">=</span>
+              <span>max</span>
+              <span class="formula-paren">(</span>
+              <span>0, 1 -</span>
+              <span class="formula-fraction">
+                <span class="formula-numerator">|<var>p&#770;</var> - <var>p</var>|</span>
+                <span class="formula-denominator">25</span>
+              </span>
+              <span class="formula-paren">)</span>
+            </div>
+            <div class="formula-block" aria-label="s T equals five s p plus four s a divided by nine">
+              <span class="math-var"><var>s</var><sub>T</sub></span>
+              <span class="formula-equals">=</span>
+              <span class="formula-fraction">
+                <span class="formula-numerator">
+                  5<span class="math-var"><var>s</var><sub>p</sub></span> + 4<span class="math-var"><var>s</var><sub>a</sub></span>
+                </span>
+                <span class="formula-denominator">9</span>
+              </span>
+            </div>
+            <p class="formula-note">
+              s_p: progress score; p&#770;: predicted progress; p: reference progress; s_a: next-action semantic exact match; s_T: task-track score.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section static-qa-section" id="static-qa" aria-labelledby="static-qa-title">
+        <div class="section-heading">
+          <p class="eyebrow">Static QA samples</p>
+          <h2 id="static-qa-title">Single-turn capability checks with structured outputs.</h2>
+        </div>
+
+        <div class="static-qa-dashboard">
+          <article class="sample-dashboard-card static-qa-card">
+            <div class="static-sample-content">
+              <div class="static-sample-main">
+                <div class="sample-viewer" id="sampleViewer">
+                  <img id="sampleImage" src="assets/samples/static_qa/statebench_psv_lighter.png" alt="Selected qualitative sample" />
+                </div>
+                <div class="sample-panel">
+                  <div class="sample-panel-head">
+                    <p class="label" id="sampleFamily">State Verification</p>
+                    <h3 id="sampleTitle">Physical-state verification</h3>
+                  </div>
+                  <div class="sample-columns">
+                    <article class="sample-column">
+                      <p class="label">Question</p>
+                      <p id="sampleQuestion" class="sample-field">Based on observations, is the lighter on or off?</p>
+                    </article>
+                    <article class="sample-column">
+                      <p class="label">Answer</p>
+                      <p id="sampleModelAnswer" class="sample-field">off</p>
+                    </article>
+                    <article class="sample-column">
+                      <p class="label">GT</p>
+                      <p id="sampleGt" class="sample-field">off</p>
+                    </article>
+                  </div>
+                  <p id="sampleDetail" class="sample-detail">
+                    The model tracks the lighter across chronological observations and returns the final state label.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <aside class="sample-selector-column" aria-label="Static QA sample selector">
+            <p class="label">Static QA selector</p>
+            <div class="sample-grid" id="sampleGrid" aria-label="Sample selector"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="content-section" id="method" aria-labelledby="method-title">
+        <div class="section-heading">
+          <p class="eyebrow">Execution-centric taxonomy and method</p>
+          <h2 id="method-title">Capek 0.5 turns embodied execution into trainable, verifiable capabilities.</h2>
+        </div>
+        <div class="overview-story">
+          <figure class="overview-main-figure">
+            <img
+              src="assets/figures/execution_centric_overview.png"
+              alt="Execution-centric capability overview"
+            />
+            <figcaption>
+              <strong>Execution-centric capability view.</strong> Spatial, Temporal, Guidance, and State
+              requirements recur across an observation-reasoning-action loop rather than
+              forming mutually exclusive stages.
+            </figcaption>
+          </figure>
+
+          <div class="story-copy story-opening">
+            <p class="label">Why this taxonomy</p>
+            <h3>Execution is a loop, so training has to cover the loop.</h3>
+            <p>
+              A robot does not just answer what is in an image. It must localize objects,
+              understand what changed, choose grounded actions, and verify whether the
+              world reached the required state after acting.
+            </p>
+            <p>
+              Capek 0.5 therefore organizes post-training around four capabilities that
+              repeatedly appear during execution, then turns each capability into
+              structured, checkable supervision.
+            </p>
+          </div>
+
+          <div class="capability-contract-row">
+            <figure class="inline-figure contract-figure">
+              <img src="assets/figures/data_contract_showcase.png" alt="Representative data contracts" />
+              <figcaption>Representative contracts for verifiable supervision.</figcaption>
+            </figure>
+            <div class="capability-grid story-capabilities">
+              <article class="capability-card">
+                <span class="capability-index">01</span>
+                <h3>See where execution can happen</h3>
+                <p><strong>Spatial reasoning</strong> handles geometry, object relations, viewpoint changes, distance, depth, and placement feasibility.</p>
+              </article>
+              <article class="capability-card">
+                <span class="capability-index">02</span>
+                <h3>Track what changes over time</h3>
+                <p><strong>Temporal understanding</strong> handles event ordering, temporal grounding, long videos, and observation-to-observation changes.</p>
+              </article>
+              <article class="capability-card">
+                <span class="capability-index">03</span>
+                <h3>Turn intent into action targets</h3>
+                <p><strong>Action guidance</strong> grounds language into referents, points, affordance regions, and ordered image-space trajectories.</p>
+              </article>
+              <article class="capability-card">
+                <span class="capability-index">04</span>
+                <h3>Verify whether execution succeeded</h3>
+                <p><strong>State verification</strong> checks physical predicates, progress, next actions, and task-state completion.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="story-supervision">
+            <div class="story-copy">
+              <p class="label">Make outputs verifiable</p>
+              <h3>Records are organized by execution role and output contract.</h3>
+              <p>
+                Each capability uses output formats that can be parsed and scored:
+                choices for spatial judgments, time intervals for events, coordinates and
+                trajectories for guidance, and JSON-style predicates or progress fields
+                for state verification.
+              </p>
+              <p>
+                This lets each specialist learn from feedback that matches the thing execution
+                actually needs: a location, a temporal relation, an action target, or a
+                state decision.
+              </p>
+            </div>
+            <div class="overview-figures">
+              <figure class="inline-figure data-composition-figure" aria-label="Capek 0.5 data composition">
+                <div class="data-composition-chart">
+                  <div class="data-donut-wrap">
+                    <svg class="data-donut" viewBox="0 0 520 520" role="img" aria-label="Capability-oriented data inventory donut chart">
+                      <circle class="donut-guide" cx="260" cy="260" r="142"></circle>
+                      <g class="donut-inner" transform="rotate(-115 260 260)">
+                        <circle class="donut-segment data-segment-spatial" data-data-family="spatial" cx="260" cy="260" r="142" pathLength="100" stroke-dasharray="25.9 74.1" stroke-dashoffset="0"></circle>
+                        <circle class="donut-segment data-segment-temporal" data-data-family="temporal" cx="260" cy="260" r="142" pathLength="100" stroke-dasharray="28.6 71.4" stroke-dashoffset="-26.5"></circle>
+                        <circle class="donut-segment data-segment-guidance" data-data-family="guidance" cx="260" cy="260" r="142" pathLength="100" stroke-dasharray="29.7 70.3" stroke-dashoffset="-55.7"></circle>
+                        <circle class="donut-segment data-segment-state" data-data-family="state" cx="260" cy="260" r="142" pathLength="100" stroke-dasharray="13.4 86.6" stroke-dashoffset="-86"></circle>
+                      </g>
+                      <g class="donut-outer" transform="rotate(-115 260 260)">
+                        <circle class="donut-segment data-segment-spatial data-shade-1" data-data-family="spatial" data-data-detail="spatial-direction" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="6.15 93.85" stroke-dashoffset="0"></circle>
+                        <circle class="donut-segment data-segment-spatial data-shade-2" data-data-family="spatial" data-data-detail="spatial-cross-view" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="5.96 94.04" stroke-dashoffset="-6.55"></circle>
+                        <circle class="donut-segment data-segment-spatial data-shade-3" data-data-family="spatial" data-data-detail="spatial-relations" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="6.07 93.93" stroke-dashoffset="-12.91"></circle>
+                        <circle class="donut-segment data-segment-spatial data-shade-4" data-data-family="spatial" data-data-detail="spatial-navigation" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="4.03 95.97" stroke-dashoffset="-19.38"></circle>
+                        <circle class="donut-segment data-segment-spatial data-shade-5" data-data-family="spatial" data-data-detail="spatial-other" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="2.30 97.70" stroke-dashoffset="-23.81"></circle>
+                        <circle class="donut-segment data-segment-temporal data-shade-1" data-data-family="temporal" data-data-detail="temporal-structured" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="17.13 82.87" stroke-dashoffset="-26.5"></circle>
+                        <circle class="donut-segment data-segment-temporal data-shade-2" data-data-family="temporal" data-data-detail="temporal-grounding" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="3.58 96.42" stroke-dashoffset="-44.03"></circle>
+                        <circle class="donut-segment data-segment-temporal data-shade-3" data-data-family="temporal" data-data-detail="temporal-open" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="7.32 92.68" stroke-dashoffset="-48.01"></circle>
+                        <circle class="donut-segment data-segment-guidance data-shade-1" data-data-family="guidance" data-data-detail="guidance-grounding" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="11.84 88.16" stroke-dashoffset="-55.7"></circle>
+                        <circle class="donut-segment data-segment-guidance data-shade-2" data-data-family="guidance" data-data-detail="guidance-affordance" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="7.31 92.69" stroke-dashoffset="-67.94"></circle>
+                        <circle class="donut-segment data-segment-guidance data-shade-3" data-data-family="guidance" data-data-detail="guidance-trajectory" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="3.16 96.84" stroke-dashoffset="-75.65"></circle>
+                        <circle class="donut-segment data-segment-guidance data-shade-4" data-data-family="guidance" data-data-detail="guidance-task" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="6.39 93.61" stroke-dashoffset="-79.21"></circle>
+                        <circle class="donut-segment data-segment-state data-shade-1" data-data-family="state" data-data-detail="state-psv" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="5.92 94.08" stroke-dashoffset="-86"></circle>
+                        <circle class="donut-segment data-segment-state data-shade-2" data-data-family="state" data-data-detail="state-pve" cx="260" cy="260" r="207" pathLength="100" stroke-dasharray="7.24 92.76" stroke-dashoffset="-92.32"></circle>
+                      </g>
+                      <g class="donut-labels">
+                        <text x="360" y="166">26.5%</text>
+                        <text x="401" y="330">29.2%</text>
+                        <text x="174" y="372">30.3%</text>
+                        <text x="122" y="220">14.0%</text>
+                      </g>
+                      <g class="donut-center">
+                        <text x="260" y="248">316,736</text>
+                        <text x="260" y="278">train-side candidate</text>
+                        <text x="260" y="296">view rows</text>
+                        <text x="260" y="330">272,541 non-State</text>
+                        <text x="260" y="347">+ 44,195 State</text>
+                      </g>
+                    </svg>
+                    <p class="data-note">
+                      State candidates: 20,000 PSV rows; 24,195 PVE progress-value-estimation rows.
+                      Counts describe the candidate inventory, not the run-specific training mixture or exposure.
+                    </p>
+                  </div>
+                  <div class="data-breakdown" aria-label="Data composition breakdown">
+                    <section class="data-family data-family-spatial" data-data-family="spatial">
+                      <h4><span></span>Spatial · Perception &amp; reasoning <strong>84.0K · 26.5%</strong></h4>
+                      <p data-data-family="spatial" data-data-detail="spatial-direction"><span></span>Direction / orientation <strong>20,730 · 24.7%</strong></p>
+                      <p data-data-family="spatial" data-data-detail="spatial-cross-view"><span></span>Multi- / cross-view <strong>20,194 · 24.0%</strong></p>
+                      <p data-data-family="spatial" data-data-detail="spatial-relations"><span></span>Relations / metric <strong>20,499 · 24.4%</strong></p>
+                      <p data-data-family="spatial" data-data-detail="spatial-navigation"><span></span>Navigation / scene <strong>14,028 · 16.7%</strong></p>
+                      <p data-data-family="spatial" data-data-detail="spatial-other"><span></span>Other verified tasks <strong>8,576 · 10.2%</strong></p>
+                    </section>
+                    <section class="data-family data-family-temporal" data-data-family="temporal">
+                      <h4><span></span>Temporal · Events &amp; change <strong>92.6K · 29.2%</strong></h4>
+                      <p data-data-family="temporal" data-data-detail="temporal-structured"><span></span>Structured video reasoning <strong>55,531 · 60.0%</strong></p>
+                      <p data-data-family="temporal" data-data-detail="temporal-grounding"><span></span>Temporal / ST grounding <strong>12,594 · 13.6%</strong></p>
+                      <p data-data-family="temporal" data-data-detail="temporal-open"><span></span>Open video reasoning <strong>24,441 · 26.4%</strong></p>
+                    </section>
+                    <section class="data-family data-family-guidance" data-data-family="guidance">
+                      <h4><span></span>Guidance · Targets &amp; paths <strong>95.9K · 30.3%</strong></h4>
+                      <p data-data-family="guidance" data-data-detail="guidance-grounding"><span></span>Grounding <strong>38,767 · 40.4%</strong></p>
+                      <p data-data-family="guidance" data-data-detail="guidance-affordance"><span></span>Affordance <strong>24,408 · 25.4%</strong></p>
+                      <p data-data-family="guidance" data-data-detail="guidance-trajectory"><span></span>Trajectory <strong>11,277 · 11.8%</strong></p>
+                      <p data-data-family="guidance" data-data-detail="guidance-task"><span></span>Task understanding <strong>21,496 · 22.4%</strong></p>
+                    </section>
+                    <section class="data-family data-family-state" data-data-family="state">
+                      <h4><span></span>State · Physical &amp; task state <strong>44.2K · 14.0%</strong></h4>
+                      <p data-data-family="state" data-data-detail="state-psv"><span></span>PSV · Physical-state verification <strong>20,000 · 45.3%</strong></p>
+                      <p data-data-family="state" data-data-detail="state-pve"><span></span>PVE · Progress-value estimation <strong>24,195 · 54.7%</strong></p>
+                    </section>
+                  </div>
+                </div>
+                <figcaption>Capability-oriented data inventory grouped by execution role.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="story-consolidation">
+            <div class="story-copy">
+              <p class="label">Specialize during training</p>
+              <h3>Four same-origin specialists acquire focused behaviors.</h3>
+              <p>
+                Spatial, Temporal, Guidance, and State specialists start from the same
+                backbone but receive capability-specific data, parsers, and reward
+                geometry. The separation keeps feedback precise while capabilities are
+                being acquired.
+              </p>
+            </div>
+            <div class="expert-grid">
+              <article class="expert-card">
+                <div>
+                  <span>Spatial specialist</span>
+                  <h3>Geometry and relations</h3>
+                  <p>Trains on relations, metric reasoning, multi-view reasoning, and scene-level spatial judgments.</p>
+                </div>
+              </article>
+              <article class="expert-card">
+                <div>
+                  <span>Temporal specialist</span>
+                  <h3>Events over time</h3>
+                  <p>Learns event ordering, temporal localization, video QA, and long-video reasoning.</p>
+                </div>
+              </article>
+              <article class="expert-card">
+                <div>
+                  <span>Guidance specialist</span>
+                  <h3>Targets and trajectories</h3>
+                  <p>Optimizes boxes, points, regions, affordances, and ordered image-space paths.</p>
+                </div>
+              </article>
+              <article class="expert-card">
+                <div>
+                  <span>State specialist</span>
+                  <h3>Predicates and progress</h3>
+                  <p>Checks state labels, binary predicates, progress values, next actions, and JSON validity.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="figure-feature">
+            <img
+              src="assets/figures/expert_consolidation_pipeline.png"
+              alt="Specialist consolidation pipeline for Capek 0.5"
+            />
+            <div class="figure-copy">
+              <p class="label">Merge for deployment</p>
+              <h3>Specialists are folded back into one inference-time model.</h3>
+              <p>
+                TIES initializes a unified student in weight space, then routed MOPD
+                consolidates student-generated prefixes with the responsible frozen specialist. The deployed
+                checkpoint exposes one autoregressive interface while retaining behaviors
+                acquired by focused specialists.
+              </p>
+            </div>
+          </div>
+
+          <div class="method-steps">
+            <article>
+              <span>Takeaway 1</span>
+              <h3>Separate capability acquisition</h3>
+              <p>Train four same-origin specialists independently with capability-aligned data, objectives, and rewards.</p>
+            </article>
+            <article>
+              <span>Takeaway 2</span>
+              <h3>Initialize with TIES</h3>
+              <p>Merge specialist task vectors in weight space to initialize a unified student checkpoint.</p>
+            </article>
+            <article>
+              <span>Takeaway 3</span>
+              <h3>Consolidate with routed MOPD</h3>
+              <p>Route student-generated prefixes to the responsible frozen specialist during training; inference uses one autoregressive model.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" id="results" aria-labelledby="results-title">
+        <div class="section-heading">
+          <p class="eyebrow">Core benchmark leaderboard</p>
+          <h2 id="results-title">Execution-facing benchmark results across capability families and model scales.</h2>
+        </div>
+        <div class="results-tabs" role="tablist" aria-label="Result tracks">
+          <button class="tab-button active" type="button" data-track="large" role="tab" aria-selected="true">
+            35B-A3B
+          </button>
+          <button class="tab-button" type="button" data-track="compact" role="tab" aria-selected="false">
+            2B
+          </button>
+        </div>
+        <div class="rank-grid" id="rankGrid" aria-live="polite"></div>
+        <div class="table-toolbar">
+          <div>
+            <p class="label">Benchmark leaderboard</p>
+            <h3 id="benchmarkTableTitle">35B-A3B core benchmark leaderboard</h3>
+          </div>
+          <div class="benchmark-scope-toggle" role="group" aria-label="Benchmark row scope">
+            <button class="scope-button active" type="button" data-scope="selected" aria-pressed="true">Selected 15</button>
+            <button class="scope-button" type="button" data-scope="all" aria-pressed="false">All benchmarks</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="benchmark-table" id="benchmarkTable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="results-note">
+          The default view keeps 15 high-signal rows; switch to all benchmarks for the full matrix. Metrics are shown next to benchmark names;
+          the Capek column is pinned first, with best scores bolded and second-best scores underlined.
+        </p>
+
+        <div class="agentic-results" aria-labelledby="agentic-results-title">
+          <div class="section-heading compact-heading">
+            <p class="eyebrow">35B-A3B agentic evaluation</p>
+            <h2 id="agentic-results-title">Embodied agent evaluation in simulated environments.</h2>
+          </div>
+          <div class="agentic-grid">
+            <article class="agentic-card">
+              <div class="table-toolbar static-toolbar">
+                <div>
+                  <p class="label">EmbodiedBench</p>
+                  <h3>Average task success on EB-HAB and EB-ALF</h3>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table class="benchmark-table agentic-compact-table">
+                  <thead>
+                    <tr>
+                      <th>Model</th>
+                      <th>EB-HAB Avg.</th>
+                      <th>EB-ALF Avg.</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Embodied-R1.5 8B</td><td>21.7</td><td>14.7</td></tr>
+                    <tr><td>RynnBrain1.1-9B</td><td>44.7</td><td>35.3</td></tr>
+                    <tr><td>RoboBrain2.0-32B</td><td>38.3</td><td>25.0</td></tr>
+                    <tr><td>RynnBrain-30B-A3B</td><td>26.7</td><td>26.3</td></tr>
+                    <tr><td>Qwen3.6-35B-A3B</td><td class="second-cell">46.0</td><td class="second-cell">50.7</td></tr>
+                    <tr class="capek-row"><td>Capek0.5 35B-A3B</td><td class="best-cell">63.0</td><td class="best-cell">55.3</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+            <article class="agentic-card">
+              <div class="table-toolbar static-toolbar">
+                <div>
+                  <p class="label">VIGIL</p>
+                  <h3>Primary score, world completion, and benchmark success</h3>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table class="benchmark-table agentic-compact-table">
+                  <thead>
+                    <tr>
+                      <th>Model</th>
+                      <th>Score</th>
+                      <th>W</th>
+                      <th>B</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Embodied-R1.5 8B</td><td>31.7</td><td>33.4</td><td>31.7</td></tr>
+                    <tr><td>RynnBrain1.1-9B</td><td>29.1</td><td>34.3</td><td>23.4</td></tr>
+                    <tr><td>RoboBrain2.0-32B</td><td class="best-cell">38.1</td><td>36.2</td><td class="best-cell">34.3</td></tr>
+                    <tr><td>RynnBrain-30B-A3B</td><td>17.2</td><td>22.2</td><td>13.5</td></tr>
+                    <tr><td>Qwen3.6-35B-A3B</td><td>30.2</td><td class="second-cell">37.4</td><td>28.8</td></tr>
+                    <tr class="capek-row"><td>Capek0.5 35B-A3B</td><td class="second-cell">36.4</td><td class="best-cell">38.6</td><td class="second-cell">32.2</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section demo-section" id="demo" aria-labelledby="demo-title">
+        <div class="section-heading">
+          <p class="eyebrow">Qualitative samples</p>
+          <h2 id="demo-title">Sample rollouts across EmbodiedBench and VIGIL.</h2>
+        </div>
+
+        <div class="rollout-showcase-grid">
+          <article class="sample-dashboard-card rollout-sample-card embodied-sample-card" data-rollout-key="embodied-alf" aria-labelledby="embodied-rollout-title">
+            <div class="sample-subheading">
+              <p class="eyebrow">EmbodiedBench sample</p>
+              <h3 id="embodied-rollout-title">Long-horizon manipulation with 20 successful steps.</h3>
+            </div>
+            <div class="rollout-block embodied-block compact-rollout">
+              <div class="rollout-viewer">
+                <img
+                  data-rollout-image
+                  src="assets/samples/embodied_showcase/episode_10_step_0.png"
+                  alt="Selected EmbodiedBench rollout frame"
+                />
+              </div>
+              <div class="rollout-panel">
+                <div class="rollout-header">
+                  <div>
+                    <p class="label">EmbodiedBench / ALF episode 10</p>
+                    <h3 data-rollout-step-title>Start</h3>
+                  </div>
+                  <button class="button small" type="button" data-rollout-play>Pause</button>
+                </div>
+                <div class="rollout-question">
+                  <p class="label">Question</p>
+                  <p>Pick up knife, slice apple, put knife in bowl, heat slice of apple in microwave, put apple slice on table.</p>
+                </div>
+                <p class="rollout-command" data-rollout-command>instruction issued</p>
+                <p class="rollout-outcome" data-rollout-outcome>
+                  The rollout starts from the task instruction before any environment-changing action.
+                </p>
+                <input
+                  class="rollout-range"
+                  type="range"
+                  min="0"
+                  max="20"
+                  value="0"
+                  aria-label="Select EmbodiedBench rollout step"
+                  data-rollout-range
+                />
+                <div class="step-buttons compact-steps" data-rollout-step-buttons aria-label="EmbodiedBench rollout steps"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="sample-dashboard-card rollout-sample-card embodied-sample-card" data-rollout-key="embodied-habitat">
+            <div class="sample-subheading">
+              <p class="eyebrow">EmbodiedBench sample</p>
+              <h3>Goal-conditioned object retrieval in Habitat.</h3>
+            </div>
+            <div class="rollout-block embodied-block compact-rollout">
+              <div class="rollout-viewer">
+                <img
+                  data-rollout-image
+                  src="assets/samples/embodied_showcase/episode_8_step_0.png"
+                  alt="Selected EmbodiedBench Habitat rollout frame"
+                />
+              </div>
+              <div class="rollout-panel">
+                <div class="rollout-header">
+                  <div>
+                    <p class="label">EmbodiedBench / Habitat visual episode 8</p>
+                    <h3 data-rollout-step-title>Start</h3>
+                  </div>
+                  <button class="button small" type="button" data-rollout-play>Pause</button>
+                </div>
+                <div class="rollout-question">
+                  <p class="label">Question</p>
+                  <p>Retrieve a purple fruit and place it in the sink.</p>
+                </div>
+                <p class="rollout-command" data-rollout-command>instruction issued</p>
+                <p class="rollout-outcome" data-rollout-outcome>
+                  The rollout starts with a target object and destination but no executed action.
+                </p>
+                <input
+                  class="rollout-range"
+                  type="range"
+                  min="0"
+                  max="8"
+                  value="0"
+                  aria-label="Select EmbodiedBench Habitat rollout step"
+                  data-rollout-range
+                />
+                <div class="step-buttons compact-steps" data-rollout-step-buttons aria-label="EmbodiedBench Habitat rollout steps"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="sample-dashboard-card rollout-sample-card vigil-sample-card" data-rollout-key="vigil-toaster">
+            <div class="sample-subheading">
+              <p class="eyebrow">VIGIL sample</p>
+              <h3>Closed-loop execution with step-level action selection.</h3>
+            </div>
+            <div class="rollout-block vigil-rollout-block compact-rollout">
+              <div class="rollout-viewer">
+                <img
+                  data-rollout-image
+                  src="assets/vigil_showcase/toaster_step_01.png"
+                  alt="Selected VIGIL rollout frame"
+                />
+              </div>
+              <div class="rollout-panel">
+                <div class="rollout-header">
+                  <div>
+                    <p class="label">VIGIL / sample-627</p>
+                    <h3 data-rollout-step-title>Step 1</h3>
+                  </div>
+                  <button class="button small" type="button" data-rollout-play>Pause</button>
+                </div>
+                <div class="rollout-question">
+                  <p class="label">Question</p>
+                  <p>Find the toaster, turn it on, then report success.</p>
+                </div>
+                <p class="rollout-command" data-rollout-command>navigate forward, 2</p>
+                <p class="rollout-outcome" data-rollout-outcome>
+                  The agent moves toward the table; no target interaction has been credited yet.
+                </p>
+                <input
+                  class="rollout-range"
+                  type="range"
+                  min="0"
+                  max="9"
+                  value="0"
+                  aria-label="Select rollout step"
+                  data-rollout-range
+                />
+                <div class="step-buttons" data-rollout-step-buttons aria-label="Rollout steps"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="sample-dashboard-card rollout-sample-card vigil-sample-card" data-rollout-key="vigil-laptop">
+            <div class="sample-subheading">
+              <p class="eyebrow">VIGIL sample</p>
+              <h3>Sequential rearrangement with terminal success reporting.</h3>
+            </div>
+            <div class="rollout-block vigil-rollout-block compact-rollout">
+              <div class="rollout-viewer">
+                <img
+                  data-rollout-image
+                  src="assets/vigil_showcase/laptop_step_00.png"
+                  alt="Selected VIGIL laptop rollout frame"
+                />
+              </div>
+              <div class="rollout-panel">
+                <div class="rollout-header">
+                  <div>
+                    <p class="label">VIGIL / sample-813</p>
+                    <h3 data-rollout-step-title>Start</h3>
+                  </div>
+                  <button class="button small" type="button" data-rollout-play>Pause</button>
+                </div>
+                <div class="rollout-question">
+                  <p class="label">Question</p>
+                  <p>Pick up the laptop, place it on the coffee table, then report success.</p>
+                </div>
+                <p class="rollout-command" data-rollout-command>instruction issued</p>
+                <p class="rollout-outcome" data-rollout-outcome>
+                  The laptop is still on the armchair before any environment-changing action.
+                </p>
+                <input
+                  class="rollout-range"
+                  type="range"
+                  min="0"
+                  max="11"
+                  value="0"
+                  aria-label="Select VIGIL laptop rollout step"
+                  data-rollout-range
+                />
+                <div class="step-buttons" data-rollout-step-buttons aria-label="VIGIL laptop rollout steps"></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section citation-section" id="citation" aria-labelledby="citation-title">
+        <div class="section-heading">
+          <p class="eyebrow">Citation</p>
+          <h2 id="citation-title">Citation</h2>
+        </div>
+        <div class="citation-box">
+          <pre id="citationText">@misc{chen2026capek05executioncentricvisionlanguage,
+  title={Capek 0.5: An Execution-Centric Vision-Language Model for Embodied Intelligence},
+  author={Ying Chen and Weizhen Li and Zhe Hu and Zhenjiang Li and Rui Jiang and Zhifeng Gu and Lihuang Fang and Jiangping Liu and Lei Yi and Jie Chen},
+  year={2026},
+  eprint={2608.06756},
+  archivePrefix={arXiv},
+  primaryClass={cs.AI},
+  url={https://arxiv.org/abs/2608.06756},
+}</pre>
+          <button class="button primary" type="button" id="copyCitationButton">Copy BibTeX</button>
+        </div>
+      </section>
+    </main>
+
+    <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close enlarged image">Close</button>
+      <figure class="lightbox-figure">
+        <img id="lightboxImage" src="" alt="" />
+        <figcaption id="lightboxCaption"></figcaption>
+      </figure>
+    </div>
+
+    <footer class="site-footer">
+      <span>XPENG Robotics</span>
+      <a href="#top">Back to top</a>
+    </footer>
+
+    <script src="app.js?v=20260810-responsive-layout"></script>
+  </body>
+</html>
