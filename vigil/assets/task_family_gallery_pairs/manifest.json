@@ -1,0 +1,174 @@
+[
+  {
+    "family": "S1",
+    "name": "Pixel Grounding",
+    "episode": "data/episodes/ithor_fp224_s1_pixel_grounding_medium_laptop_ground_001/episode.json",
+    "instruction": "Select the laptop in the image, then report success once you have selected the correct target.",
+    "frames": [
+      {
+        "key": "input",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/S1_input.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/S1_input_annotated.png",
+        "label": "input RGB"
+      },
+      {
+        "key": "selected_target",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/S1_selected_target.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/S1_selected_target_annotated.png",
+        "label": "select target"
+      }
+    ]
+  },
+  {
+    "family": "S2",
+    "name": "Distance Approach",
+    "episode": "data/episodes/ithor_fp213_s2_distance_approach_easy_houseplant_approach_001/episode.json",
+    "instruction": "Move close to the houseplant until you reach interaction range, then report success once you are close enough.",
+    "frames": [
+      {
+        "key": "far",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/S2_far.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/S2_far_annotated.png",
+        "label": "target visible, far"
+      },
+      {
+        "key": "near",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/S2_near.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/S2_near_annotated.png",
+        "label": "after approach"
+      }
+    ]
+  },
+  {
+    "family": "S3",
+    "name": "Active View Search",
+    "episode": "data/episodes/ithor_fp7_s3_view_search_hard_shelvingunit_find_001/episode.json",
+    "instruction": "Search for the shelf and report success once it becomes visible.",
+    "frames": [
+      {
+        "key": "before_search",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/S3_before_search.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/S3_before_search_annotated.png",
+        "label": "before search"
+      },
+      {
+        "key": "target_visible",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/S3_target_visible.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/S3_target_visible_annotated.png",
+        "label": "target visible"
+      }
+    ]
+  },
+  {
+    "family": "S4",
+    "name": "State Verification",
+    "episode": "data/episodes/ithor_fp224_s4_state_recognition_na_laptop_off_verify_toggled_001/episode.json",
+    "instruction": "Check whether the laptop is on or off, then report the observed state as on or off.",
+    "frames": [
+      {
+        "key": "state_a",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/S4_state_a.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/S4_state_a_annotated.png",
+        "label": "verify state"
+      },
+      {
+        "key": "state_b",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/S4_state_b.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/S4_state_b_annotated.png",
+        "label": "contrast state"
+      }
+    ]
+  },
+  {
+    "family": "T1",
+    "name": "Grounded Interaction",
+    "episode": "data/episodes/ithor_fp209_t1_grounded_interaction_medium_drawer_open_access_001/episode.json",
+    "instruction": "Open the drawer, then report success once it is open.",
+    "frames": [
+      {
+        "key": "before_action",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/T1_before_action.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/T1_before_action_annotated.png",
+        "label": "click visible target"
+      },
+      {
+        "key": "after_action",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/T1_after_action.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/T1_after_action_annotated.png",
+        "label": "after native open"
+      }
+    ]
+  },
+  {
+    "family": "T2",
+    "name": "Search Then Interact",
+    "episode": "data/episodes/ithor_floorplan28_physics_T2-search-then-interact_medium_microwave_open_300/episode.json",
+    "instruction": "Locate the microwave and open it—I think my soup is still inside.",
+    "frames": [
+      {
+        "key": "search_start",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/T2_search_start.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/T2_search_start_annotated.png",
+        "label": "search start"
+      },
+      {
+        "key": "target_found",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/T2_target_found.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/T2_target_found_annotated.png",
+        "label": "target found"
+      },
+      {
+        "key": "after_open",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/T2_after_open.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/T2_after_open_annotated.png",
+        "label": "after open"
+      }
+    ]
+  },
+  {
+    "family": "T3",
+    "name": "Sequential Manipulation",
+    "episode": "data/episodes/ithor_fp10_t3_sequential_manipulation_template_knife_container_cabinet_destination_sinkbasin_open_pick_place_001/episode.json",
+    "instruction": "Open the cabinet, take out the knife, place it on the sinkbasin, then report success once it is placed correctly.",
+    "frames": [
+      {
+        "key": "before_action",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/T3_before_action.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/T3_before_action_annotated.png",
+        "label": "subgoal: open container"
+      },
+      {
+        "key": "after_action",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/T3_after_action.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/T3_after_action_annotated.png",
+        "label": "container open"
+      }
+    ]
+  },
+  {
+    "family": "T4",
+    "name": "Constraint Resolving",
+    "episode": "data/episodes/ithor_fp2_t4_constraint_resolving_medium_kettle_open_access_001/episode.json",
+    "instruction": "Reach the kettle by taking a clear route around the obstruction, then open it and report success once it is open.",
+    "frames": [
+      {
+        "key": "blocked_start",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/T4_blocked_start.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/T4_blocked_start_annotated.png",
+        "label": "blocked / detour start"
+      },
+      {
+        "key": "after_detour",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/T4_after_detour.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/T4_after_detour_annotated.png",
+        "label": "after navigation"
+      },
+      {
+        "key": "after_resolve",
+        "raw": "docs/assets/task_family_gallery_pairs/raw/T4_after_resolve.png",
+        "annotated": "docs/assets/task_family_gallery_pairs/annotated/T4_after_resolve_annotated.png",
+        "label": "after resolving"
+      }
+    ]
+  }
+]

@@ -41,6 +41,8 @@ body {
 main {
   display: flex;
   flex-direction: column;
+  width: min(1440px, 100%);
+  margin: 0 auto;
 }
 
 img {
