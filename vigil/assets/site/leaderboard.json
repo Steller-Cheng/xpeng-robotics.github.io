@@ -1,0 +1,2062 @@
+{
+    "generated_from": [
+        "results/smoke_closed_20260430_000240",
+        "results/smoke_closed_20260430_095058",
+        "results/smoke_closed_20260430_163424",
+        "results/smoke_fuyao_20260428_223228",
+        "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934",
+        "https://xpeng-robotics.github.io/capek-0.5/"
+  ],
+  "family_order": [
+    "PG",
+    "DA",
+    "SV",
+    "VS",
+    "AI",
+    "SI",
+    "SM",
+    "CR"
+  ],
+  "rows": [
+    {
+      "model": "Gemini-3.1-Pro",
+      "model_id": "gemini-3.1-pro-preview",
+      "group": "closed",
+      "episodes": 1000,
+      "score": 57.8,
+      "all": {
+        "w": 57.7,
+        "b": 56.4,
+        "text": "57.7/56.4"
+      },
+      "delta": 1.3,
+      "families": {
+        "PG": {
+          "w": 92.0,
+          "b": 92.0,
+          "text": "92.0/92.0"
+        },
+        "DA": {
+          "w": 52.8,
+          "b": 52.0,
+          "text": "52.8/52.0"
+        },
+        "SV": {
+          "w": 95.2,
+          "b": 90.4,
+          "text": "95.2/90.4"
+        },
+        "VS": {
+          "w": 71.2,
+          "b": 71.2,
+          "text": "71.2/71.2"
+        },
+        "AI": {
+          "w": 62.4,
+          "b": 60.8,
+          "text": "62.4/60.8"
+        },
+        "SI": {
+          "w": 26.4,
+          "b": 25.6,
+          "text": "26.4/25.6"
+        },
+        "SM": {
+          "w": 43.2,
+          "b": 42.4,
+          "text": "43.2/42.4"
+        },
+        "CR": {
+          "w": 18.4,
+          "b": 16.8,
+          "text": "18.4/16.8"
+        }
+      },
+      "outcomes": {
+        "verified_success": 56.4,
+        "unsupported_commitment": 24.6,
+        "no_report": 18.4,
+        "invalid": 1.2,
+        "honest_fail": 0.0,
+        "missed_execution": 0.0
+      },
+      "source": "results/smoke_closed_20260430_095058/gemini-3.1-pro-preview/aggregate.json"
+    },
+    {
+      "model": "Qwen3.6-27B",
+      "model_id": "qwen3.6-27b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 40.1,
+      "all": {
+        "w": 46.7,
+        "b": 37.8,
+        "text": "46.7/37.8"
+      },
+      "delta": 8.9,
+      "families": {
+        "PG": {
+          "w": 87.2,
+          "b": 76.8,
+          "text": "87.2/76.8"
+        },
+        "DA": {
+          "w": 56.8,
+          "b": 55.2,
+          "text": "56.8/55.2"
+        },
+        "SV": {
+          "w": 93.6,
+          "b": 80.8,
+          "text": "93.6/80.8"
+        },
+        "VS": {
+          "w": 47.2,
+          "b": 44.0,
+          "text": "47.2/44.0"
+        },
+        "AI": {
+          "w": 54.4,
+          "b": 28.8,
+          "text": "54.4/28.8"
+        },
+        "SI": {
+          "w": 12.8,
+          "b": 7.2,
+          "text": "12.8/7.2"
+        },
+        "SM": {
+          "w": 14.4,
+          "b": 6.4,
+          "text": "14.4/6.4"
+        },
+        "CR": {
+          "w": 7.2,
+          "b": 3.2,
+          "text": "7.2/3.2"
+        }
+      },
+      "outcomes": {
+        "verified_success": 37.8,
+        "unsupported_commitment": 18.4,
+        "no_report": 43.1,
+        "invalid": 4.8,
+        "honest_fail": 0.2,
+        "missed_execution": 0.0
+      },
+      "source": "results/smoke_fuyao_20260428_223228/qwen3.6-27b/aggregate.json"
+    },
+    {
+      "model": "Doubao-Seed-1.8",
+      "model_id": "doubao-seed-1.8",
+      "group": "closed",
+      "episodes": 1000,
+      "score": 40.8,
+      "all": {
+        "w": 40.4,
+        "b": 37.1,
+        "text": "40.4/37.1"
+      },
+      "delta": 3.3,
+      "families": {
+        "PG": {
+          "w": 76.8,
+          "b": 75.2,
+          "text": "76.8/75.2"
+        },
+        "DA": {
+          "w": 44.8,
+          "b": 41.6,
+          "text": "44.8/41.6"
+        },
+        "SV": {
+          "w": 94.4,
+          "b": 80.0,
+          "text": "94.4/80.0"
+        },
+        "VS": {
+          "w": 29.6,
+          "b": 29.6,
+          "text": "29.6/29.6"
+        },
+        "AI": {
+          "w": 42.4,
+          "b": 37.6,
+          "text": "42.4/37.6"
+        },
+        "SI": {
+          "w": 5.6,
+          "b": 4.8,
+          "text": "5.6/4.8"
+        },
+        "SM": {
+          "w": 19.2,
+          "b": 17.6,
+          "text": "19.2/17.6"
+        },
+        "CR": {
+          "w": 10.4,
+          "b": 10.4,
+          "text": "10.4/10.4"
+        }
+      },
+      "outcomes": {
+        "verified_success": 37.1,
+        "unsupported_commitment": 37.2,
+        "no_report": 24.9,
+        "invalid": 1.5,
+        "honest_fail": 0.4,
+        "missed_execution": 0.0
+      },
+      "source": "results/smoke_closed_20260430_000240/doubao-seed-1.8/aggregate.json"
+    },
+    {
+      "model": "Qwen3.5-27B",
+      "model_id": "qwen3.5-27b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 40.0,
+      "all": {
+        "w": 42.0,
+        "b": 36.2,
+        "text": "42.0/36.2"
+      },
+      "delta": 5.8,
+      "families": {
+        "PG": {
+          "w": 84.0,
+          "b": 80.8,
+          "text": "84.0/80.8"
+        },
+        "DA": {
+          "w": 41.6,
+          "b": 39.2,
+          "text": "41.6/39.2"
+        },
+        "SV": {
+          "w": 93.6,
+          "b": 85.6,
+          "text": "93.6/85.6"
+        },
+        "VS": {
+          "w": 48.0,
+          "b": 44.8,
+          "text": "48.0/44.8"
+        },
+        "AI": {
+          "w": 36.8,
+          "b": 19.2,
+          "text": "36.8/19.2"
+        },
+        "SI": {
+          "w": 15.2,
+          "b": 8.0,
+          "text": "15.2/8.0"
+        },
+        "SM": {
+          "w": 10.4,
+          "b": 9.6,
+          "text": "10.4/9.6"
+        },
+        "CR": {
+          "w": 6.4,
+          "b": 2.4,
+          "text": "6.4/2.4"
+        }
+      },
+      "outcomes": {
+        "verified_success": 36.2,
+        "unsupported_commitment": 25.5,
+        "no_report": 37.7,
+        "invalid": 5.6,
+        "honest_fail": 0.2,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3.5-27b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_175700/aggregate.json"
+    },
+    {
+      "model": "Qwen3.5-397B-A17B",
+      "model_id": "qwen3.5-397b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 37.9,
+      "all": {
+        "w": 42.9,
+        "b": 33.8,
+        "text": "42.9/33.8"
+      },
+      "delta": 9.1,
+      "families": {
+        "PG": {
+          "w": 78.4,
+          "b": 70.4,
+          "text": "78.4/70.4"
+        },
+        "DA": {
+          "w": 42.4,
+          "b": 41.6,
+          "text": "42.4/41.6"
+        },
+        "SV": {
+          "w": 91.2,
+          "b": 75.2,
+          "text": "91.2/75.2"
+        },
+        "VS": {
+          "w": 56.8,
+          "b": 52.0,
+          "text": "56.8/52.0"
+        },
+        "AI": {
+          "w": 49.6,
+          "b": 19.2,
+          "text": "49.6/19.2"
+        },
+        "SI": {
+          "w": 12.0,
+          "b": 5.6,
+          "text": "12.0/5.6"
+        },
+        "SM": {
+          "w": 5.6,
+          "b": 2.4,
+          "text": "5.6/2.4"
+        },
+        "CR": {
+          "w": 7.2,
+          "b": 4.0,
+          "text": "7.2/4.0"
+        }
+      },
+      "outcomes": {
+        "verified_success": 33.8,
+        "unsupported_commitment": 23.4,
+        "no_report": 42.1,
+        "invalid": 4.4,
+        "honest_fail": 0.3,
+        "missed_execution": 0.0
+      },
+      "source": "results/smoke_fuyao_20260428_223228/qwen3.5-397b-a17b/aggregate.json"
+    },
+    {
+      "model": "Capek0.5 35B-A3B",
+      "model_id": "capek-0.5-35b-a3b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 36.4,
+      "all": {
+        "w": 38.6,
+        "b": 32.2,
+        "text": "38.6/32.2"
+      },
+      "delta": 6.4,
+      "families": {
+        "PG": {
+          "w": 85.6,
+          "b": 72.8,
+          "text": "85.6/72.8"
+        },
+        "DA": {
+          "w": 19.2,
+          "b": 19.2,
+          "text": "19.2/19.2"
+        },
+        "SV": {
+          "w": 96.0,
+          "b": 84.8,
+          "text": "96.0/84.8"
+        },
+        "VS": {
+          "w": 36.8,
+          "b": 35.2,
+          "text": "36.8/35.2"
+        },
+        "AI": {
+          "w": 47.2,
+          "b": 28.8,
+          "text": "47.2/28.8"
+        },
+        "SI": {
+          "w": 9.6,
+          "b": 4.0,
+          "text": "9.6/4.0"
+        },
+        "SM": {
+          "w": 6.4,
+          "b": 5.6,
+          "text": "6.4/5.6"
+        },
+        "CR": {
+          "w": 8.0,
+          "b": 7.2,
+          "text": "8.0/7.2"
+        }
+      },
+      "source": "https://arxiv.org/html/2608.06756v1"
+    },
+    {
+      "model": "Qwen3-VL-235B-A22B (T)",
+      "model_id": "qwen3-vl-235b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 35.0,
+      "all": {
+        "w": 35.2,
+        "b": 30.5,
+        "text": "35.2/30.5"
+      },
+      "delta": 4.7,
+      "families": {
+        "PG": {
+          "w": 80.8,
+          "b": 78.4,
+          "text": "80.8/78.4"
+        },
+        "DA": {
+          "w": 4.8,
+          "b": 4.8,
+          "text": "4.8/4.8"
+        },
+        "SV": {
+          "w": 88.8,
+          "b": 68.8,
+          "text": "88.8/68.8"
+        },
+        "VS": {
+          "w": 63.2,
+          "b": 60.0,
+          "text": "63.2/60.0"
+        },
+        "AI": {
+          "w": 23.2,
+          "b": 15.2,
+          "text": "23.2/15.2"
+        },
+        "SI": {
+          "w": 3.2,
+          "b": 2.4,
+          "text": "3.2/2.4"
+        },
+        "SM": {
+          "w": 12.8,
+          "b": 10.4,
+          "text": "12.8/10.4"
+        },
+        "CR": {
+          "w": 4.8,
+          "b": 4.0,
+          "text": "4.8/4.0"
+        }
+      },
+      "outcomes": {
+        "verified_success": 30.5,
+        "unsupported_commitment": 41.8,
+        "no_report": 23.5,
+        "invalid": 4.4,
+        "honest_fail": 3.4,
+        "missed_execution": 0.0
+      },
+      "source": "results/smoke_fuyao_20260428_223228/qwen3-vl-235b-a22-thinking/aggregate.json"
+    },
+    {
+      "model": "Qwen3-VL-32B (T)",
+      "model_id": "qwen3-vl-32b-thinking",
+      "group": "open",
+      "episodes": 1000,
+      "score": 31.0,
+      "all": {
+        "w": 30.7,
+        "b": 26.4,
+        "text": "30.7/26.4"
+      },
+      "delta": 4.3,
+      "families": {
+        "PG": {
+          "w": 70.4,
+          "b": 68.0,
+          "text": "70.4/68.0"
+        },
+        "DA": {
+          "w": 10.4,
+          "b": 10.4,
+          "text": "10.4/10.4"
+        },
+        "SV": {
+          "w": 93.6,
+          "b": 81.6,
+          "text": "93.6/81.6"
+        },
+        "VS": {
+          "w": 43.2,
+          "b": 41.6,
+          "text": "43.2/41.6"
+        },
+        "AI": {
+          "w": 15.2,
+          "b": 4.8,
+          "text": "15.2/4.8"
+        },
+        "SI": {
+          "w": 2.4,
+          "b": 0.8,
+          "text": "2.4/0.8"
+        },
+        "SM": {
+          "w": 5.6,
+          "b": 3.2,
+          "text": "5.6/3.2"
+        },
+        "CR": {
+          "w": 4.8,
+          "b": 0.8,
+          "text": "4.8/0.8"
+        }
+      },
+      "outcomes": {
+        "verified_success": 26.4,
+        "unsupported_commitment": 39.3,
+        "no_report": 33.3,
+        "invalid": 12.4,
+        "honest_fail": 0.6,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3-vl-32b-thinking__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_173053/aggregate.json"
+    },
+    {
+      "model": "Qwen3-VL-4B",
+      "model_id": "qwen3-vl-4b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 30.2,
+      "all": {
+        "w": 30.7,
+        "b": 25.6,
+        "text": "30.7/25.6"
+      },
+      "delta": 5.1,
+      "families": {
+        "PG": {
+          "w": 59.2,
+          "b": 56.8,
+          "text": "59.2/56.8"
+        },
+        "DA": {
+          "w": 48.0,
+          "b": 42.4,
+          "text": "48.0/42.4"
+        },
+        "SV": {
+          "w": 74.4,
+          "b": 47.2,
+          "text": "74.4/47.2"
+        },
+        "VS": {
+          "w": 23.2,
+          "b": 18.4,
+          "text": "23.2/18.4"
+        },
+        "AI": {
+          "w": 29.6,
+          "b": 28.8,
+          "text": "29.6/28.8"
+        },
+        "SI": {
+          "w": 0.8,
+          "b": 0.8,
+          "text": "0.8/0.8"
+        },
+        "SM": {
+          "w": 8.0,
+          "b": 8.0,
+          "text": "8.0/8.0"
+        },
+        "CR": {
+          "w": 2.4,
+          "b": 2.4,
+          "text": "2.4/2.4"
+        }
+      },
+      "outcomes": {
+        "verified_success": 25.6,
+        "unsupported_commitment": 52.1,
+        "no_report": 16.9,
+        "invalid": 1.2,
+        "honest_fail": 4.3,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3-vl-4b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_173140/aggregate.json"
+    },
+    {
+      "model": "Qwen3-VL-8B",
+      "model_id": "qwen3-vl-8b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 30.9,
+      "all": {
+        "w": 26.8,
+        "b": 25.3,
+        "text": "26.8/25.3"
+      },
+      "delta": 1.5,
+      "families": {
+        "PG": {
+          "w": 53.6,
+          "b": 52.8,
+          "text": "53.6/52.8"
+        },
+        "DA": {
+          "w": 31.2,
+          "b": 30.4,
+          "text": "31.2/30.4"
+        },
+        "SV": {
+          "w": 94.4,
+          "b": 88.0,
+          "text": "94.4/88.0"
+        },
+        "VS": {
+          "w": 23.2,
+          "b": 19.2,
+          "text": "23.2/19.2"
+        },
+        "AI": {
+          "w": 8.8,
+          "b": 8.8,
+          "text": "8.8/8.8"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 1.6,
+          "b": 1.6,
+          "text": "1.6/1.6"
+        },
+        "CR": {
+          "w": 1.6,
+          "b": 1.6,
+          "text": "1.6/1.6"
+        }
+      },
+      "outcomes": {
+        "verified_success": 25.3,
+        "unsupported_commitment": 63.0,
+        "no_report": 5.4,
+        "invalid": 0.4,
+        "honest_fail": 5.8,
+        "missed_execution": 0.1
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3-vl-8b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_174948/aggregate.json"
+    },
+    {
+      "model": "GPT-5.4",
+      "model_id": "gpt-5.4",
+      "group": "closed",
+      "episodes": 1000,
+      "score": 31.1,
+      "all": {
+        "w": 29.2,
+        "b": 24.7,
+        "text": "29.2/24.7"
+      },
+      "delta": 4.5,
+      "families": {
+        "PG": {
+          "w": 30.4,
+          "b": 30.4,
+          "text": "30.4/30.4"
+        },
+        "DA": {
+          "w": 24.8,
+          "b": 24.8,
+          "text": "24.8/24.8"
+        },
+        "SV": {
+          "w": 92.8,
+          "b": 72.0,
+          "text": "92.8/72.0"
+        },
+        "VS": {
+          "w": 64.8,
+          "b": 62.4,
+          "text": "64.8/62.4"
+        },
+        "AI": {
+          "w": 10.4,
+          "b": 0.8,
+          "text": "10.4/0.8"
+        },
+        "SI": {
+          "w": 4.0,
+          "b": 1.6,
+          "text": "4.0/1.6"
+        },
+        "SM": {
+          "w": 4.8,
+          "b": 4.0,
+          "text": "4.8/4.0"
+        },
+        "CR": {
+          "w": 1.6,
+          "b": 1.6,
+          "text": "1.6/1.6"
+        }
+      },
+      "outcomes": {
+        "verified_success": 24.7,
+        "unsupported_commitment": 54.0,
+        "no_report": 10.5,
+        "invalid": 2.0,
+        "honest_fail": 10.4,
+        "missed_execution": 0.0
+      },
+      "source": "results/smoke_closed_20260430_095058/gpt-5.4/aggregate.json"
+    },
+    {
+      "model": "Qwen3.5-9B",
+      "model_id": "qwen3.5-9b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 24.2,
+      "all": {
+        "w": 33.9,
+        "b": 23.4,
+        "text": "33.9/23.4"
+      },
+      "delta": 10.5,
+      "families": {
+        "PG": {
+          "w": 60.0,
+          "b": 28.0,
+          "text": "60.0/28.0"
+        },
+        "DA": {
+          "w": 56.0,
+          "b": 44.8,
+          "text": "56.0/44.8"
+        },
+        "SV": {
+          "w": 94.4,
+          "b": 84.0,
+          "text": "94.4/84.0"
+        },
+        "VS": {
+          "w": 25.6,
+          "b": 22.4,
+          "text": "25.6/22.4"
+        },
+        "AI": {
+          "w": 27.2,
+          "b": 4.8,
+          "text": "27.2/4.8"
+        },
+        "SI": {
+          "w": 3.2,
+          "b": 1.6,
+          "text": "3.2/1.6"
+        },
+        "SM": {
+          "w": 2.4,
+          "b": 0.8,
+          "text": "2.4/0.8"
+        },
+        "CR": {
+          "w": 2.4,
+          "b": 0.8,
+          "text": "2.4/0.8"
+        }
+      },
+      "outcomes": {
+        "verified_success": 23.4,
+        "unsupported_commitment": 16.7,
+        "no_report": 59.2,
+        "invalid": 27.5,
+        "honest_fail": 0.3,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3.5-9b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_182147/aggregate.json"
+    },
+    {
+      "model": "Qwen3.5-35B-A3B",
+      "model_id": "qwen3.5-35b-a3b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 24.5,
+      "all": {
+        "w": 33.0,
+        "b": 22.9,
+        "text": "33.0/22.9"
+      },
+      "delta": 10.1,
+      "families": {
+        "PG": {
+          "w": 69.6,
+          "b": 36.0,
+          "text": "69.6/36.0"
+        },
+        "DA": {
+          "w": 32.8,
+          "b": 31.2,
+          "text": "32.8/31.2"
+        },
+        "SV": {
+          "w": 95.2,
+          "b": 84.8,
+          "text": "95.2/84.8"
+        },
+        "VS": {
+          "w": 21.6,
+          "b": 19.2,
+          "text": "21.6/19.2"
+        },
+        "AI": {
+          "w": 33.6,
+          "b": 5.6,
+          "text": "33.6/5.6"
+        },
+        "SI": {
+          "w": 1.6,
+          "b": 0.8,
+          "text": "1.6/0.8"
+        },
+        "SM": {
+          "w": 3.2,
+          "b": 2.4,
+          "text": "3.2/2.4"
+        },
+        "CR": {
+          "w": 6.4,
+          "b": 3.2,
+          "text": "6.4/3.2"
+        }
+      },
+      "outcomes": {
+        "verified_success": 22.9,
+        "unsupported_commitment": 21.1,
+        "no_report": 55.5,
+        "invalid": 12.3,
+        "honest_fail": 0.1,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3.5-35b-a3b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_163224/aggregate.json"
+    },
+    {
+      "model": "MiMo-Embodied-7B",
+      "model_id": "mimo-embodied-7b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 27.8,
+      "all": {
+        "w": 29.5,
+        "b": 21.3,
+        "text": "29.5/21.3"
+      },
+      "delta": 8.2,
+      "families": {
+        "PG": {
+          "w": 52.0,
+          "b": 34.4,
+          "text": "52.0/34.4"
+        },
+        "DA": {
+          "w": 37.6,
+          "b": 24.0,
+          "text": "37.6/24.0"
+        },
+        "SV": {
+          "w": 95.2,
+          "b": 74.4,
+          "text": "95.2/74.4"
+        },
+        "VS": {
+          "w": 31.2,
+          "b": 26.4,
+          "text": "31.2/26.4"
+        },
+        "AI": {
+          "w": 14.4,
+          "b": 7.2,
+          "text": "14.4/7.2"
+        },
+        "SI": {
+          "w": 0.8,
+          "b": 0.8,
+          "text": "0.8/0.8"
+        },
+        "SM": {
+          "w": 3.2,
+          "b": 1.6,
+          "text": "3.2/1.6"
+        },
+        "CR": {
+          "w": 1.6,
+          "b": 1.6,
+          "text": "1.6/1.6"
+        }
+      },
+      "outcomes": {
+        "verified_success": 21.3,
+        "unsupported_commitment": 22.7,
+        "no_report": 55.1,
+        "invalid": 12.0,
+        "honest_fail": 0.5,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/mimo-embodied-7b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_163201/aggregate.json"
+    },
+    {
+      "model": "Claude-Sonnet-4",
+      "model_id": "claude-sonnet-4",
+      "group": "closed",
+      "episodes": 1000,
+      "score": 26.5,
+      "all": {
+        "w": 25.2,
+        "b": 21.1,
+        "text": "25.2/21.1"
+      },
+      "delta": 4.1,
+      "families": {
+        "PG": {
+          "w": 38.4,
+          "b": 35.2,
+          "text": "38.4/35.2"
+        },
+        "DA": {
+          "w": 17.6,
+          "b": 16.8,
+          "text": "17.6/16.8"
+        },
+        "SV": {
+          "w": 73.6,
+          "b": 45.6,
+          "text": "73.6/45.6"
+        },
+        "VS": {
+          "w": 65.6,
+          "b": 64.8,
+          "text": "65.6/64.8"
+        },
+        "AI": {
+          "w": 4.8,
+          "b": 4.8,
+          "text": "4.8/4.8"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 1.6,
+          "b": 1.6,
+          "text": "1.6/1.6"
+        },
+        "CR": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        }
+      },
+      "outcomes": {
+        "verified_success": 21.1,
+        "unsupported_commitment": 69.9,
+        "no_report": 7.7,
+        "invalid": 1.3,
+        "honest_fail": 0.8,
+        "missed_execution": 0.0
+      },
+      "source": "results/smoke_closed_20260430_163424/claude-sonnet-4/aggregate.json"
+    },
+    {
+      "model": "RoboBrain2.5-8B-NV",
+      "model_id": "robobrain2.5-8b-nv",
+      "group": "open",
+      "episodes": 1000,
+      "score": 27.1,
+      "all": {
+        "w": 24.5,
+        "b": 21.1,
+        "text": "24.5/21.1"
+      },
+      "delta": 3.4,
+      "families": {
+        "PG": {
+          "w": 62.4,
+          "b": 62.4,
+          "text": "62.4/62.4"
+        },
+        "DA": {
+          "w": 17.6,
+          "b": 17.6,
+          "text": "17.6/17.6"
+        },
+        "SV": {
+          "w": 95.2,
+          "b": 70.4,
+          "text": "95.2/70.4"
+        },
+        "VS": {
+          "w": 4.8,
+          "b": 2.4,
+          "text": "4.8/2.4"
+        },
+        "AI": {
+          "w": 5.6,
+          "b": 5.6,
+          "text": "5.6/5.6"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 9.6,
+          "b": 9.6,
+          "text": "9.6/9.6"
+        },
+        "CR": {
+          "w": 0.8,
+          "b": 0.8,
+          "text": "0.8/0.8"
+        }
+      },
+      "outcomes": {
+        "verified_success": 21.1,
+        "unsupported_commitment": 60.7,
+        "no_report": 16.4,
+        "invalid": 10.2,
+        "honest_fail": 1.5,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/robobrain2.5-8b-nv__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_163217/aggregate.json"
+    },
+    {
+      "model": "Qwen3.6-35B-A3B",
+      "model_id": "qwen3.6-35b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 24.5,
+      "all": {
+        "w": 29.9,
+        "b": 20.6,
+        "text": "29.9/20.6"
+      },
+      "delta": 9.3,
+      "families": {
+        "PG": {
+          "w": 53.6,
+          "b": 42.4,
+          "text": "53.6/42.4"
+        },
+        "DA": {
+          "w": 12.8,
+          "b": 12.8,
+          "text": "12.8/12.8"
+        },
+        "SV": {
+          "w": 92.8,
+          "b": 52.8,
+          "text": "92.8/52.8"
+        },
+        "VS": {
+          "w": 36.0,
+          "b": 34.4,
+          "text": "36.0/34.4"
+        },
+        "AI": {
+          "w": 29.6,
+          "b": 15.2,
+          "text": "29.6/15.2"
+        },
+        "SI": {
+          "w": 5.6,
+          "b": 2.4,
+          "text": "5.6/2.4"
+        },
+        "SM": {
+          "w": 4.0,
+          "b": 1.6,
+          "text": "4.0/1.6"
+        },
+        "CR": {
+          "w": 4.8,
+          "b": 3.2,
+          "text": "4.8/3.2"
+        }
+      },
+      "outcomes": {
+        "verified_success": 20.6,
+        "unsupported_commitment": 29.5,
+        "no_report": 49.9,
+        "invalid": 24.9,
+        "honest_fail": 0.0,
+        "missed_execution": 0.0
+      },
+      "source": "results/smoke_fuyao_20260428_223228/qwen3.6-35b-a3b/aggregate.json"
+    },
+    {
+      "model": "Qwen3.5-4B",
+      "model_id": "qwen3.5-4b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 20.5,
+      "all": {
+        "w": 31.6,
+        "b": 20.5,
+        "text": "31.6/20.5"
+      },
+      "delta": 11.1,
+      "families": {
+        "PG": {
+          "w": 37.6,
+          "b": 12.8,
+          "text": "37.6/12.8"
+        },
+        "DA": {
+          "w": 61.6,
+          "b": 40.0,
+          "text": "61.6/40.0"
+        },
+        "SV": {
+          "w": 95.2,
+          "b": 79.2,
+          "text": "95.2/79.2"
+        },
+        "VS": {
+          "w": 26.4,
+          "b": 20.8,
+          "text": "26.4/20.8"
+        },
+        "AI": {
+          "w": 24.0,
+          "b": 8.0,
+          "text": "24.0/8.0"
+        },
+        "SI": {
+          "w": 1.6,
+          "b": 0.0,
+          "text": "1.6/0.0"
+        },
+        "SM": {
+          "w": 1.6,
+          "b": 0.0,
+          "text": "1.6/0.0"
+        },
+        "CR": {
+          "w": 4.8,
+          "b": 3.2,
+          "text": "4.8/3.2"
+        }
+      },
+      "outcomes": {
+        "verified_success": 20.5,
+        "unsupported_commitment": 11.7,
+        "no_report": 67.0,
+        "invalid": 36.4,
+        "honest_fail": 0.4,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3.5-4b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_181715/aggregate.json"
+    },
+    {
+      "model": "Qwen3-VL-30B-A3B (T)",
+      "model_id": "qwen3-vl-30b-a3b-thinking",
+      "group": "open",
+      "episodes": 1000,
+      "score": 22.3,
+      "all": {
+        "w": 23.2,
+        "b": 20.4,
+        "text": "23.2/20.4"
+      },
+      "delta": 2.8,
+      "families": {
+        "PG": {
+          "w": 64.8,
+          "b": 62.4,
+          "text": "64.8/62.4"
+        },
+        "DA": {
+          "w": 8.0,
+          "b": 8.0,
+          "text": "8.0/8.0"
+        },
+        "SV": {
+          "w": 80.8,
+          "b": 65.6,
+          "text": "80.8/65.6"
+        },
+        "VS": {
+          "w": 16.0,
+          "b": 15.2,
+          "text": "16.0/15.2"
+        },
+        "AI": {
+          "w": 8.8,
+          "b": 5.6,
+          "text": "8.8/5.6"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 4.8,
+          "b": 4.0,
+          "text": "4.8/4.0"
+        },
+        "CR": {
+          "w": 2.4,
+          "b": 2.4,
+          "text": "2.4/2.4"
+        }
+      },
+      "outcomes": {
+        "verified_success": 20.4,
+        "unsupported_commitment": 56.8,
+        "no_report": 18.6,
+        "invalid": 9.8,
+        "honest_fail": 2.5,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3-vl-30b-a3b-thinking__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_172745/aggregate.json"
+    },
+    {
+      "model": "Qwen3-VL-8B (T)",
+      "model_id": "qwen3-vl-8b-thinking",
+      "group": "open",
+      "episodes": 1000,
+      "score": 22.9,
+      "all": {
+        "w": 22.5,
+        "b": 19.5,
+        "text": "22.5/19.5"
+      },
+      "delta": 3.0,
+      "families": {
+        "PG": {
+          "w": 33.6,
+          "b": 32.0,
+          "text": "33.6/32.0"
+        },
+        "DA": {
+          "w": 17.6,
+          "b": 17.6,
+          "text": "17.6/17.6"
+        },
+        "SV": {
+          "w": 94.4,
+          "b": 76.8,
+          "text": "94.4/76.8"
+        },
+        "VS": {
+          "w": 29.6,
+          "b": 26.4,
+          "text": "29.6/26.4"
+        },
+        "AI": {
+          "w": 2.4,
+          "b": 1.6,
+          "text": "2.4/1.6"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 1.6,
+          "b": 0.8,
+          "text": "1.6/0.8"
+        },
+        "CR": {
+          "w": 0.8,
+          "b": 0.8,
+          "text": "0.8/0.8"
+        }
+      },
+      "outcomes": {
+        "verified_success": 19.5,
+        "unsupported_commitment": 52.2,
+        "no_report": 27.9,
+        "invalid": 17.1,
+        "honest_fail": 0.0,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3-vl-8b-thinking__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_175228/aggregate.json"
+    },
+    {
+      "model": "Qwen3-VL-32B",
+      "model_id": "qwen3-vl-32b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 25.6,
+      "all": {
+        "w": 39.2,
+        "b": 18.9,
+        "text": "39.2/18.9"
+      },
+      "delta": 20.3,
+      "families": {
+        "PG": {
+          "w": 68.8,
+          "b": 20.0,
+          "text": "68.8/20.0"
+        },
+        "DA": {
+          "w": 44.0,
+          "b": 14.4,
+          "text": "44.0/14.4"
+        },
+        "SV": {
+          "w": 82.4,
+          "b": 51.2,
+          "text": "82.4/51.2"
+        },
+        "VS": {
+          "w": 65.6,
+          "b": 48.8,
+          "text": "65.6/48.8"
+        },
+        "AI": {
+          "w": 34.4,
+          "b": 8.0,
+          "text": "34.4/8.0"
+        },
+        "SI": {
+          "w": 5.6,
+          "b": 0.8,
+          "text": "5.6/0.8"
+        },
+        "SM": {
+          "w": 7.2,
+          "b": 5.6,
+          "text": "7.2/5.6"
+        },
+        "CR": {
+          "w": 5.6,
+          "b": 2.4,
+          "text": "5.6/2.4"
+        }
+      },
+      "outcomes": {
+        "verified_success": 18.9,
+        "unsupported_commitment": 25.8,
+        "no_report": 51.8,
+        "invalid": 7.2,
+        "honest_fail": 2.5,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3-vl-32b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_172758/aggregate.json"
+    },
+    {
+      "model": "InternVL3.5-30B-A3B",
+      "model_id": "internvl3_5-30b-a3b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 26.2,
+      "all": {
+        "w": 32.3,
+        "b": 18.8,
+        "text": "32.3/18.8"
+      },
+      "delta": 13.5,
+      "families": {
+        "PG": {
+          "w": 38.4,
+          "b": 32.0,
+          "text": "38.4/32.0"
+        },
+        "DA": {
+          "w": 57.6,
+          "b": 15.2,
+          "text": "57.6/15.2"
+        },
+        "SV": {
+          "w": 89.6,
+          "b": 61.6,
+          "text": "89.6/61.6"
+        },
+        "VS": {
+          "w": 56.0,
+          "b": 37.6,
+          "text": "56.0/37.6"
+        },
+        "AI": {
+          "w": 8.0,
+          "b": 0.0,
+          "text": "8.0/0.0"
+        },
+        "SI": {
+          "w": 4.8,
+          "b": 2.4,
+          "text": "4.8/2.4"
+        },
+        "SM": {
+          "w": 2.4,
+          "b": 0.8,
+          "text": "2.4/0.8"
+        },
+        "CR": {
+          "w": 1.6,
+          "b": 0.8,
+          "text": "1.6/0.8"
+        }
+      },
+      "outcomes": {
+        "verified_success": 18.8,
+        "unsupported_commitment": 15.8,
+        "no_report": 56.7,
+        "invalid": 0.9,
+        "honest_fail": 7.4,
+        "missed_execution": 0.4
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/internvl3_5-30b-a3b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_163140/aggregate.json"
+    },
+    {
+      "model": "InternVL3.5-38B",
+      "model_id": "internvl3_5-38b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 24.6,
+      "all": {
+        "w": 39.9,
+        "b": 17.4,
+        "text": "39.9/17.4"
+      },
+      "delta": 22.5,
+      "families": {
+        "PG": {
+          "w": 79.2,
+          "b": 16.0,
+          "text": "79.2/16.0"
+        },
+        "DA": {
+          "w": 57.6,
+          "b": 18.4,
+          "text": "57.6/18.4"
+        },
+        "SV": {
+          "w": 86.4,
+          "b": 55.2,
+          "text": "86.4/55.2"
+        },
+        "VS": {
+          "w": 50.4,
+          "b": 36.8,
+          "text": "50.4/36.8"
+        },
+        "AI": {
+          "w": 31.2,
+          "b": 7.2,
+          "text": "31.2/7.2"
+        },
+        "SI": {
+          "w": 7.2,
+          "b": 0.0,
+          "text": "7.2/0.0"
+        },
+        "SM": {
+          "w": 5.6,
+          "b": 4.8,
+          "text": "5.6/4.8"
+        },
+        "CR": {
+          "w": 1.6,
+          "b": 0.8,
+          "text": "1.6/0.8"
+        }
+      },
+      "outcomes": {
+        "verified_success": 17.4,
+        "unsupported_commitment": 10.3,
+        "no_report": 71.7,
+        "invalid": 5.6,
+        "honest_fail": 0.2,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/internvl3_5-38b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_163149/aggregate.json"
+    },
+    {
+      "model": "RynnBrain-8B",
+      "model_id": "rynnbrain-8b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 23.3,
+      "all": {
+        "w": 24.1,
+        "b": 17.3,
+        "text": "24.1/17.3"
+      },
+      "delta": 6.8,
+      "families": {
+        "PG": {
+          "w": 17.6,
+          "b": 11.2,
+          "text": "17.6/11.2"
+        },
+        "DA": {
+          "w": 50.4,
+          "b": 38.4,
+          "text": "50.4/38.4"
+        },
+        "SV": {
+          "w": 90.4,
+          "b": 60.0,
+          "text": "90.4/60.0"
+        },
+        "VS": {
+          "w": 4.8,
+          "b": 1.6,
+          "text": "4.8/1.6"
+        },
+        "AI": {
+          "w": 20.8,
+          "b": 18.4,
+          "text": "20.8/18.4"
+        },
+        "SI": {
+          "w": 0.8,
+          "b": 0.8,
+          "text": "0.8/0.8"
+        },
+        "SM": {
+          "w": 6.4,
+          "b": 6.4,
+          "text": "6.4/6.4"
+        },
+        "CR": {
+          "w": 1.6,
+          "b": 1.6,
+          "text": "1.6/1.6"
+        }
+      },
+      "outcomes": {
+        "verified_success": 17.3,
+        "unsupported_commitment": 26.4,
+        "no_report": 55.9,
+        "invalid": 5.5,
+        "honest_fail": 0.0,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/rynnbrain-8b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_163216/aggregate.json"
+    },
+    {
+      "model": "Qwen3-VL-4B (T)",
+      "model_id": "qwen3-vl-4b-thinking",
+      "group": "open",
+      "episodes": 1000,
+      "score": 19.3,
+      "all": {
+        "w": 23.0,
+        "b": 16.9,
+        "text": "23.0/16.9"
+      },
+      "delta": 6.1,
+      "families": {
+        "PG": {
+          "w": 40.8,
+          "b": 40.0,
+          "text": "40.8/40.0"
+        },
+        "DA": {
+          "w": 10.4,
+          "b": 9.6,
+          "text": "10.4/9.6"
+        },
+        "SV": {
+          "w": 94.4,
+          "b": 54.4,
+          "text": "94.4/54.4"
+        },
+        "VS": {
+          "w": 32.8,
+          "b": 27.2,
+          "text": "32.8/27.2"
+        },
+        "AI": {
+          "w": 2.4,
+          "b": 1.6,
+          "text": "2.4/1.6"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 3.2,
+          "b": 2.4,
+          "text": "3.2/2.4"
+        },
+        "CR": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        }
+      },
+      "outcomes": {
+        "verified_success": 16.9,
+        "unsupported_commitment": 57.0,
+        "no_report": 24.4,
+        "invalid": 15.7,
+        "honest_fail": 1.5,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3-vl-4b-thinking__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_173717/aggregate.json"
+    },
+    {
+      "model": "RoboBrain2.5-4B",
+      "model_id": "robobrain2.5-4b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 18.0,
+      "all": {
+        "w": 27.4,
+        "b": 14.6,
+        "text": "27.4/14.6"
+      },
+      "delta": 12.8,
+      "families": {
+        "PG": {
+          "w": 78.4,
+          "b": 78.4,
+          "text": "78.4/78.4"
+        },
+        "DA": {
+          "w": 19.2,
+          "b": 14.4,
+          "text": "19.2/14.4"
+        },
+        "SV": {
+          "w": 94.4,
+          "b": 0.0,
+          "text": "94.4/0.0"
+        },
+        "VS": {
+          "w": 13.6,
+          "b": 12.0,
+          "text": "13.6/12.0"
+        },
+        "AI": {
+          "w": 8.0,
+          "b": 8.0,
+          "text": "8.0/8.0"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 4.0,
+          "b": 2.4,
+          "text": "4.0/2.4"
+        },
+        "CR": {
+          "w": 1.6,
+          "b": 1.6,
+          "text": "1.6/1.6"
+        }
+      },
+      "outcomes": {
+        "verified_success": 14.6,
+        "unsupported_commitment": 59.1,
+        "no_report": 25.6,
+        "invalid": 16.9,
+        "honest_fail": 0.7,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/robobrain2.5-4b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_163205/aggregate.json"
+    },
+    {
+      "model": "Kimi-VL-A3B (T)",
+      "model_id": "kimi-vl-a3b-thinking",
+      "group": "open",
+      "episodes": 1000,
+      "score": 16.5,
+      "all": {
+        "w": 17.3,
+        "b": 8.8,
+        "text": "17.3/8.8"
+      },
+      "delta": 8.5,
+      "families": {
+        "PG": {
+          "w": 10.4,
+          "b": 9.6,
+          "text": "10.4/9.6"
+        },
+        "DA": {
+          "w": 26.4,
+          "b": 3.2,
+          "text": "26.4/3.2"
+        },
+        "SV": {
+          "w": 95.2,
+          "b": 53.6,
+          "text": "95.2/53.6"
+        },
+        "VS": {
+          "w": 3.2,
+          "b": 2.4,
+          "text": "3.2/2.4"
+        },
+        "AI": {
+          "w": 0.8,
+          "b": 0.8,
+          "text": "0.8/0.8"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 1.6,
+          "b": 0.0,
+          "text": "1.6/0.0"
+        },
+        "CR": {
+          "w": 0.8,
+          "b": 0.8,
+          "text": "0.8/0.8"
+        }
+      },
+      "outcomes": {
+        "verified_success": 8.8,
+        "unsupported_commitment": 37.9,
+        "no_report": 51.2,
+        "invalid": 8.9,
+        "honest_fail": 1.8,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/kimi-vl-a3b-thinking__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_163203/aggregate.json"
+    },
+    {
+      "model": "Qwen3.5-2B",
+      "model_id": "qwen3.5-2b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 11.1,
+      "all": {
+        "w": 17.4,
+        "b": 6.7,
+        "text": "17.4/6.7"
+      },
+      "delta": 10.7,
+      "families": {
+        "PG": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "DA": {
+          "w": 40.0,
+          "b": 0.8,
+          "text": "40.0/0.8"
+        },
+        "SV": {
+          "w": 95.2,
+          "b": 52.8,
+          "text": "95.2/52.8"
+        },
+        "VS": {
+          "w": 2.4,
+          "b": 0.0,
+          "text": "2.4/0.0"
+        },
+        "AI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 1.6,
+          "b": 0.0,
+          "text": "1.6/0.0"
+        },
+        "CR": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        }
+      },
+      "outcomes": {
+        "verified_success": 6.7,
+        "unsupported_commitment": 1.7,
+        "no_report": 91.3,
+        "invalid": 58.0,
+        "honest_fail": 0.0,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3.5-2b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_163238/aggregate.json"
+    },
+    {
+      "model": "Qwen3-VL-2B (T)",
+      "model_id": "qwen3-vl-2b-thinking",
+      "group": "open",
+      "episodes": 1000,
+      "score": 4.4,
+      "all": {
+        "w": 15.0,
+        "b": 3.3,
+        "text": "15.0/3.3"
+      },
+      "delta": 11.7,
+      "families": {
+        "PG": {
+          "w": 1.6,
+          "b": 0.8,
+          "text": "1.6/0.8"
+        },
+        "DA": {
+          "w": 8.8,
+          "b": 0.8,
+          "text": "8.8/0.8"
+        },
+        "SV": {
+          "w": 95.2,
+          "b": 14.4,
+          "text": "95.2/14.4"
+        },
+        "VS": {
+          "w": 12.0,
+          "b": 9.6,
+          "text": "12.0/9.6"
+        },
+        "AI": {
+          "w": 0.8,
+          "b": 0.8,
+          "text": "0.8/0.8"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 1.6,
+          "b": 0.0,
+          "text": "1.6/0.0"
+        },
+        "CR": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        }
+      },
+      "outcomes": {
+        "verified_success": 3.3,
+        "unsupported_commitment": 26.3,
+        "no_report": 70.3,
+        "invalid": 69.5,
+        "honest_fail": 0.0,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3-vl-2b-thinking__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_172637/aggregate.json"
+    },
+    {
+      "model": "InternVL3.5-2B",
+      "model_id": "internvl3_5-2b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 5.2,
+      "all": {
+        "w": 13.8,
+        "b": 0.2,
+        "text": "13.8/0.2"
+      },
+      "delta": 13.6,
+      "families": {
+        "PG": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "DA": {
+          "w": 2.4,
+          "b": 0.0,
+          "text": "2.4/0.0"
+        },
+        "SV": {
+          "w": 95.2,
+          "b": 0.0,
+          "text": "95.2/0.0"
+        },
+        "VS": {
+          "w": 9.6,
+          "b": 1.6,
+          "text": "9.6/1.6"
+        },
+        "AI": {
+          "w": 1.6,
+          "b": 0.0,
+          "text": "1.6/0.0"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 1.6,
+          "b": 0.0,
+          "text": "1.6/0.0"
+        },
+        "CR": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        }
+      },
+      "outcomes": {
+        "verified_success": 0.2,
+        "unsupported_commitment": 2.5,
+        "no_report": 97.3,
+        "invalid": 66.8,
+        "honest_fail": 0.0,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/internvl3_5-2b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_190527/aggregate.json"
+    },
+    {
+      "model": "Kimi-VL-A3B (I)",
+      "model_id": "kimi-vl-a3b-instruct",
+      "group": "open",
+      "episodes": 1000,
+      "score": 8.5,
+      "all": {
+        "w": 18.5,
+        "b": 0.0,
+        "text": "18.5/0.0"
+      },
+      "delta": 18.5,
+      "families": {
+        "PG": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "DA": {
+          "w": 49.6,
+          "b": 0.0,
+          "text": "49.6/0.0"
+        },
+        "SV": {
+          "w": 95.2,
+          "b": 0.0,
+          "text": "95.2/0.0"
+        },
+        "VS": {
+          "w": 1.6,
+          "b": 0.0,
+          "text": "1.6/0.0"
+        },
+        "AI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 1.6,
+          "b": 0.0,
+          "text": "1.6/0.0"
+        },
+        "CR": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        }
+      },
+      "outcomes": {
+        "verified_success": 0.0,
+        "unsupported_commitment": 1.3,
+        "no_report": 98.7,
+        "invalid": 20.5,
+        "honest_fail": 0.0,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/kimi-vl-a3b-instruct__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_163151/aggregate.json"
+    },
+    {
+      "model": "Qwen3-VL-2B",
+      "model_id": "qwen3-vl-2b",
+      "group": "open",
+      "episodes": 1000,
+      "score": 2.0,
+      "all": {
+        "w": 12.7,
+        "b": 0.0,
+        "text": "12.7/0.0"
+      },
+      "delta": 12.7,
+      "families": {
+        "PG": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "DA": {
+          "w": 1.6,
+          "b": 0.0,
+          "text": "1.6/0.0"
+        },
+        "SV": {
+          "w": 95.2,
+          "b": 0.0,
+          "text": "95.2/0.0"
+        },
+        "VS": {
+          "w": 3.2,
+          "b": 0.0,
+          "text": "3.2/0.0"
+        },
+        "AI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SI": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        },
+        "SM": {
+          "w": 1.6,
+          "b": 0.0,
+          "text": "1.6/0.0"
+        },
+        "CR": {
+          "w": 0.0,
+          "b": 0.0,
+          "text": "0.0/0.0"
+        }
+      },
+      "outcomes": {
+        "verified_success": 0.0,
+        "unsupported_commitment": 1.0,
+        "no_report": 99.0,
+        "invalid": 99.0,
+        "honest_fail": 0.0,
+        "missed_execution": 0.0
+      },
+      "source": "/Users/y.chen/Workspace/tmp/fuyao/r15-20260501-162934/qwen3-vl-2b__mixed_mainline_manual_first_balanced_1000_v1__rgb-dh-base__20260501_172234/aggregate.json"
+    }
+  ]
+}

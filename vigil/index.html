@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VIGIL: Terminal Commitment in Embodied Evaluation</title>
+    <meta
+      name="description"
+      content="VIGIL makes terminal commitment independently measurable: egocentric RGB, no action-success signals, mandatory semantic reports scored against hidden world state. Preprint: arXiv:2605.08747. This site publishes an extended leaderboard of multimodal variants on a shared 1,000-episode frozen pack."
+    />
+    <link rel="stylesheet" href="assets/site.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="VIGIL home">
+        <img class="brand-logo" src="assets/site/xpeng-robotics-research.svg" alt="XPeng Robotics Research" />
+        <span>
+          <strong>VIGIL</strong>
+          <small>Terminal Commitment Benchmark</small>
+        </span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#failure-analysis">Failures</a>
+        <a href="#demos">Cases</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#tasks">Tasks</a>
+        <a href="https://arxiv.org/abs/2605.08747" rel="noopener noreferrer">arXiv</a>
+        <span class="nav-soon" title="Public code repository not yet open">GitHub <small>(coming soon)</small></span>
+      </nav>
+    </header>
+
+    <main id="top">
+      <!-- Hero: rotating GIF showcase -->
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">XPeng Robotics Research</p>
+          <h1>Done But<br/>Not Sure</h1>
+          <p class="lede">
+            <span class="highlight">Standard embodied evaluation does not independently score terminal commitment at episode closure.</span>
+          </p>
+          <p class="lede">
+            <strong>VIGIL</strong> makes that commitment observable: agents see only egocentric RGB, receive no action-success signals, and must end each episode with a semantic <code>report</code> checked deterministically against hidden world state.
+            This yields <strong>W</strong> (world-state completion) and <strong>B</strong> (benchmark success), where <strong>B</strong> additionally requires a correct terminal report—in manuscript terms, correct <strong>terminal commitment</strong>.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#failure-analysis">Why models fail</a>
+            <a class="button" href="#leaderboard">Leaderboard</a>
+          </div>
+        </div>
+        <div class="hero-carousel">
+          <div class="carousel-stage">
+            <img class="carousel-img active" src="assets/site/rollout_gemini_fridge_success.gif" alt="" data-label="Gemini-3.1-Pro · AI" data-outcome="verified" data-class="success" />
+            <img class="carousel-img" src="assets/site/rollout_claude_microwave_false_report.gif" alt="" data-label="Claude-Sonnet-4 · SI" data-outcome="false report" data-class="failure" />
+            <img class="carousel-img" src="assets/site/rollout_doubao_laundry_success.gif" alt="" data-label="Doubao-Seed-1.8 · DA" data-outcome="verified" data-class="success" />
+            <img class="carousel-img" src="assets/site/rollout_gpt54_book_invalid.gif" alt="" data-label="GPT-5.4 · SM" data-outcome="invalid loop" data-class="invalid" />
+            <img class="carousel-img" src="assets/site/demo_t3_trace.gif" alt="" data-label="SM · Sequential Manipulation" data-outcome="10-step trace" data-class="success" />
+            <img class="carousel-img" src="assets/site/demo_s1_grounding.gif" alt="" data-label="PG · Pixel Grounding" data-outcome="target click" data-class="success" />
+          </div>
+          <div class="carousel-caption">
+            <span class="outcome success" id="carouselOutcome">verified</span>
+            <span id="carouselLabel">Gemini-3.1-Pro · AI</span>
+          </div>
+          <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+      </section>
+
+      <!-- Metrics: concise -->
+      <section class="metric-band" aria-label="Benchmark summary">
+        <article>
+          <span class="metric-label">Task families</span>
+          <strong>8</strong>
+          <small>diagnostic + compositional tiers</small>
+        </article>
+        <article>
+          <span class="metric-label">Episodes</span>
+          <strong>1,000</strong>
+          <small>frozen pack</small>
+        </article>
+        <article>
+          <span class="metric-label">Matched gap</span>
+          <strong>19.7 pp</strong>
+          <small>comparable W, up to 19.7 pp apart in B (primary experiment panel in manuscript)</small>
+        </article>
+      </section>
+
+      <!-- Key findings highlight -->
+      <section class="findings-band">
+        <div class="finding">
+          <span class="finding-icon">W≈, B≠</span>
+          <p>Systems with <mark>comparable W</mark> differ by up to <mark>19.7 pp in B</mark>: one converts achieved states into correct reports; another with near-identical execution drifts past the goal without closing.</p>
+        </div>
+        <div class="finding">
+          <span class="finding-icon">+Prop</span>
+          <p>An action-feedback intervention modeled on <mark>proprioceptive signals</mark> improves <mark>W broadly</mark>, yet <mark>commitment failures persist</mark> in models that do not already ground terminal reports in the achieved state.</p>
+        </div>
+        <div class="finding">
+          <span class="finding-icon">4×</span>
+          <p>Four distinguishable outcomes — <mark>missed execution</mark>, <mark>post-attainment drift</mark>, <mark>unsupported commitment</mark>, and <mark>verified success</mark> — where standard benchmarks see only pass/fail.</p>
+        </div>
+      </section>
+
+      <!-- Failure analysis -->
+      <section class="failure-section" id="failure-analysis">
+        <div class="failure-intro">
+          <p class="eyebrow">Core finding</p>
+          <h2>Closure vs execution</h2>
+          <p class="lede">
+            Aggregate metrics collapse distinct cases: failing to complete the task, completing it but failing to stop, or declaring completion without sufficient evidence.
+            <span class="highlight">VIGIL separates task-closure failures from execution failures</span> and exposes structured terminal profiles (e.g., FR, NR) invisible under a single success bit.
+          </p>
+        </div>
+
+        <!-- FR vs NR explainer -->
+        <div class="failure-cards">
+          <div class="failure-card failure-fr">
+            <span class="outcome failure">False Report (FR)</span>
+            <h3>Premature Commitment</h3>
+            <p>The agent reports success without sufficient evidence in the world (unsupported commitment). 65–88% of false success reports occur at <strong>zero task progress</strong>—no closer navigation, no task-relevant state change (step-level diagnostic in manuscript).</p>
+            <p class="failure-stat">Claude-Sonnet-4: FR = 69.9% (W only 25.2%)</p>
+          </div>
+          <div class="failure-card failure-nr">
+            <span class="outcome invalid">No Report (NR)</span>
+            <h3>Post-Attainment Drift</h3>
+            <p>The agent achieves the goal but never issues a terminal report — it drifts past attainment, continuing to act without recognizing completion.</p>
+            <p class="failure-stat">InternVL3.5-38B: W = 39.9%, B = 17.4% (Δ = 22.5 pp)</p>
+          </div>
+        </div>
+
+        <!-- Interactive chart 1: failure distribution -->
+        <div class="failure-figure-block">
+          <div class="failure-figure-text">
+            <h3>Closure profiles differ sharply — even at similar Δ</h3>
+            <p>
+              Gemini-3.1-Pro and Claude-Sonnet-4 have similarly small gaps (Δ ≈ 1–4 pp), yet their closure regimes are opposite: Gemini combines high W (57.7%) with moderate FR, while Claude reaches much lower W (25.2%) but reports aggressively.
+            </p>
+            <p>
+              A small Δ is <strong>not</strong> evidence of reliable closure — it may reflect frequent commitment despite weak state support.
+            </p>
+          </div>
+          <article class="analysis-figure chart-panel">
+            <div class="chart-head">
+              <span class="eyebrow">Hover to inspect</span>
+              <h3>Outcome partition by model</h3>
+            </div>
+            <div class="chart-wrap" id="outcomeChart" aria-label="Interactive outcome partition chart"></div>
+          </article>
+        </div>
+
+        <!-- Interactive chart 2: limited proprioception intervention -->
+        <div class="failure-figure-block">
+          <div class="failure-figure-text">
+            <h3>Proprioceptive action-feedback intervention</h3>
+            <p>
+              As in our manuscript experiments, we add two execution-oriented signals—<code>too_far</code> and <code>path_blocked</code>—after each action (proprioception-style feedback). It reduces execution traps broadly, but terminal reporting improves only for models whose reports are already coupled to achieved task state; others show little or no ΔB despite higher W.
+            </p>
+            <p>
+              Hover each bar to see ΔW, ΔB, ΔFR, and ΔNR in percentage points under the limited-proprioception intervention.
+            </p>
+          </div>
+          <article class="analysis-figure chart-panel">
+            <div class="chart-head">
+              <span class="eyebrow">Diagnostic intervention</span>
+              <h3>Limited proprioception: what changes?</h3>
+            </div>
+            <div class="chart-wrap" id="feedbackChart" aria-label="Interactive limited proprioception intervention chart"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Demos: all rollout GIFs -->
+      <section class="demo-showcase" id="demos">
+        <div class="demo-header">
+          <p class="eyebrow">Agent behavior in action</p>
+          <h2>Case Rollouts</h2>
+        </div>
+        <div class="demo-grid">
+          <figure class="demo-card demo-success">
+            <img src="assets/site/rollout_gemini_fridge_success.gif" alt="Gemini opens fridge successfully" />
+            <figcaption>
+              <span class="outcome success">verified</span>
+              <strong>Gemini-3.1-Pro · AI Fridge</strong>
+            </figcaption>
+          </figure>
+          <figure class="demo-card demo-success">
+            <img src="assets/site/rollout_doubao_laundry_success.gif" alt="Doubao approaches laundry" />
+            <figcaption>
+              <span class="outcome success">verified</span>
+              <strong>Doubao-Seed-1.8 · DA Approach</strong>
+            </figcaption>
+          </figure>
+          <figure class="demo-card demo-failure">
+            <img src="assets/site/rollout_claude_microwave_false_report.gif" alt="Claude falsely reports success" />
+            <figcaption>
+              <span class="outcome failure">false report</span>
+              <strong>Claude-Sonnet-4 · SI Microwave</strong>
+            </figcaption>
+          </figure>
+          <figure class="demo-card demo-invalid">
+            <img src="assets/site/rollout_gpt54_book_invalid.gif" alt="GPT-5.4 enters invalid-action loop" />
+            <figcaption>
+              <span class="outcome invalid">invalid loop</span>
+              <strong>GPT-5.4 · SM Book</strong>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="rollout-grid" id="rolloutGrid"></div>
+      </section>
+      <!-- Leaderboard -->
+      <section class="section-grid" id="leaderboard">
+        <div class="section-heading">
+          <p class="eyebrow">Benchmark results</p>
+          <h2>Leaderboard</h2>
+          <p>
+            Each row is one evaluated model variant on the same <strong>1,000</strong> frozen episodes; cells are W/B per family.
+            The headline <strong>19.7&nbsp;pp</strong> gap (comparable&nbsp;W, different&nbsp;B) comes from the manuscript’s primary comparison—not from counting rows here.
+          </p>
+        </div>
+        <div class="leaderboard-shell">
+          <div class="tabs" role="tablist" aria-label="Leaderboard profiles">
+            <button class="tab active" type="button" data-filter="all">All models</button>
+            <button class="tab" type="button" data-filter="closed">Closed API</button>
+            <button class="tab" type="button" data-filter="open">Open / embodied</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Model</th>
+                  <th>Type</th>
+                  <th>N</th>
+                  <th>Score</th>
+                  <th>All W/B</th>
+                  <th>Delta</th>
+                  <th>PG</th>
+                  <th>DA</th>
+                  <th>SV</th>
+                  <th>VS</th>
+                  <th>AI</th>
+                  <th>SI</th>
+                  <th>SM</th>
+                  <th>CR</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task families: visual grid -->
+      <section class="task-section" id="tasks">
+        <div class="task-intro">
+          <p class="eyebrow">8 task families · 1,000 episodes</p>
+          <h2>Task Families</h2>
+          <p class="lede">
+            Eight families probe when terminal judgment is hard—target visibility, distance, state uncertainty, temporal dependency, physical constraint—decomposed along atomic perceptual-motor capacities (not domain-only splits) for precise attribution.
+          </p>
+        </div>
+        <div class="task-tier">
+          <div class="tier-label tier-diagnostic">
+            <span>Diagnostic</span>
+            <small>Isolate single bottlenecks (5–20 steps)</small>
+          </div>
+          <div class="task-grid-4" id="taskGridDiagnostic"></div>
+        </div>
+        <div class="task-tier">
+          <div class="tier-label tier-compositional">
+            <span>Compositional</span>
+            <small>Chain capacities under longer budgets (25–40 steps)</small>
+          </div>
+          <div class="task-grid-4" id="taskGridCompositional"></div>
+        </div>
+      </section>
+
+      <section class="citation-section" id="citation">
+        <div class="citation-panel">
+          <div class="citation-head">
+            <span class="citation-label">Citation</span>
+            <button class="citation-copy-button" type="button" id="copyBibtex" aria-live="polite">
+              <span class="copy-icon" aria-hidden="true"></span>
+              <span class="copy-label">Copy BibTeX</span>
+            </button>
+          </div>
+          <h2>Cite VIGIL</h2>
+          <div class="citation-meta">
+            <span>arXiv:2605.08747</span>
+            <span>cs.AI</span>
+            <span>2026</span>
+          </div>
+          <pre class="bibtex-block"><code id="bibtexCode">@misc{chen2026done,
+  title={Done, But Not Sure: Disentangling World Completion from Self-Termination in Embodied Agents},
+  author={Chen, Ying and Fang, Lihuang and Jiang, Rui and Wang, Mingxu and Gu, Zhifeng and Yi, Lei and Chen, Jie},
+  year={2026},
+  eprint={2605.08747},
+  archivePrefix={arXiv},
+  primaryClass={cs.AI},
+  doi={10.48550/arXiv.2605.08747},
+  url={https://arxiv.org/abs/2605.08747}
+}</code></pre>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <span>VIGIL · XPeng Robotics Research</span>
+      <a href="https://arxiv.org/abs/2605.08747" rel="noopener noreferrer">arXiv</a>
+      <a href="https://arxiv.org/pdf/2605.08747" rel="noopener noreferrer">PDF</a>
+      <span class="nav-soon" title="Public code repository not yet open">GitHub <small>(coming soon)</small></span>
+    </footer>
+
+    <script src="assets/site.js"></script>
+  </body>
+</html>
