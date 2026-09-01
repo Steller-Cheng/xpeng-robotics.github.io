@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en" data-theme="night">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AnyWorld turns a single human egocentric interaction into controllable robot-native rollouts across embodiments, viewpoints, and scenes.">
+  <meta name="theme-color" content="#101412">
+  <title>AnyWorld — Factorized Egocentric World Models</title>
+  <link rel="icon" type="image/png" href="assets/fe0/xpeng-favicon-ink.png">
+  <link rel="icon" type="image/png" href="assets/fe0/xpeng-favicon-ink.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="assets/fe0/xpeng-favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="assets/fe0/xpeng-favicon-ink.png">
+  <link rel="preload" as="image" href="assets/fe0/iron-front-hand.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/fe0/iron-david-stance.webp" type="image/webp" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    const savedTheme = localStorage.getItem('anyworld-theme');
+    if (savedTheme === 'day' || savedTheme === 'night') {
+      document.documentElement.dataset.theme = savedTheme;
+    }
+  </script>
+</head>
+<body>
+  <header class="site-nav">
+    <div class="nav-inner shell">
+      <a class="brand" href="#top" aria-label="XPENG Robotics home">
+        <span class="mark" aria-hidden="true">
+          <img class="logo-mark logo-mark--white" src="assets/fe0/xpeng-logo-white.png" alt="">
+          <img class="logo-mark logo-mark--ink" src="assets/fe0/xpeng-logo-ink.png" alt="">
+        </span>
+        <span class="brand-text">XPENG Robotics</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="#overview">Overview</a>
+        <a href="#recomposition">Capabilities</a>
+        <a href="#method">Method</a>
+        <a href="#simulation">Simulation</a>
+        <a href="#robot-learning">Policy</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme">
+        <span aria-hidden="true">☾</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="content-menu" aria-label="Section navigation">
+    <div class="content-menu-list shell">
+      <a href="#overview">Thesis</a>
+      <a href="#recomposition">Capabilities</a>
+      <a href="#method">Model</a>
+      <a href="#training">Training</a>
+      <a href="#simulation">Simulation</a>
+      <a href="#robot-learning">Policy</a>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero hero--editorial" aria-labelledby="hero-title">
+      <div class="hero-art" aria-hidden="true">
+        <img class="hero-figure hero-figure--night" src="assets/fe0/iron-front-hand.webp" alt="">
+        <img class="hero-figure hero-figure--day" src="assets/fe0/iron-david-stance.webp" alt="">
+      </div>
+      <div class="hero-grid hero-grid--single shell">
+        <div class="hero-copy reveal">
+          <p class="kicker">Cross-Embodiment World Model</p>
+          <h1 id="hero-title">AnyWorld</h1>
+          <p class="hero-subtitle">Human interaction, recomposed for robot learning.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://arxiv.org/pdf/2608.29242" target="_blank" rel="noopener">Explore the research</a>
+            <a class="button" href="https://github.com/xpeng-robotics/AnyWorld" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+
+        <div class="hero-takeaways reveal" aria-label="Key takeaways">
+          <div class="hero-takeaways-label"><span>Key takeaways</span><i></i></div>
+          <div class="takeaway-band takeaway-band--hero">
+            <article><span>01</span><div><b>Unpaired transfer</b><small>No paired human–robot clips</small></div></article>
+            <article><span>02</span><div><b>Cross-embodiment</b><small>Same interaction, new realization</small></div></article>
+            <article><span>03</span><div><b>Targeted intervention</b><small>Missing states · counterfactual pairs</small></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="section section-intro section-thesis">
+      <div class="shell">
+        <div class="section-heading thesis-heading reveal">
+          <p class="eyebrow">Research thesis</p>
+          <h2>From controllable experience generation to targeted policy adaptation.</h2>
+          <p class="section-lead">AnyWorld turns human interactions into controllable robot-domain experiences. The same factorized interface scales diverse training data and synthesizes targeted supervision for policy correction and capability acquisition.</p>
+        </div>
+
+        <div class="thesis-system reveal" aria-label="AnyWorld research path">
+          <article class="thesis-source">
+            <span>Source</span>
+            <strong>Human interaction</strong>
+            <small>Scalable physical experience</small>
+          </article>
+          <div class="thesis-arrow" aria-hidden="true">→</div>
+          <article class="thesis-engine">
+            <span>AnyWorld</span>
+            <strong>Controllable factorization</strong>
+            <div><i>Action</i><i>Camera</i><i>Target context</i></div>
+          </article>
+          <div class="thesis-arrow" aria-hidden="true">→</div>
+          <div class="thesis-branches">
+            <article>
+              <span>Scale</span>
+              <strong>Diverse robot-domain experience</strong>
+              <small>Embodiments, scenes, objects, lighting, and viewpoints</small>
+            </article>
+            <article class="thesis-branch--accent">
+              <span>Intervene</span>
+              <strong>Targeted policy supervision</strong>
+              <small>Rare task states and contrastive instruction–action pairs</small>
+            </article>
+          </div>
+          <div class="thesis-arrow" aria-hidden="true">→</div>
+          <article class="thesis-outcome">
+            <span>Policy impact</span>
+            <strong>Improve · Correct · Extend</strong>
+            <small>Behavioral gains on a physical IRON robot</small>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="recomposition" class="section section-tonal section-capabilities">
+      <div class="shell">
+        <div class="section-heading two-column-heading reveal">
+          <div>
+            <p class="eyebrow">01 · Controllable recomposition</p>
+            <h2>Preserve the interaction. Recompose its realization.</h2>
+          </div>
+          <p>AnyWorld preserves the underlying interaction and scales it into diverse realizations across embodiments, scenes, object configurations, lighting, and camera trajectories.</p>
+        </div>
+
+        <article class="recomp-block reveal">
+          <header class="recomp-header">
+            <div><span>Cross-embodiment replay</span><h3>The same human interaction, executed by IRON.</h3></div>
+            <p>Action and viewpoint structure are retained while the acting body is changed.</p>
+          </header>
+          <div class="direct-pair-grid">
+            <article class="compact-pair">
+              <div class="compact-pair-title"><span>Interaction 01</span><b>Surface sweeping</b></div>
+              <div class="feature-pair">
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image2.png"><source src="assets/media/media2.mp4" type="video/mp4"></video><figcaption><span>Human</span> Source interaction</figcaption></figure>
+                <div class="mini-arrow" aria-hidden="true">→</div>
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image1.png"><source src="assets/media/media1.mp4" type="video/mp4"></video><figcaption><span>IRON</span> Re-embodied rollout</figcaption></figure>
+              </div>
+            </article>
+            <article class="compact-pair">
+              <div class="compact-pair-title"><span>Interaction 02</span><b>Garment cleaning</b></div>
+              <div class="feature-pair">
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image3.png"><source src="assets/media/media3.mp4" type="video/mp4"></video><figcaption><span>Human</span> Source interaction</figcaption></figure>
+                <div class="mini-arrow" aria-hidden="true">→</div>
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image4.png"><source src="assets/media/media4.mp4" type="video/mp4"></video><figcaption><span>IRON</span> Re-embodied rollout</figcaption></figure>
+              </div>
+            </article>
+          </div>
+        </article>
+
+        <article class="recomp-block reveal">
+          <header class="recomp-header">
+            <div><span>Scene and object recomposition</span><h3>Scale one interaction family across controllable worlds.</h3></div>
+            <p>Objects, layouts, illumination, and environments can change without discarding the interaction.</p>
+          </header>
+
+          <div class="recomp-family-stack">
+            <article class="recomp-family">
+              <div class="recomp-family-copy"><span>A</span><div><b>Sweeping</b><small>Object and scene variation</small></div></div>
+              <div class="recomp-family-media">
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image1.png"><source src="assets/media/media1.mp4" type="video/mp4"></video><figcaption><span>Base</span> IRON rollout</figcaption></figure>
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image5.png"><source src="assets/media/media5.mp4" type="video/mp4"></video><figcaption><span>Objects</span> Edited layout</figcaption></figure>
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image6.png"><source src="assets/media/media6.mp4" type="video/mp4"></video><figcaption><span>Scene</span> New environment</figcaption></figure>
+              </div>
+            </article>
+
+            <article class="recomp-family">
+              <div class="recomp-family-copy"><span>B</span><div><b>Object manipulation</b><small>Context and lighting variation</small></div></div>
+              <div class="recomp-family-media">
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image8.png"><source src="assets/media/media8.mp4" type="video/mp4"></video><figcaption><span>Base</span> Interaction rollout</figcaption></figure>
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image9.png"><source src="assets/media/media9.mp4" type="video/mp4"></video><figcaption><span>Objects</span> Added context</figcaption></figure>
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image7.png"><source src="assets/media/media7.mp4" type="video/mp4"></video><figcaption><span>Lighting</span> Relit environment</figcaption></figure>
+              </div>
+            </article>
+
+            <article class="recomp-family">
+              <div class="recomp-family-copy"><span>C</span><div><b>Fine-grained interaction</b><small>Object and appearance variation</small></div></div>
+              <div class="recomp-family-media">
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image12.png"><source src="assets/media/media12.mp4" type="video/mp4"></video><figcaption><span>Base</span> Piano interaction</figcaption></figure>
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image10.png"><source src="assets/media/media10.mp4" type="video/mp4"></video><figcaption><span>Objects</span> Edited context</figcaption></figure>
+                <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image11.png"><source src="assets/media/media11.mp4" type="video/mp4"></video><figcaption><span>Lighting</span> Relit context</figcaption></figure>
+              </div>
+            </article>
+          </div>
+        </article>
+
+        <article class="recomp-block reveal">
+          <header class="recomp-header">
+            <div><span>Explicit camera control</span><h3>Compare each generated trajectory against the source viewpoint.</h3></div>
+            <p>The reference video is shown alongside camera-controlled realizations of the same interaction.</p>
+          </header>
+          <div class="camera-comparison-grid">
+            <figure class="video-card camera-reference"><video muted loop playsinline preload="metadata" poster="assets/posters/image44.png"><source src="assets/media/media24.mp4" type="video/mp4"></video><figcaption><span>Reference</span> Source camera trajectory</figcaption></figure>
+            <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image45.png"><source src="assets/media/media25.mp4" type="video/mp4"></video><figcaption><span>Trajectory A</span> Horizontal viewpoint shift</figcaption></figure>
+            <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image46.png"><source src="assets/media/media26.mp4" type="video/mp4"></video><figcaption><span>Trajectory B</span> Roll and vertical motion</figcaption></figure>
+            <figure class="video-card"><video muted loop playsinline preload="metadata" poster="assets/posters/image47.png"><source src="assets/media/media27.mp4" type="video/mp4"></video><figcaption><span>Trajectory C</span> Diagonal viewpoint motion</figcaption></figure>
+          </div>
+        </article>
+
+        <div class="capability-note reveal">
+          <span>Interaction preserved</span><i></i><b>Realization scaled across controllable factors</b><small>Body · Scene · Objects · Lighting · Camera</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="method" class="section section-method">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">02 · Model design</p>
+          <h2>Factorized controls make interaction and realization independently composable.</h2>
+          <p class="section-lead">Action and camera controls preserve the source interaction. A target first frame and embodiment condition specify the robot body, environment, and initial interaction geometry.</p>
+        </div>
+
+        <div class="method-composition reveal">
+          <article class="method-media-card method-media-card--source">
+            <div class="method-card-head"><span>Source interaction</span><b>Human experience</b></div>
+            <figure>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/image44.png"><source src="assets/media/media24.mp4" type="video/mp4"></video>
+              <figcaption>Wiping interaction in the source human scene</figcaption>
+            </figure>
+            <div class="method-extract-row"><span>Extract</span><i>Action sequence</i><i>Camera trajectory</i></div>
+          </article>
+
+          <div class="method-arrow-v2" aria-hidden="true">→</div>
+
+          <article class="method-composer-card method-composer-card--refined">
+            <div class="composer-title"><span>Factorized condition fusion</span><strong>AnyWorld</strong></div>
+            <div class="composer-control-grid">
+              <article class="condition-tile condition-tile--action">
+                <span>Interaction control</span>
+                <b>Action trajectory</b>
+                <small>Pixel-space motion structure preserved across embodiments</small>
+                <em>Latent conditioning</em>
+              </article>
+              <article class="condition-tile condition-tile--camera">
+                <span>Viewpoint control</span>
+                <b>Camera trajectory</b>
+                <small>Plücker-ray geometry specifies viewpoint evolution</small>
+                <em>Geometric adapter</em>
+              </article>
+            </div>
+            <div class="composer-context composer-context--refined">
+              <img src="assets/posters/image43.png" alt="Target recomposed environment context">
+              <div>
+                <span>Target visual state</span>
+                <b>Recompose into a new environment</b>
+                <small>The first frame anchors embodiment, scene layout, objects, and initial interaction geometry.</small>
+                <div class="context-tags"><em>New embodiment</em><em>New scene</em><em>New layout</em></div>
+              </div>
+            </div>
+          </article>
+
+          <div class="method-arrow-v2" aria-hidden="true">→</div>
+
+          <article class="method-media-card method-media-card--output">
+            <div class="method-card-head"><span>Generated experience</span><b>Composed realization</b></div>
+            <figure>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/image43.png"><source src="assets/media/media23.mp4" type="video/mp4"></video>
+              <figcaption>The same interaction recomposed into a new embodiment, scene, and layout</figcaption>
+            </figure>
+            <div class="method-output-tags"><span>Interaction retained</span><i>New embodiment</i><i>New scene</i><i>New layout</i></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="training" class="section section-tonal">
+      <div class="shell">
+        <div class="section-heading two-column-heading reveal">
+          <div>
+            <p class="eyebrow">03 · Training</p>
+            <h2>Learn interaction priors first, then ground them across embodiments.</h2>
+          </div>
+          <p>Human video provides broad contact and motion priors. Unpaired mixed-domain fine-tuning binds the shared control interface to robot appearance and geometry.</p>
+        </div>
+
+        <div class="training-flow reveal">
+          <article class="training-stage">
+            <div class="stage-top"><span>Stage 1</span><b>Human interaction pretraining</b></div>
+            <div class="thumb-strip">
+              <img src="assets/posters/image24.png" alt="Human interaction example">
+              <img src="assets/posters/image25.png" alt="Human interaction example">
+              <img src="assets/posters/image26.png" alt="Human interaction example">
+            </div>
+            <p>Learn physical interaction priors and action–camera control fidelity.</p>
+          </article>
+          <div class="training-arrow" aria-hidden="true">→</div>
+          <article class="training-stage training-stage-mixed">
+            <div class="stage-top"><span>Stage 2</span><b>Unpaired mixed-embodiment grounding</b></div>
+            <div class="thumb-strip">
+              <img src="assets/posters/image27.jpeg" alt="IRON interaction example">
+              <img src="assets/posters/image28.jpeg" alt="IRON interaction example">
+              <img src="assets/posters/image22.png" alt="RoboCasa GR1 interaction example">
+            </div>
+            <p>Associate shared interaction controls with IRON and GR1 appearance, viewpoints, and interaction geometry.</p>
+          </article>
+        </div>
+
+        <div class="no-pair-banner reveal">
+          <span>Key property</span>
+          <strong>No paired human–robot videos.</strong>
+          <p>Cross-embodiment correspondence emerges through the unified action, camera, and embodiment interface.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="simulation" class="section section-physics">
+      <div class="shell">
+        <div class="section-heading two-column-heading reveal">
+          <div>
+            <p class="eyebrow">04 · Physics-aware simulation</p>
+            <h2>Physics-aware rollouts capture both success and failure.</h2>
+          </div>
+          <p>Under the same scene, controlled changes in motion geometry lead to successful target contact or a miss. The rollout reflects interaction outcomes rather than only visual appearance.</p>
+        </div>
+        <div class="physics-grid reveal">
+          <figure class="video-card physics-reference"><video muted loop playsinline preload="metadata" poster="assets/posters/image49.png"><source src="assets/media/media29.mp4" type="video/mp4"></video><figcaption><span>C1 · Reference</span> Nominal interaction trajectory</figcaption></figure>
+          <figure class="video-card physics-success"><video muted loop playsinline preload="metadata" poster="assets/posters/image48.png"><source src="assets/media/media28.mp4" type="video/mp4"></video><figcaption><span>C2 · Success</span> Adjusted motion reaches and grasps the target</figcaption></figure>
+          <figure class="video-card physics-failure"><video muted loop playsinline preload="metadata" poster="assets/posters/image50.png"><source src="assets/media/media30.mp4" type="video/mp4"></video><figcaption><span>C3 · Failure</span> Rotated motion fails to establish contact</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="world-evidence" class="section section-results">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">05 · World-model evidence</p>
+          <h2>Stronger control without sacrificing video quality.</h2>
+          <p class="section-lead">AnyWorld improves alignment to action, camera, and embodiment conditions while maintaining competitive visual consistency.</p>
+        </div>
+
+        <div class="results-layout reveal">
+          <div class="score-panel">
+            <div class="score-panel-head"><span>Overall controllability</span><small>Average of ActionAlign, CameraAlign, and EmbodAcc</small></div>
+            <div class="bar-row"><b>Cosmos-Predict2.5</b><div><i style="--value:41.7%"></i></div><span>0.417</span></div>
+            <div class="bar-row"><b>WAN Fun-Control</b><div><i style="--value:60.9%"></i></div><span>0.609</span></div>
+            <div class="bar-row bar-row-ours"><b>AnyWorld</b><div><i style="--value:77.8%"></i></div><span>0.778</span></div>
+          </div>
+
+          <div class="result-table-wrap">
+            <table class="result-table">
+              <caption>World-model controllability</caption>
+              <thead><tr><th>Method</th><th>Action</th><th>Camera</th><th>Embodiment</th><th>Avg.</th></tr></thead>
+              <tbody>
+                <tr><td>Cosmos-Predict2.5</td><td>0.170</td><td>0.315</td><td>0.765</td><td>0.417</td></tr>
+                <tr><td>WAN Fun-Control</td><td>0.655</td><td>0.402</td><td>0.769</td><td>0.609</td></tr>
+                <tr class="ours"><td>AnyWorld</td><td>0.659</td><td>0.789</td><td>0.886</td><td>0.778</td></tr>
+              </tbody>
+            </table>
+            <div class="quality-strip">
+              <span><b>0.942</b> Subject</span>
+              <span><b>0.949</b> Background</span>
+              <span><b>0.995</b> Flicker</span>
+              <span><b>0.996</b> Smoothness</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="robot-learning" class="section section-deployment">
+      <div class="shell">
+        <div class="section-heading two-column-heading reveal">
+          <div>
+            <p class="eyebrow">06 · Real-robot policy evidence</p>
+            <h2>Targeted robot-domain data can correct and extend policy behavior.</h2>
+          </div>
+          <p>We use AnyWorld not only to scale experience, but also to construct targeted robot-domain supervision for concrete policy failures.</p>
+        </div>
+
+        <div class="evidence-ladder evidence-ladder--reordered reveal" aria-label="Policy evidence">
+          <article><span>01</span><div><b>Correct policy shortcuts</b><small>Augment missing task states</small></div></article>
+          <article><span>02</span><div><b>Ground instruction-conditioned control</b><small>Pair language, target, and action</small></div></article>
+          <article><span>03</span><div><b>Improve target-domain adaptation</b><small>Supporting aggregate evidence</small></div></article>
+        </div>
+
+        <article id="policy-debiasing" class="closed-loop-case reveal">
+          <header class="case-header">
+            <div>
+              <p class="case-index">Evidence 01 · Policy debiasing</p>
+              <h3>Targeted state augmentation corrects completion shortcuts.</h3>
+            </div>
+            <p>The baseline learns a false completion prior: when a banana is already visible inside the box, it remains stationary even though another target must still be placed. AnyWorld re-embodies the human interaction as IRON and re-scenes it into this missing robot-domain state.</p>
+          </header>
+
+          <div class="human-derived-path" aria-label="Human-derived policy intervention path">
+            <span>Human interaction</span><i>→</i><span>AnyWorld robot-domain state</span><i>→</i><strong>Policy correction</strong>
+          </div>
+
+          <div class="policy-ab-comparison">
+            <figure class="policy-demo policy-demo--before">
+              <div class="policy-demo-head">
+                <div><span>Before intervention</span><b>VLA baseline</b></div>
+                <em>No action</em>
+              </div>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/closed_loop/completion_bias_baseline.jpg"><source src="assets/media/closed_loop/completion_bias_baseline.mp4" type="video/mp4"></video>
+              <figcaption>The policy treats the banana already inside the box as evidence that the instruction has been completed.</figcaption>
+            </figure>
+
+            <div class="policy-intervention-node">
+              <span>Human-derived intervention</span>
+              <strong>AnyWorld state augmentation</strong>
+              <div><i>Human → IRON</i><i>Banana-in-box state</i><i>Small fine-tuning set</i></div>
+              <b aria-hidden="true">→</b>
+            </div>
+
+            <figure class="policy-demo policy-demo--after">
+              <div class="policy-demo-head">
+                <div><span>After intervention</span><b>+ Human-derived AnyWorld data</b></div>
+                <em>Task resumed</em>
+              </div>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/closed_loop/completion_bias_after.jpg"><source src="assets/media/closed_loop/completion_bias_after.mp4" type="video/mp4"></video>
+              <figcaption>The same policy now responds to the instruction and places the remaining banana into the box.</figcaption>
+            </figure>
+          </div>
+
+          <div class="policy-data-provenance">
+            <div class="provenance-title">
+              <span>Training-data construction</span>
+              <strong>The corrective experience is synthesized from human interaction.</strong>
+            </div>
+            <figure class="provenance-media">
+              <div class="trace-label"><span>Human source</span><b>Interaction prior</b></div>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/closed_loop/human_inside_box.jpg"><source src="assets/media/closed_loop/human_inside_box.mp4" type="video/mp4"></video>
+            </figure>
+            <div class="provenance-transform">
+              <span>AnyWorld</span>
+              <strong>Re-embody + re-scene</strong>
+              <div><i>Human → IRON</i><i>Add banana inside box</i></div>
+              <b aria-hidden="true">→</b>
+            </div>
+            <figure class="provenance-media provenance-media--generated">
+              <div class="trace-label"><span>Generated supervision</span><b>Targeted IRON rollout</b></div>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/closed_loop/generated_inside_box.jpg"><source src="assets/media/closed_loop/generated_inside_box.mp4" type="video/mp4"></video>
+            </figure>
+          </div>
+        </article>
+
+        <article id="capability-acquisition" class="closed-loop-case closed-loop-case--language reveal">
+          <header class="case-header">
+            <div>
+              <p class="case-index">Evidence 02 · Instruction-grounded control</p>
+              <h3>Contrastive pairing grounds language while preserving stable robot action.</h3>
+            </div>
+            <p>The robot data contains only single-target, single-side grasps. AnyWorld re-embodies human motion as IRON and re-scenes it with symmetric left–right targets; paired supervision then binds language to the corresponding stable robot action.</p>
+          </header>
+
+          <div class="human-derived-path human-derived-path--language" aria-label="Human-derived instruction grounding path">
+            <span>Human wrist motion</span><i>→</i><span>AnyWorld dual-target experience</span><i>→</i><strong>Instruction-grounded policy</strong>
+          </div>
+
+          <div class="language-data-track">
+            <figure class="trace-media">
+              <div class="trace-label"><span>Human source</span><b>Wrist-level motion</b></div>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/closed_loop/human_left_right.jpg"><source src="assets/media/closed_loop/human_left_right.mp4" type="video/mp4"></video>
+            </figure>
+            <div class="language-track-core language-track-core--refined">
+              <span>AnyWorld transformation</span>
+              <div class="language-transform-list">
+                <div><em>Re-embody</em><b>Human → IRON</b></div>
+                <div><em>Re-scene</em><b>Symmetric left/right targets</b></div>
+                <div><em>Align action</em><b>Relative EEF + robot-space projection</b></div>
+              </div>
+              <i aria-hidden="true">→</i>
+            </div>
+            <figure class="trace-media trace-media--generated">
+              <div class="trace-label"><span>AnyWorld output</span><b>IRON dual-target experience</b></div>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/closed_loop/generated_left_right.jpg"><source src="assets/media/closed_loop/generated_left_right.mp4" type="video/mp4"></video>
+            </figure>
+          </div>
+
+          <div class="pair-principle reveal">
+            <span>Contrastive supervision</span>
+            <strong>Same observation. Opposite instruction. Corresponding action.</strong>
+            <small>This pairing forces the policy to use language rather than memorized visual or state priors.</small>
+          </div>
+
+          <div class="policy-result-banner">
+            <span>Real-robot policy trained with human-derived AnyWorld data</span>
+            <strong>Language selects the target under matched visual conditions.</strong>
+            <small>The paired robot-domain experience changes only the instruction and corresponding action.</small>
+          </div>
+
+          <div class="counterfactual-pair policy-instruction-pair">
+            <figure class="instruction-video">
+              <div class="instruction-bar"><span>After · Human-derived AnyWorld pairs</span><b>“Place the left-side banana into the box.”</b></div>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/closed_loop/left_instruction.jpg"><source src="assets/media/closed_loop/left_instruction.mp4" type="video/mp4"></video>
+              <figcaption><span>Left target</span> Language selects the target; the learned robot motion remains stable.</figcaption>
+            </figure>
+            <div class="pair-axis" aria-hidden="true"><span>Matched visual state</span><i></i><b>Instruction-conditioned target</b></div>
+            <figure class="instruction-video">
+              <div class="instruction-bar"><span>After · Human-derived AnyWorld pairs</span><b>“Place the right-side banana into the box.”</b></div>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/closed_loop/right_instruction.jpg"><source src="assets/media/closed_loop/right_instruction.mp4" type="video/mp4"></video>
+              <figcaption><span>Right target</span> The policy changes target while preserving accurate execution.</figcaption>
+            </figure>
+          </div>
+
+          <div class="technical-note-grid technical-note-grid--compact">
+            <article><span>Control space</span><h4>Relative EEF</h4><p>Preserves local motion direction during robot fine-tuning.</p></article>
+            <article><span>Human signal</span><h4>Wrist-centric action</h4><p>Avoids transferring incompatible human arm-scale motion.</p></article>
+            <article><span>Alignment</span><h4>Robot-space projection</h4><p>Constrains action magnitude while retaining intent.</p></article>
+            <article><span>Supervision</span><h4>Contrastive pairs</h4><p>Break visual and state overfitting by changing caption and action under the same observation.</p></article>
+          </div>
+        </article>
+
+        <article class="closed-loop-case closed-loop-case--adaptation reveal">
+          <header class="case-header">
+            <div>
+              <p class="case-index">Evidence 03 · Target-domain adaptation</p>
+              <h3>Re-embodied rollouts provide additional policy gains.</h3>
+            </div>
+            <p>As supporting evidence, mixing generated target-domain rollouts with robot data improves average task success in both simulation and real-robot evaluation.</p>
+          </header>
+
+          <div class="adaptation-chart" aria-label="Policy adaptation results">
+            <article>
+              <div class="adaptation-chart-head"><span>RoboCasa GR1</span><small>18 pick-and-place tasks</small></div>
+              <div class="adaptation-bar"><b>Baseline</b><div><i style="--value:49.8%"></i></div><span>49.8%</span></div>
+              <div class="adaptation-bar adaptation-bar--ours"><b>+ AnyWorld</b><div><i style="--value:54.6%"></i></div><span>54.6%</span></div>
+              <strong>+4.8 pts</strong>
+            </article>
+            <article class="adaptation-chart--primary">
+              <div class="adaptation-chart-head"><span>IRON real robot</span><small>20 grasp trials</small></div>
+              <div class="adaptation-bar"><b>Baseline</b><div><i style="--value:20%"></i></div><span>20.0%</span></div>
+              <div class="adaptation-bar adaptation-bar--ours"><b>+ AnyWorld</b><div><i style="--value:55%"></i></div><span>55.0%</span></div>
+              <strong>+35.0 pts</strong>
+            </article>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="citation" class="section section-citation">
+      <div class="shell-narrow">
+        <div class="citation-card reveal">
+          <div>
+            <p class="eyebrow">Project</p>
+            <h2>AnyWorld</h2>
+            <p>Factorized Egocentric World Models for Cross-Embodiment Generalization</p>
+          </div>
+          <button class="copy-button" type="button" data-copy="@article{chen2026anyworld, title={AnyWorld: Factorized Egocentric World Models for Cross-Embodiment Generalization}, author={Chen, Cheng and Bai, Jerry and Wei, Jiacheng and Chen, Boyu and Zheng, Xiaoji and Wu, Fan and Yang, Minghao and Chen, Tianrun and Li, Ruibo and Yue, Xiaoyu and Guo, Xiaoyang and Ge, Yixiao and Lin, Guosheng and Liu, Fayao}, journal={arXiv preprint arXiv:2608.29242}, year={2026}, url={https://arxiv.org/abs/2608.29242}}">Copy BibTeX</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <footer class="footer">
+    <div class="shell">
+      <span>XPENG Robotics</span>
+      <span>AnyWorld · 2026</span>
+    </div>
+  </footer>
+
+  <dialog class="video-dialog" aria-label="Expanded video">
+    <button class="dialog-close" type="button" aria-label="Close video">×</button>
+    <video controls playsinline></video>
+    <p></p>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
